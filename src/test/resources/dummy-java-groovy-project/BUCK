@@ -1,0 +1,31 @@
+java_library(
+                name="main",
+                autodeps=True,
+                srcs=glob(["src/main/java/**/*.java"]),
+                resources=[],
+                deps=[],
+                exported_deps=["//lib:commons-lang", "//lib:joda-time", "child:main"],
+                visibility=["PUBLIC"]
+)
+
+groovy_library(
+                name="main-groovy",
+                srcs=glob(["src/main/groovy/**/*.groovy", "src/main/groovy/**/*.java"]),
+                resources=[],
+                deps=[],
+                exported_deps=["//lib:commons-lang", "//lib:joda-time", "child:main"],
+                visibility=["PUBLIC"]
+)
+
+java_test(
+                name="test",
+                autodeps=True,
+                source_under_test=["test-java"],
+                srcs=glob(["src/test/java/**/*.java"]),
+                resources=["src/test/resources"],
+                deps=["//lib:junit", "//lib:commons-lang", "//lib:joda-time", "child:main"],
+                visibility=["PUBLIC"]
+)
+
+prebuilt_jar(name='commons-lang', binary_jar=':commons-lang-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='joda-time', binary_jar=':joda-time-mvn', visibility=["PUBLIC"])

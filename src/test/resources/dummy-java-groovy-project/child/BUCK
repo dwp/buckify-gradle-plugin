@@ -1,0 +1,10 @@
+groovy_library(
+                name="main-groovy",
+                srcs=glob(["src/main/groovy/**/*.groovy", "src/main/groovy/**/*.java"]),
+                resources=[],
+                deps=[],
+                exported_deps=["//lib:commons-lang"],
+                visibility=["PUBLIC"]
+)
+
+prebuilt_jar(name='commons-lang', binary_jar=':commons-lang-mvn', visibility=["PUBLIC"])
