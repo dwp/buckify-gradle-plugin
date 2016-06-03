@@ -4,7 +4,7 @@ java_library(
                 srcs=glob(["src/main/java/**/*.java"]),
                 resources=[],
                 deps=[],
-                exported_deps=["//lib:commons-lang", "//lib:joda-time", "child:main"],
+                exported_deps=["//lib:commons-lang", "//lib:joda-time", "//lib:solr-core", "//lib:lucene-analyzers-common", "//lib:lucene-analyzers-kuromoji", "//lib:lucene-analyzers-phonetic", "//lib:lucene-backward-codecs", "//lib:lucene-codecs", "//lib:lucene-core", "//lib:lucene-expressions", "//lib:lucene-grouping", "//lib:lucene-highlighter", "//lib:lucene-join", "//lib:lucene-memory", "//lib:lucene-misc", "//lib:lucene-queries", "//lib:lucene-queryparser", "//lib:lucene-sandbox", "//lib:lucene-spatial-extras", "//lib:lucene-suggest", "//lib:solr-solrj", "//lib:hppc", "//lib:presto-parser", "//lib:jackson-core", "//lib:jackson-dataformat-smile", "//lib:caffeine", "//lib:guava", "//lib:protobuf-java", "//lib:t-digest", "//lib:commons-cli", "//lib:commons-codec", "//lib:commons-collections", "//lib:commons-configuration", "//lib:commons-fileupload", "//lib:commons-io", "//lib:dom4j", "//lib:slice", "//lib:javax.servlet-api", "//lib:log4j", "//lib:antlr4-runtime", "//lib:commons-exec", "//lib:hadoop-annotations", "//lib:hadoop-auth", "//lib:hadoop-common", "//lib:hadoop-hdfs", "//lib:httpclient", "//lib:httpcore", "//lib:httpmime", "//lib:zookeeper", "//lib:stax2-api", "//lib:woodstox-core-asl", "//lib:jetty-continuation", "//lib:jetty-deploy", "//lib:jetty-http", "//lib:jetty-io", "//lib:jetty-jmx", "//lib:jetty-rewrite", "//lib:jetty-security", "//lib:jetty-server", "//lib:jetty-servlet", "//lib:jetty-servlets", "//lib:jetty-util", "//lib:jetty-webapp", "//lib:jetty-xml", "//lib:htrace-core", "//lib:spatial4j", "//lib:noggit", "//lib:asm", "//lib:asm-commons", "//lib:org.restlet", "//lib:org.restlet.ext.servlet", "//lib:jcl-over-slf4j", "//lib:slf4j-api", "//lib:jline", "//lib:netty", "//lib:junit"],
                 visibility=["PUBLIC"]
 )
 
@@ -13,19 +13,83 @@ groovy_library(
                 srcs=glob(["src/main/groovy/**/*.groovy", "src/main/groovy/**/*.java"]),
                 resources=[],
                 deps=[],
-                exported_deps=["//lib:commons-lang", "//lib:joda-time", "child:main"],
-                visibility=["PUBLIC"]
-)
-
-java_test(
-                name="test",
-                autodeps=True,
-                source_under_test=["test-java"],
-                srcs=glob(["src/test/java/**/*.java"]),
-                resources=["src/test/resources"],
-                deps=["//lib:junit", "//lib:commons-lang", "//lib:joda-time", "child:main"],
+                exported_deps=["//lib:commons-lang", "//lib:joda-time", "//lib:solr-core", "//lib:lucene-analyzers-common", "//lib:lucene-analyzers-kuromoji", "//lib:lucene-analyzers-phonetic", "//lib:lucene-backward-codecs", "//lib:lucene-codecs", "//lib:lucene-core", "//lib:lucene-expressions", "//lib:lucene-grouping", "//lib:lucene-highlighter", "//lib:lucene-join", "//lib:lucene-memory", "//lib:lucene-misc", "//lib:lucene-queries", "//lib:lucene-queryparser", "//lib:lucene-sandbox", "//lib:lucene-spatial-extras", "//lib:lucene-suggest", "//lib:solr-solrj", "//lib:hppc", "//lib:presto-parser", "//lib:jackson-core", "//lib:jackson-dataformat-smile", "//lib:caffeine", "//lib:guava", "//lib:protobuf-java", "//lib:t-digest", "//lib:commons-cli", "//lib:commons-codec", "//lib:commons-collections", "//lib:commons-configuration", "//lib:commons-fileupload", "//lib:commons-io", "//lib:dom4j", "//lib:slice", "//lib:javax.servlet-api", "//lib:log4j", "//lib:antlr4-runtime", "//lib:commons-exec", "//lib:hadoop-annotations", "//lib:hadoop-auth", "//lib:hadoop-common", "//lib:hadoop-hdfs", "//lib:httpclient", "//lib:httpcore", "//lib:httpmime", "//lib:zookeeper", "//lib:stax2-api", "//lib:woodstox-core-asl", "//lib:jetty-continuation", "//lib:jetty-deploy", "//lib:jetty-http", "//lib:jetty-io", "//lib:jetty-jmx", "//lib:jetty-rewrite", "//lib:jetty-security", "//lib:jetty-server", "//lib:jetty-servlet", "//lib:jetty-servlets", "//lib:jetty-util", "//lib:jetty-webapp", "//lib:jetty-xml", "//lib:htrace-core", "//lib:spatial4j", "//lib:noggit", "//lib:asm", "//lib:asm-commons", "//lib:org.restlet", "//lib:org.restlet.ext.servlet", "//lib:jcl-over-slf4j", "//lib:slf4j-api", "//lib:jline", "//lib:netty", "//lib:junit"],
                 visibility=["PUBLIC"]
 )
 
 prebuilt_jar(name='commons-lang', binary_jar=':commons-lang-mvn', visibility=["PUBLIC"])
 prebuilt_jar(name='joda-time', binary_jar=':joda-time-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='solr-core', binary_jar=':solr-core-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-analyzers-common', binary_jar=':lucene-analyzers-common-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-analyzers-kuromoji', binary_jar=':lucene-analyzers-kuromoji-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-analyzers-phonetic', binary_jar=':lucene-analyzers-phonetic-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-backward-codecs', binary_jar=':lucene-backward-codecs-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-codecs', binary_jar=':lucene-codecs-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-core', binary_jar=':lucene-core-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-expressions', binary_jar=':lucene-expressions-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-grouping', binary_jar=':lucene-grouping-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-highlighter', binary_jar=':lucene-highlighter-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-join', binary_jar=':lucene-join-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-memory', binary_jar=':lucene-memory-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-misc', binary_jar=':lucene-misc-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-queries', binary_jar=':lucene-queries-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-queryparser', binary_jar=':lucene-queryparser-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-sandbox', binary_jar=':lucene-sandbox-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-spatial-extras', binary_jar=':lucene-spatial-extras-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-suggest', binary_jar=':lucene-suggest-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='solr-solrj', binary_jar=':solr-solrj-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='hppc', binary_jar=':hppc-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='presto-parser', binary_jar=':presto-parser-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jackson-core', binary_jar=':jackson-core-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jackson-dataformat-smile', binary_jar=':jackson-dataformat-smile-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='caffeine', binary_jar=':caffeine-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='guava', binary_jar=':guava-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='protobuf-java', binary_jar=':protobuf-java-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='t-digest', binary_jar=':t-digest-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='commons-cli', binary_jar=':commons-cli-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='commons-codec', binary_jar=':commons-codec-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='commons-collections', binary_jar=':commons-collections-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='commons-configuration', binary_jar=':commons-configuration-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='commons-fileupload', binary_jar=':commons-fileupload-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='commons-io', binary_jar=':commons-io-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='dom4j', binary_jar=':dom4j-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='slice', binary_jar=':slice-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='javax.servlet-api', binary_jar=':javax.servlet-api-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='log4j', binary_jar=':log4j-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='antlr4-runtime', binary_jar=':antlr4-runtime-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='commons-exec', binary_jar=':commons-exec-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='hadoop-annotations', binary_jar=':hadoop-annotations-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='hadoop-auth', binary_jar=':hadoop-auth-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='hadoop-common', binary_jar=':hadoop-common-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='hadoop-hdfs', binary_jar=':hadoop-hdfs-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='httpclient', binary_jar=':httpclient-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='httpcore', binary_jar=':httpcore-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='httpmime', binary_jar=':httpmime-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='zookeeper', binary_jar=':zookeeper-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='stax2-api', binary_jar=':stax2-api-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='woodstox-core-asl', binary_jar=':woodstox-core-asl-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jetty-continuation', binary_jar=':jetty-continuation-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jetty-deploy', binary_jar=':jetty-deploy-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jetty-http', binary_jar=':jetty-http-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jetty-io', binary_jar=':jetty-io-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jetty-jmx', binary_jar=':jetty-jmx-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jetty-rewrite', binary_jar=':jetty-rewrite-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jetty-security', binary_jar=':jetty-security-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jetty-server', binary_jar=':jetty-server-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jetty-servlet', binary_jar=':jetty-servlet-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jetty-servlets', binary_jar=':jetty-servlets-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jetty-util', binary_jar=':jetty-util-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jetty-webapp', binary_jar=':jetty-webapp-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jetty-xml', binary_jar=':jetty-xml-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='htrace-core', binary_jar=':htrace-core-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='spatial4j', binary_jar=':spatial4j-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='noggit', binary_jar=':noggit-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='asm', binary_jar=':asm-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='asm-commons', binary_jar=':asm-commons-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='org.restlet', binary_jar=':org.restlet-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='org.restlet.ext.servlet', binary_jar=':org.restlet.ext.servlet-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jcl-over-slf4j', binary_jar=':jcl-over-slf4j-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='slf4j-api', binary_jar=':slf4j-api-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jline', binary_jar=':jline-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='netty', binary_jar=':netty-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='junit', binary_jar=':junit-mvn', visibility=["PUBLIC"])
