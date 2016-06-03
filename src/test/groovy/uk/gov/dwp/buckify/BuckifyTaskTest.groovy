@@ -8,13 +8,23 @@ class BuckifyTaskTest {
     @Test
     public void pluginShouldAddTaskToProject() {
         Project testProject = ProjectBuilder.builder().withProjectDir(new File("src/test/resources/dummy-java-groovy-project")) build()
-//        Project childProject = ProjectBuilder.builder().withName("child").withParent(testProject).build()
-//
-//        childProject.extensions.create("buckify", BuckifyExtension, "console")
-//        childProject.plugins.apply('java')
-//        childProject.dependencies{
-//            compile 'commons-lang:commons-lang:2.7'
-//        }
+        Project childProject = ProjectBuilder.builder().withName("child").withParent(testProject).build()
+
+        childProject.extensions.create("buckify", BuckifyExtension, "console")
+        childProject.plugins.apply('java')
+        childProject.plugins.apply('groovy')
+
+        childProject.dependencies{
+            compile 'commons-lang:commons-lang:2.5'
+        }
+
+        childProject.repositories {
+            maven { url 'http://bld1.infra.uk1.uc:8081/nexus/content/repositories/releases' }
+            maven { url 'http://bld1.infra.uk1.uc:8081/nexus/content/groups/public/' }
+            maven { url 'http://bld1.infra.uk1.uc:8081/nexus/content/repositories/snapshots' }
+            maven { url 'https://repo.gradle.org/gradle/libs' }
+            mavenLocal()
+        }
 
         testProject.extensions.create("buckify", BuckifyExtension, "console")
         testProject.plugins.apply('java')
@@ -28,7 +38,7 @@ class BuckifyTaskTest {
         }
 
         testProject.dependencies {
-//            compile project(path: ':child')
+            compile project(path: ':child')
             compile 'commons-lang:commons-lang:2.6'
             compile 'joda-time:joda-time:2.2'
             compile group: 'org.apache.solr', name: 'solr-core', version: '6.0.1'

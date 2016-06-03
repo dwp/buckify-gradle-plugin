@@ -24,16 +24,7 @@ class Dependencies {
     }
 
     Set<String> resolve(Configuration compileConfiguration) {
-
-        def resolvedConfiguration = compileConfiguration.resolvedConfiguration
-//        ErrorHandlingArtifactDependencyResolver.ErrorHandlingLenientConfiguration lanientConfiguration = resolvedConfiguration.lenientConfiguration
-//        lanientConfiguration.metaClass.rethrowFailure = {return }
-//        lanientConfiguration.metaClass.hasError = {return false}
-
-
-       resolvedConfiguration.getFirstLevelModuleDependencies()
-        def resolvedArtifacts = resolvedConfiguration.resolvedArtifacts
-        resolvedArtifacts
+        compileConfiguration.resolvedConfiguration.resolvedArtifacts
     }
 
     public Set<String> allDependencyNames() {
