@@ -3,11 +3,8 @@ package uk.gov.dwp.buckify.dependencies
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Configuration
 import org.gradle.api.artifacts.ExternalDependency
-import org.gradle.api.artifacts.LenientConfiguration
 import org.gradle.api.artifacts.ProjectDependency
 import org.gradle.api.artifacts.ResolvedArtifact
-import org.gradle.api.internal.artifacts.ivyservice.DefaultLenientConfiguration
-import org.gradle.api.internal.artifacts.ivyservice.ErrorHandlingArtifactDependencyResolver
 import uk.gov.dwp.buckify.BuckifyExtension
 
 class Dependencies {
