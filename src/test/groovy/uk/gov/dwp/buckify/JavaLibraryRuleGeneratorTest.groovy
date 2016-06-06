@@ -4,6 +4,7 @@ import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.Test
+import uk.gov.dwp.buckify.dependencies.DependencyCache
 import uk.gov.dwp.buckify.rules.JavaLibraryRule
 
 class JavaLibraryRuleGeneratorTest {
@@ -14,14 +15,14 @@ class JavaLibraryRuleGeneratorTest {
         project.extensions.create("buckify", BuckifyExtension, "console")
         project.plugins.apply(JavaPlugin)
 
-        def rules = JavaLibraryRule.generator(project)
+        def rules = JavaLibraryRule.generator(project, new DependencyCache(project))
         assert rules.size() == 1
         assert rules.first() instanceof JavaLibraryRule
     }
 
     @Test
     public void doNotCreateJavaLibraryRuleWhenJavaPluginDoesNotExist() {
-        def rules = JavaLibraryRule.generator(project)
+        def rules = JavaLibraryRule.generator(project, new DependencyCache(project))
         assert rules.isEmpty()
     }
 }

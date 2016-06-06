@@ -5,22 +5,21 @@ import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPlugin
 import uk.gov.dwp.buckify.BuckifyExtension
 import uk.gov.dwp.buckify.dependencies.Dependencies
-
-import static uk.gov.dwp.buckify.dependencies.Dependencies.testCompileDependencies
+import uk.gov.dwp.buckify.dependencies.DependencyCache
 
 class JavaTestRule extends Rule {
     static final sourceDir = "src/test/java"
     static final resourcesDir = "src/test/resources"
 
-    static generator = { Project project -> project.plugins.hasPlugin(JavaPlugin) && project.file(sourceDir).exists() ? [new JavaTestRule(project)] : [] }
+    static generator = { Project project, DependencyCache dependencies -> project.plugins.hasPlugin(JavaPlugin) && project.file(sourceDir).exists() ? [new JavaTestRule(project, dependencies)] : [] }
 
     Dependencies dependencies
     Set<String> resources
     boolean autoDeps
     Set<String> sourceUnderTest
 
-    JavaTestRule(Project project) {
-        this.dependencies = testCompileDependencies(project)
+    JavaTestRule(Project project, DependencyCache dependencies) {
+        this.dependencies = dependencies.testCompileDependencies()
         this.name = BuckifyExtension.from(project).javaTestLibrary.defaultRuleName
         this.sourceUnderTest = [project.name + "-java"]
         this.autoDeps = BuckifyExtension.from(project).autoDeps
@@ -29,13 +28,14 @@ class JavaTestRule extends Rule {
 
     @Override
     Writable createOutput() {
-        new SimpleTemplateEngine().createTemplate("""java_test(
+        new SimpleTemplateEngine().createTemplate("""
+java_test(
                 name="$name",
                 autodeps=${toPythonBoolean(autoDeps)},
                 source_under_test=${quoted(sourceUnderTest)},
                 srcs=glob(["$sourceDir/**/*.java"]),
                 resources=$resources,
-                deps=${quoted(dependencies.allDependencyPaths())},
+                deps=${quoted(dependencies.configSpecificDependencies.collect({ it.path() }))},
                 visibility=${quoted(visibility)}
 )
 

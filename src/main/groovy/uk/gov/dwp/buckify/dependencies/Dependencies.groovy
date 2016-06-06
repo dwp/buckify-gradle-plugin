@@ -1,58 +1,80 @@
 package uk.gov.dwp.buckify.dependencies
 
-import org.gradle.api.Project
 import org.gradle.api.artifacts.Configuration
-import org.gradle.api.artifacts.ExternalDependency
-import org.gradle.api.artifacts.ProjectDependency
+import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.ResolvedArtifact
+import org.gradle.api.artifacts.ResolvedDependency
+import org.gradle.internal.component.local.model.PublishArtifactLocalArtifactMetaData
 import uk.gov.dwp.buckify.BuckifyExtension
 
 class Dependencies {
-    Set<ExternalDependency> externalDependencies
-    Set<ProjectDependency> projectDependencies
-    Set<ResolvedArtifact> resolvedArtifacts;
-    private BuckifyExtension buckifyExtension
+    Set<DependencyTarget> projectDependencies
+    Set<DependencyTarget> declaredExternalDependencies
+    Set<DependencyTarget> transitiveDependencies
+    Set<DependencyTarget> configSpecificDependencies
 
     Dependencies(Configuration configuration, BuckifyExtension buckifyExtension) {
-        this.buckifyExtension = buckifyExtension
-        this.externalDependencies = configuration.allDependencies.findAll({ it instanceof ExternalDependency })
-        this.resolvedArtifacts = resolve(configuration)
-        this.projectDependencies = configuration.allDependencies.findAll({ it instanceof ProjectDependency })
+        def resolvedArtifacts = configuration.resolvedConfiguration.resolvedArtifacts
+        def projectArtifacts = findProjectArtifacts(resolvedArtifacts)
+        def externalArtifacts = findDeclaredExternalArtifacts(configuration)
+        def transitiveArtifacts = (resolvedArtifacts - externalArtifacts) - projectArtifacts
+        def configSpecificArtifacts = findArtifacts(findConfigSpecificDependencies(configuration))
+
+        configSpecificDependencies = configSpecificArtifacts.collect({ new DependencyTarget(it, buckifyExtension.externalDependencyRuleResolution)} )
+        projectDependencies = projectArtifacts.collect({ new DependencyTarget(it, buckifyExtension.projectDependencyRuleResolution) })
+        declaredExternalDependencies = externalArtifacts.collect({ new DependencyTarget(it, buckifyExtension.externalDependencyRuleResolution) })
+        transitiveDependencies = transitiveArtifacts.collect({ new DependencyTarget(it, buckifyExtension.externalDependencyRuleResolution) })
     }
 
-    Set<String> resolve(Configuration compileConfiguration) {
-        compileConfiguration.resolvedConfiguration.resolvedArtifacts
+    private static HashSet<ResolvedDependency> findConfigSpecificDependencies(Configuration configuration) {
+        configuration.resolvedConfiguration.firstLevelModuleDependencies.findAll({ moduleDep ->
+            configuration.dependencies.matching({ compareDeps(it, moduleDep) }).size() > 0
+        })
     }
 
-    public Set<String> allDependencyNames() {
-        externalDependencyNames() + projectDependencyNames()
+    private static boolean compareDeps(Dependency it, ResolvedDependency moduleDep) {
+        "$it.group:$it.name:$it.version" == moduleDep.name
     }
 
-    public Set<String> externalDependencyNames() {
-        resolvedArtifacts.collect{dep -> dep.owner.identifier.name}
+    private static HashSet<ResolvedArtifact> findProjectArtifacts(Set<ResolvedArtifact> resolvedArtifacts) {
+        resolvedArtifacts.findAll({
+            it.artifactSource.artifact instanceof PublishArtifactLocalArtifactMetaData
+        })
     }
 
-    public Set<String> projectDependencyNames() {
-        projectDependencies.collect { it.name }
+    private static Set<ResolvedArtifact> findDeclaredExternalArtifacts(Configuration configuration) {
+        def firstLevelModuleDependencies = configuration.resolvedConfiguration.firstLevelModuleDependencies
+        findArtifacts(firstLevelModuleDependencies)
+                .findAll({ !(it.artifactSource.artifact instanceof PublishArtifactLocalArtifactMetaData) })
     }
 
-    public Set<String> allDependencyPaths() {
-        externalDependencyPaths() + projectDependencyPaths()
+    private static ArrayList<ResolvedArtifact> findArtifacts(Set<ResolvedDependency> firstLevelModuleDependencies) {
+        firstLevelModuleDependencies
+                .collect({ it.moduleArtifacts })
+                .flatten()
     }
 
-    public Set<String> externalDependencyPaths() {
-        resolvedArtifacts.collect { buckifyExtension.resolvedExternalDependencyRuleResolution it }
+    public Set<DependencyTarget> allDependencies() {
+        externalDependencies() + projectDependencies()
     }
 
-    public Set<String> projectDependencyPaths() {
-        projectDependencies.collect { buckifyExtension.projectDependencyRuleResolution it }
+    public Set<DependencyTarget> externalDependencies() {
+        transitiveDependencies() + declaredDependencies()
     }
 
-    static Dependencies compileDependencies(Project project) {
-        new Dependencies(project.configurations.findByName("compile"), BuckifyExtension.from(project))
+    public Set<DependencyTarget> declaredDependencies() {
+        declaredExternalDependencies
     }
 
-    static Dependencies testCompileDependencies(Project project) {
-        new Dependencies(project.configurations.findByName("testCompile"), BuckifyExtension.from(project))
+    public Set<DependencyTarget> transitiveDependencies() {
+        transitiveDependencies
+    }
+
+    public Set<DependencyTarget> nonTransitiveDependencies() {
+        declaredDependencies() + projectDependencies()
+    }
+
+    public Set<DependencyTarget> projectDependencies() {
+        projectDependencies
     }
 }

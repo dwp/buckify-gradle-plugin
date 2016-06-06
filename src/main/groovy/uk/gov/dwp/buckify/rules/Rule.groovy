@@ -19,5 +19,4 @@ abstract class Rule {
     static String toPythonBoolean(boolean val){
         String.valueOf(val).capitalize()
     }
-
 }

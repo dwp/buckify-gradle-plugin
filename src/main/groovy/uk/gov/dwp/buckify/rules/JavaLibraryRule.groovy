@@ -5,22 +5,21 @@ import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPlugin
 import uk.gov.dwp.buckify.BuckifyExtension
 import uk.gov.dwp.buckify.dependencies.Dependencies
-
-import static uk.gov.dwp.buckify.dependencies.Dependencies.compileDependencies
+import uk.gov.dwp.buckify.dependencies.DependencyCache
 
 class JavaLibraryRule extends Rule {
     static final sourceDir = "src/main/java"
     static final resourcesDir = "src/main/resources"
 
-    static generator = { Project project -> project.plugins.hasPlugin(JavaPlugin) && project.file(sourceDir).exists() ? [new JavaLibraryRule(project)] : [] }
+    static generator = { Project project, DependencyCache dependencies -> project.plugins.hasPlugin(JavaPlugin) && project.file(sourceDir).exists() ? [new JavaLibraryRule(project, dependencies)] : [] }
 
     Dependencies dependencies
     boolean autoDeps
     Set<String> resources
 
-    JavaLibraryRule(Project project) {
+    JavaLibraryRule(Project project, DependencyCache dependencies) {
         def buckifyExtension = project.extensions.findByType(BuckifyExtension)
-        this.dependencies = compileDependencies(project)
+        this.dependencies = dependencies.compileDependencies()
         this.name = BuckifyExtension.from(project).javaLibrary.defaultRuleName
         this.autoDeps = buckifyExtension.autoDeps
         this.resources = project.file(resourcesDir).exists() ? quoted([resourcesDir]) : []
@@ -28,13 +27,15 @@ class JavaLibraryRule extends Rule {
 
     @Override
     Writable createOutput() {
-        new SimpleTemplateEngine().createTemplate("""java_library(
+        new SimpleTemplateEngine().createTemplate("""
+java_library(
                 name="$name",
                 autodeps=${toPythonBoolean(autoDeps)},
                 srcs=glob(["$sourceDir/**/*.java"]),
                 resources=$resources,
-                deps=[],
-                exported_deps=${quoted(dependencies.allDependencyPaths())},
+                # transitive deps
+                deps=${quoted(dependencies.transitiveDependencies().collect({ it.path() }))},
+                exported_deps=${quoted(dependencies.nonTransitiveDependencies().collect({ it.path() }))},
                 visibility=${quoted(visibility)}
 )
 

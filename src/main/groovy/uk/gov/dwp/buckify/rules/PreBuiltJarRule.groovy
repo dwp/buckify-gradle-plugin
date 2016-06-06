@@ -3,11 +3,10 @@ package uk.gov.dwp.buckify.rules
 import groovy.text.SimpleTemplateEngine
 import org.gradle.api.Project
 import uk.gov.dwp.buckify.BuckifyExtension
-
-import static uk.gov.dwp.buckify.dependencies.Dependencies.compileDependencies
+import uk.gov.dwp.buckify.dependencies.DependencyCache
 
 class PreBuiltJarRule extends Rule {
-    static generator = { Project project -> compileDependencies(project).externalDependencyNames().collect({ new PreBuiltJarRule(it, BuckifyExtension.from(project).binaryJarResolution(it)) }) }
+    static generator = { Project project, DependencyCache dependencies -> dependencies.compileDependencies().externalDependencies().collect({ new PreBuiltJarRule(it.name(), BuckifyExtension.from(project).binaryJarResolution(it.name())) }) }
 
     private String binaryJar
 
