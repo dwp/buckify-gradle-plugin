@@ -4,10 +4,10 @@ import groovy.transform.Canonical
 import org.gradle.api.artifacts.ResolvedArtifact
 
 @Canonical
-class ProjectDependency implements Dependency {
+class ProjectDependency implements BuckDependency {
     ProjectDependency(ResolvedArtifact artifact, Closure pathResolution) {
-        this.name = artifact.name
-        this.rulePath = pathResolution artifact
+        this.ruleName = artifact.name
         this.identifier = artifact.owner.identifier
+        this.path = pathResolution this
     }
 }

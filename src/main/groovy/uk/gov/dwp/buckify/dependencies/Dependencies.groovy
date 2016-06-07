@@ -70,7 +70,7 @@ class Dependencies {
         transitiveDependencies + declaredExternalDependencies
     }
 
-    public Set<uk.gov.dwp.buckify.dependencies.Dependency> nonTransitiveDependencies() {
+    public Set<BuckDependency> nonTransitiveDependencies() {
         declaredExternalDependencies + projectDependencies
     }
 }

@@ -173,7 +173,7 @@ groovy_library(
 java_test(
                 name="test",
                 autodeps=True,
-                source_under_test=["test-java"],
+                source_under_test=["main"],
                 srcs=glob(["src/test/java/**/*.java"]),
                 resources=["src/test/resources"],
                 deps=[

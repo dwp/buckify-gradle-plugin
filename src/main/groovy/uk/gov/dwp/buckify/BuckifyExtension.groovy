@@ -1,15 +1,16 @@
 package uk.gov.dwp.buckify
 
 import org.gradle.api.Project
-import org.gradle.api.artifacts.ResolvedArtifact
 import org.gradle.api.plugins.GroovyPlugin
+import uk.gov.dwp.buckify.dependencies.ArtifactDependency
+import uk.gov.dwp.buckify.dependencies.ProjectDependency
 
 class BuckifyExtension {
     static final String NAME = "buckify"
 
     String outputType
-    Closure projectDependencyRuleResolution = { ResolvedArtifact artifact -> artifact.name + ":" + javaLibrary.defaultRuleName }
-    Closure externalDependencyRuleResolution = { ResolvedArtifact artifact -> "//lib:" + artifact.artifact.toString() }
+    Closure projectDependencyRuleResolution = { ProjectDependency dep -> dep.ruleName + ":" + javaLibrary.defaultRuleName }
+    Closure externalDependencyRuleResolution = { ArtifactDependency dep -> "//lib:" + dep.ruleName }
     Closure binaryJarResolution = { String dep -> ":" + dep + "-mvn" }
     GroovyLibrary groovyLibrary = new GroovyLibrary()
     JavaTestLibrary javaTestLibrary = new JavaTestLibrary()

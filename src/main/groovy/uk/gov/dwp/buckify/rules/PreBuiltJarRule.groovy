@@ -8,7 +8,7 @@ import uk.gov.dwp.buckify.dependencies.DependencyCache
 class PreBuiltJarRule extends Rule {
     static generator = { Project project, DependencyCache dependencies ->
         dependencies.externalDependenciesForAllConfigurations().collect({ dep ->
-            new PreBuiltJarRule(dep.name, BuckifyExtension.from(project).binaryJarResolution(dep.name))
+            new PreBuiltJarRule(dep.ruleName, BuckifyExtension.from(project).binaryJarResolution(dep.ruleName))
         })
     }
 

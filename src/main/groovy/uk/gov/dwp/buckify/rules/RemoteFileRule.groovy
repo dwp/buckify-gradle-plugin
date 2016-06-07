@@ -15,7 +15,7 @@ class RemoteFileRule extends Rule {
     def sha1
 
     RemoteFileRule(ArtifactDependency dependencyTarget) {
-        name = dependencyTarget.name + "-mvn"
+        name = dependencyTarget.ruleName + "-mvn"
         out = dependencyTarget.filename
         url = "mvn:${dependencyTarget.identifier}"
         sha1 = dependencyTarget.sha1

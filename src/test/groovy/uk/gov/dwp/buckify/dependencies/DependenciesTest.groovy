@@ -29,7 +29,7 @@ class DependenciesTest {
         def dependencies = new Dependencies(testProject.configurations.findByName("compile"), testProject.extensions.findByType(BuckifyExtension))
 
         assert dependencies.projectDependencies.size() == 1
-        assert dependencies.projectDependencies.collect({ it.name }) == ["child"]
+        assert dependencies.projectDependencies.collect({ it.ruleName }) == ["child"]
     }
 
     @Test
@@ -37,7 +37,7 @@ class DependenciesTest {
         def dependencies = new Dependencies(testProject.configurations.findByName("compile"), testProject.extensions.findByType(BuckifyExtension))
 
         assert dependencies.declaredExternalDependencies.size() == 3
-        assert dependencies.declaredExternalDependencies.collect({ it.name }) == (["commons-lang.jar", "joda-time.jar", "cucumber-core.jar"])
+        assert dependencies.declaredExternalDependencies.collect({ it.ruleName }) == (["commons-lang.jar", "joda-time.jar", "cucumber-core.jar"])
     }
 
     @Test
@@ -45,7 +45,7 @@ class DependenciesTest {
         def dependencies = new Dependencies(testProject.configurations.findByName("compile"), testProject.extensions.findByType(BuckifyExtension))
 
         assert dependencies.transitiveDependencies.size() == 3
-        assert dependencies.transitiveDependencies.collect({ it.name }) == ["cucumber-html.jar", "cucumber-jvm-deps.jar", "gherkin.jar"]
+        assert dependencies.transitiveDependencies.collect({ it.ruleName }) == ["cucumber-html.jar", "cucumber-jvm-deps.jar", "gherkin.jar"]
         assert dependencies.transitiveDependencies.disjoint(dependencies.nonTransitiveDependencies())
     }
 
@@ -54,7 +54,7 @@ class DependenciesTest {
         def dependencies = new Dependencies(testProject.configurations.findByName("testCompile"), testProject.extensions.findByType(BuckifyExtension))
 
         assert dependencies.configSpecificDependencies.size() == 1
-        assert dependencies.configSpecificDependencies.collect({ it.name }) == ["junit.jar"]
+        assert dependencies.configSpecificDependencies.collect({ it.ruleName }) == ["junit.jar"]
     }
 
     private Project createProject() {

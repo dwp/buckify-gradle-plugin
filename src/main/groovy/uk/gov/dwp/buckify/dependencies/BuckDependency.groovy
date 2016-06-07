@@ -1,7 +1,7 @@
 package uk.gov.dwp.buckify.dependencies
 
-trait Dependency {
-    String name
-    String rulePath
+trait BuckDependency {
+    String ruleName
+    String path
     String identifier
 }

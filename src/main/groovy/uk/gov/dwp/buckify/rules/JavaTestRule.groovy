@@ -21,7 +21,7 @@ class JavaTestRule extends Rule {
     JavaTestRule(Project project, DependencyCache dependencies) {
         this.dependencies = dependencies.testCompileDependencies()
         this.name = BuckifyExtension.from(project).javaTestLibrary.defaultRuleName
-        this.sourceUnderTest = [project.name + "-java"]
+        this.sourceUnderTest = [BuckifyExtension.from(project).javaLibrary.defaultRuleName]
         this.autoDeps = BuckifyExtension.from(project).autoDeps
         this.resources = project.file(resourcesDir).exists() ? quoted([resourcesDir]) : []
     }
@@ -35,7 +35,7 @@ java_test(
                 source_under_test=${quoted(sourceUnderTest)},
                 srcs=glob(["$sourceDir/**/*.java"]),
                 resources=$resources,
-                deps=${quoted(dependencies.configSpecificDependencies.collect({ it.rulePath }))},
+                deps=${quoted(dependencies.configSpecificDependencies.collect({ it.path }))},
                 visibility=${quoted(visibility)}
 )
 
