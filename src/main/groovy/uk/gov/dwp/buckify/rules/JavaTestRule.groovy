@@ -14,7 +14,7 @@ class JavaTestRule extends Rule {
     static generator = { Project project, DependencyCache dependencies -> project.plugins.hasPlugin(JavaPlugin) && project.file(sourceDir).exists() ? [new JavaTestRule(project, dependencies)] : [] }
 
     Dependencies dependencies
-    Set<String> resources
+    boolean hasResources
     boolean autoDeps
     Set<String> sourceUnderTest
 
@@ -23,7 +23,8 @@ class JavaTestRule extends Rule {
         this.name = BuckifyExtension.from(project).javaTestLibrary.defaultRuleName
         this.sourceUnderTest = [BuckifyExtension.from(project).javaLibrary.defaultRuleName]
         this.autoDeps = BuckifyExtension.from(project).autoDeps
-        this.resources = project.file(resourcesDir).exists() ? quoted([resourcesDir]) : []
+        // todo - check sourceSets property of Java plugin to find actual resources dir
+        this.hasResources = project.file(resourcesDir).exists()
     }
 
     @Override
@@ -33,9 +34,8 @@ java_test(
                 name="$name",
                 autodeps=${toPythonBoolean(autoDeps)},
                 source_under_test=${quoted(sourceUnderTest)},
-                srcs=glob(["$sourceDir/**/*.java"]),
-                resources=$resources,
-                deps=${quoted(dependencies.configSpecificDependencies.collect({ it.path }))},
+                resources=${hasResources ? "glob(['$resourcesDir/**/*'])" : ''},
+                deps=${quoted(dependencies.configSpecificDependencies.collect({ it.path }).toSet())},
                 visibility=${quoted(visibility)}
 )
 

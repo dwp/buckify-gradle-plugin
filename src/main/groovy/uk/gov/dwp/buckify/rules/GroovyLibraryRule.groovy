@@ -16,12 +16,12 @@ class GroovyLibraryRule extends Rule {
     }
 
     Dependencies dependencies
-    Set<String> resources
+    boolean hasResources
 
     GroovyLibraryRule(Project project, DependencyCache dependencies) {
         this.dependencies = dependencies.compileDependencies()
         this.name = BuckifyExtension.from(project).groovyLibrary.defaultRuleName
-        this.resources = project.file(resourcesDir).exists() ? quoted([resourcesDir]) : []
+        this.hasResources = project.file(resourcesDir).exists()
     }
 
     @Override
@@ -30,10 +30,9 @@ class GroovyLibraryRule extends Rule {
 groovy_library(
                 name="$name",
                 srcs=glob(["$sourceDir/**/*.groovy", "$sourceDir/**/*.java"]),
-                resources=$resources,
-                # transitive deps
-                deps=${quoted(dependencies.transitiveDependencies.collect({ it.path }))},
-                exported_deps=${quoted(dependencies.nonTransitiveDependencies().collect({ it.path }))},
+                resources=${hasResources ? "glob(['$resourcesDir/**/*'])" : ''},
+                deps=${quoted(transitiveDependencyPaths(dependencies))},
+                exported_deps=${quoted(dependencies.nonTransitiveDependencies().collect({ it.path }).toSet())},
                 visibility=${quoted(visibility)}
 )
 

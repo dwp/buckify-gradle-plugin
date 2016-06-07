@@ -1,6 +1,7 @@
 package uk.gov.dwp.buckify.rules
 
 import groovy.transform.Canonical
+import uk.gov.dwp.buckify.dependencies.Dependencies
 
 @Canonical
 abstract class Rule {
@@ -17,6 +18,10 @@ abstract class Rule {
 
     static List<String> quoted(Collection<String> strings) {
         strings.collect { '"' + it + '"' }
+    }
+
+    static Set<String> transitiveDependencyPaths(Dependencies dependencies) {
+        dependencies.transitiveDependencies.collect({ it.path }).toSet()
     }
 
     static String toPythonBoolean(boolean val){

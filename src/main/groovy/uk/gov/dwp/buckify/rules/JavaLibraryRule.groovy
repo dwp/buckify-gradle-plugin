@@ -15,14 +15,15 @@ class JavaLibraryRule extends Rule {
 
     Dependencies dependencies
     boolean autoDeps
-    Set<String> resources
+    boolean hasResources
 
     JavaLibraryRule(Project project, DependencyCache dependencies) {
         def buckifyExtension = project.extensions.findByType(BuckifyExtension)
         this.dependencies = dependencies.compileDependencies()
         this.name = BuckifyExtension.from(project).javaLibrary.defaultRuleName
         this.autoDeps = buckifyExtension.autoDeps
-        this.resources = project.file(resourcesDir).exists() ? quoted([resourcesDir]) : []
+        // todo - check sourceSets property of Java plugin to find actual resources dir
+        this.hasResources = project.file(resourcesDir).exists()
     }
 
     @Override
@@ -32,10 +33,10 @@ java_library(
                 name="$name",
                 autodeps=${toPythonBoolean(autoDeps)},
                 srcs=glob(["$sourceDir/**/*.java"]),
-                resources=$resources,
-                # transitive deps
-                deps=${quoted(dependencies.transitiveDependencies.collect({ it.path }))},
-                exported_deps=${quoted(dependencies.nonTransitiveDependencies().collect({ it.path }))},
+                resources=${hasResources ? "glob(['$resourcesDir/**/*'])" : ''},
+                resources_root=${hasResources ? "'$resourcesDir'" : ''},
+                deps=${quoted(transitiveDependencyPaths(dependencies))},
+                exported_deps=${quoted(dependencies.nonTransitiveDependencies().collect({ it.path }).toSet())},
                 visibility=${quoted(visibility)}
 )
 
