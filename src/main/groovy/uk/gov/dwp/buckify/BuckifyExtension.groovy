@@ -32,22 +32,13 @@ class BuckifyExtension {
         this.projectDependencies = new DependencyResolution(pathResolution, nameResolution)
     }
 
-    void groovyLibrary(Closure predicate) {
-        this.groovyLibrary = new GroovyLibrary(predicate: predicate)
-    }
-
     static BuckifyExtension from(Project project) {
         project.extensions.findByType(BuckifyExtension)
     }
 
     class GroovyLibrary {
         Closure predicate = { Project project ->
-            def plugin = project.plugins.hasPlugin(GroovyPlugin)
-            def groovySrcDir = project.file("src/main/groovy")
-            println "has plugin: " + plugin
-            println "groovy src dir: " + groovySrcDir.absoluteFile
-            println "groovy src dir exists: " + groovySrcDir.exists()
-            plugin && groovySrcDir.exists()
+            project.plugins.hasPlugin(GroovyPlugin) && project.file("src/main/groovy").exists()
         }
         String defaultRuleName = "main-groovy"
     }
