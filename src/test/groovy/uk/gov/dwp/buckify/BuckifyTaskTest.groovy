@@ -35,7 +35,7 @@ class BuckifyTaskTest {
     }
 
     private void setupProject(Project myProject) {
-        myProject.extensions.create("buckify", BuckifyExtension, "console")
+        myProject.extensions.create("buckify", BuckifyExtension)
         myProject.plugins.apply('java')
         myProject.plugins.apply('groovy')
         myProject.repositories {

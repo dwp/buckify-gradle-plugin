@@ -7,10 +7,13 @@ import uk.gov.dwp.buckify.dependencies.Dependencies
 import uk.gov.dwp.buckify.dependencies.DependencyCache
 
 class GroovyLibraryRule extends Rule {
+
     static final sourceDir = "src/main/groovy"
     static final resourcesDir = "src/main/resources"
 
-    static generator = { Project project, DependencyCache dependencies -> BuckifyExtension.from(project).groovyLibrary.predicate ? [new GroovyLibraryRule(project, dependencies)] : [] }
+    static generator = { Project project, DependencyCache dependencies ->
+        BuckifyExtension.from(project).groovyLibrary.predicate(project) ? [new GroovyLibraryRule(project, dependencies)] : []
+    }
 
     Dependencies dependencies
     Set<String> resources

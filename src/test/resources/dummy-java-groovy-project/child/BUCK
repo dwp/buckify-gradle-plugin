@@ -1,13 +1,2 @@
-
-groovy_library(
-                name="main-groovy",
-                srcs=glob(["src/main/groovy/**/*.groovy", "src/main/groovy/**/*.java"]),
-                resources=[],
-                # transitive deps
-                deps=[],
-                exported_deps=["//lib:commons-lang.jar"],
-                visibility=["PUBLIC"]
-)
-
 prebuilt_jar(name='commons-lang.jar', binary_jar=':commons-lang.jar-mvn', visibility=["PUBLIC"])
 remote_file(name='commons-lang.jar-mvn', out='commons-lang-2.5.jar', url='mvn:commons-lang:commons-lang:2.5', sha1='b0236b252e86419eef20c31a44579d2aee2f0a69' )

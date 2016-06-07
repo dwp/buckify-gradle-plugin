@@ -59,7 +59,7 @@ class DependenciesTest {
 
     private Project createProject() {
         def myProject = ProjectBuilder.builder().build()
-        myProject.extensions.create("buckify", BuckifyExtension, "console")
+        myProject.extensions.create("buckify", BuckifyExtension)
         myProject.plugins.apply('java')
         myProject.plugins.apply('groovy')
         myProject.repositories {

@@ -1,5 +1,8 @@
 package uk.gov.dwp.buckify.rules
 
+import groovy.transform.Canonical
+
+@Canonical
 abstract class Rule {
     String name
     Set<String> visibility = ["PUBLIC"]

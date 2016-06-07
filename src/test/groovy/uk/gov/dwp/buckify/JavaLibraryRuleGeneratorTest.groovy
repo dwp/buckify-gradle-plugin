@@ -12,7 +12,7 @@ class JavaLibraryRuleGeneratorTest {
 
     @Test
     public void createJavaLibraryRuleWhenJavaPluginAndSourceDirectoriesExist() {
-        project.extensions.create("buckify", BuckifyExtension, "console")
+        project.extensions.create("buckify", BuckifyExtension)
         project.plugins.apply(JavaPlugin)
 
         def rules = JavaLibraryRule.generator(project, new DependencyCache(project))

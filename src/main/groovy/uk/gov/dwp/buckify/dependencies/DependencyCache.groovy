@@ -13,7 +13,8 @@ class DependencyCache {
 
     Dependencies get(String configurationName) {
         dependenciesForConfiguration.computeIfAbsent(configurationName, {
-            new Dependencies(project.configurations.findByName(configurationName), BuckifyExtension.from(project))
+            def configuration = project.configurations.findByName(configurationName)
+            configuration != null ? new Dependencies(configuration, BuckifyExtension.from(project)) : new Dependencies()
         })
     }
 

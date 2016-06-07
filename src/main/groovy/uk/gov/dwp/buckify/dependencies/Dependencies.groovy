@@ -7,10 +7,12 @@ import org.gradle.internal.component.local.model.PublishArtifactLocalArtifactMet
 import uk.gov.dwp.buckify.BuckifyExtension
 
 class Dependencies {
-    Set<ProjectDependency> projectDependencies
-    Set<ArtifactDependency> declaredExternalDependencies
-    Set<ArtifactDependency> transitiveDependencies
-    Set<ArtifactDependency> configSpecificDependencies
+    Set<ProjectDependency> projectDependencies = []
+    Set<ArtifactDependency> declaredExternalDependencies = []
+    Set<ArtifactDependency> transitiveDependencies = []
+    Set<ArtifactDependency> configSpecificDependencies = []
+
+    Dependencies() {}
 
     Dependencies(Configuration configuration, BuckifyExtension buckifyExtension) {
         def resolvedArtifacts = configuration.resolvedConfiguration.resolvedArtifacts
@@ -20,16 +22,16 @@ class Dependencies {
         def configSpecificArtifacts = findConfigSpecificArtifacts(configuration)
 
         configSpecificDependencies = configSpecificArtifacts.collect({
-            new ArtifactDependency(it, buckifyExtension.externalDependencyRuleResolution)
+            new ArtifactDependency(it, buckifyExtension.externalDependencies)
         })
         projectDependencies = projectArtifacts.collect({
-            new ProjectDependency(it, buckifyExtension.projectDependencyRuleResolution)
+            new ProjectDependency(it, buckifyExtension.projectDependencies)
         })
         declaredExternalDependencies = externalArtifacts.collect({
-            new ArtifactDependency(it, buckifyExtension.externalDependencyRuleResolution)
+            new ArtifactDependency(it, buckifyExtension.externalDependencies)
         })
         transitiveDependencies = transitiveArtifacts.collect({
-            new ArtifactDependency(it, buckifyExtension.externalDependencyRuleResolution)
+            new ArtifactDependency(it, buckifyExtension.externalDependencies)
         })
     }
 
@@ -59,8 +61,7 @@ class Dependencies {
     }
 
     private static Set<ResolvedArtifact> findDeclaredExternalArtifacts(Configuration configuration) {
-        def firstLevelModuleDependencies = configuration.resolvedConfiguration.firstLevelModuleDependencies
-        firstLevelModuleDependencies
+        configuration.resolvedConfiguration.firstLevelModuleDependencies
                 .collect({ it.moduleArtifacts })
                 .flatten()
                 .findAll({ !(it.artifactSource.artifact instanceof PublishArtifactLocalArtifactMetaData) })
