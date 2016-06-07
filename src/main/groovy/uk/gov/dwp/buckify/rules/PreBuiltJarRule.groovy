@@ -6,7 +6,11 @@ import uk.gov.dwp.buckify.BuckifyExtension
 import uk.gov.dwp.buckify.dependencies.DependencyCache
 
 class PreBuiltJarRule extends Rule {
-    static generator = { Project project, DependencyCache dependencies -> dependencies.compileDependencies().externalDependencies().collect({ new PreBuiltJarRule(it.name(), BuckifyExtension.from(project).binaryJarResolution(it.name())) }) }
+    static generator = { Project project, DependencyCache dependencies ->
+        dependencies.externalDependenciesForAllConfigurations().collect({ dep ->
+            new PreBuiltJarRule(dep.name, BuckifyExtension.from(project).binaryJarResolution(dep.name))
+        })
+    }
 
     private String binaryJar
 

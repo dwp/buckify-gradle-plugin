@@ -24,6 +24,7 @@ class BuckifyTaskTest {
             compile 'commons-lang:commons-lang:2.6'
             compile 'joda-time:joda-time:2.2'
             compile group: 'org.apache.solr', name: 'solr-core', version: '6.0.1'
+
             testCompile group: 'junit', name: 'junit', version: '4.11'
         }
 

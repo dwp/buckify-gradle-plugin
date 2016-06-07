@@ -35,7 +35,7 @@ java_test(
                 source_under_test=${quoted(sourceUnderTest)},
                 srcs=glob(["$sourceDir/**/*.java"]),
                 resources=$resources,
-                deps=${quoted(dependencies.configSpecificDependencies.collect({ it.path() }))},
+                deps=${quoted(dependencies.configSpecificDependencies.collect({ it.rulePath }))},
                 visibility=${quoted(visibility)}
 )
 

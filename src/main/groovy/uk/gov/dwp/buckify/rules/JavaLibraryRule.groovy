@@ -34,8 +34,8 @@ java_library(
                 srcs=glob(["$sourceDir/**/*.java"]),
                 resources=$resources,
                 # transitive deps
-                deps=${quoted(dependencies.transitiveDependencies().collect({ it.path() }))},
-                exported_deps=${quoted(dependencies.nonTransitiveDependencies().collect({ it.path() }))},
+                deps=${quoted(dependencies.transitiveDependencies.collect({ it.rulePath }))},
+                exported_deps=${quoted(dependencies.nonTransitiveDependencies().collect({ it.rulePath }))},
                 visibility=${quoted(visibility)}
 )
 

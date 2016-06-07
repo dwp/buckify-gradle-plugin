@@ -2,24 +2,23 @@ package uk.gov.dwp.buckify.rules
 
 import groovy.text.SimpleTemplateEngine
 import org.gradle.api.Project
+import uk.gov.dwp.buckify.dependencies.ArtifactDependency
 import uk.gov.dwp.buckify.dependencies.DependencyCache
-import uk.gov.dwp.buckify.dependencies.DependencyTarget
 
 class RemoteFileRule extends Rule {
     static generator = { Project project, DependencyCache dependencies ->
-        dependencies.compileDependencies().externalDependencies().collect({ new RemoteFileRule(it) })
+        dependencies.externalDependenciesForAllConfigurations().collect({ new RemoteFileRule(it) })
     }
 
     def out
     def url
     def sha1
 
-    RemoteFileRule(DependencyTarget dependencyTarget) {
-        def resolvedArtifact = dependencyTarget.artifact
-        name = resolvedArtifact.name + "-mvn"
-        out = resolvedArtifact.name + ".jar"
-        url = "mvn:${resolvedArtifact.owner.identifier}"
-        sha1 = dependencyTarget.sha1()
+    RemoteFileRule(ArtifactDependency dependencyTarget) {
+        name = dependencyTarget.name + "-mvn"
+        out = dependencyTarget.filename
+        url = "mvn:${dependencyTarget.identifier}"
+        sha1 = dependencyTarget.sha1
     }
 
     @Override

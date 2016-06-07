@@ -9,7 +9,7 @@ class BuckifyExtension {
 
     String outputType
     Closure projectDependencyRuleResolution = { ResolvedArtifact artifact -> artifact.name + ":" + javaLibrary.defaultRuleName }
-    Closure externalDependencyRuleResolution = { ResolvedArtifact artifact -> "//lib:" + artifact.name }
+    Closure externalDependencyRuleResolution = { ResolvedArtifact artifact -> "//lib:" + artifact.artifact.toString() }
     Closure binaryJarResolution = { String dep -> ":" + dep + "-mvn" }
     GroovyLibrary groovyLibrary = new GroovyLibrary()
     JavaTestLibrary javaTestLibrary = new JavaTestLibrary()
