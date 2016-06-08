@@ -1,7 +1,6 @@
 package uk.gov.dwp.buckify
 
 import org.gradle.api.Project
-import org.gradle.api.artifacts.ResolvedArtifact
 import org.gradle.api.plugins.GroovyPlugin
 import uk.gov.dwp.buckify.dependencies.ArtifactDependency
 import uk.gov.dwp.buckify.dependencies.ProjectDependency
@@ -10,54 +9,21 @@ class BuckifyExtension {
 
     static final String NAME = "buckify"
 
-    DependencyResolution projectDependencies = new DependencyResolution(
-            { ProjectDependency dep -> "//$dep.ruleName:" + javaLibrary.defaultRuleName },
-            { ResolvedArtifact artifact -> artifact.name }
-    )
-    DependencyResolution externalDependencies = new DependencyResolution(
-            { ArtifactDependency dep -> "//lib:" + dep.ruleName },
-            { ResolvedArtifact artifact -> artifact.name + (artifact.classifier ? "-$artifact.classifier" : "") }
-    )
-    Closure binaryJarResolution = { String dep -> ":" + dep + "-mvn" }
-    GroovyLibrary groovyLibrary = new GroovyLibrary()
-    JavaTestLibrary javaTestLibrary = new JavaTestLibrary()
-    JavaLibrary javaLibrary = new JavaLibrary()
+    Closure<String> projectDependencyRuleName = { ProjectDependency dep -> "//$dep.ruleName:" + javaLibraryRuleName }
+    Closure<String> externalDependencyRuleName = { ArtifactDependency dep -> (dep.identifier.contains("uk.gov.dwp") ? "//lib/internal:" : "//lib:") + dep.ruleName }
+    Closure<String> binaryJarRuleName = { String dep -> ":$dep-mvn" }
+
+    String groovyLibraryRuleName = "groovy"
+    String javaLibraryRuleName = "main"
+    String javaTestRuleName = "test"
+    Closure groovyLibraryPredicate = { Project project ->
+        project.plugins.hasPlugin(GroovyPlugin) && project.file("src/main/groovy").exists()
+    }
     boolean autoDeps = true
-
-    void externalDependencies(Closure pathResolution, Closure nameResolution) {
-        this.externalDependencies = new DependencyResolution(pathResolution, nameResolution)
-    }
-
-    void projectDependencies(Closure pathResolution, Closure nameResolution) {
-        this.projectDependencies = new DependencyResolution(pathResolution, nameResolution)
-    }
+    boolean disableRemoteFileRules = true
+    boolean disablePreBuiltJarRules = true
 
     static BuckifyExtension from(Project project) {
         project.extensions.findByType(BuckifyExtension)
-    }
-
-    class GroovyLibrary {
-        Closure predicate = { Project project ->
-            project.plugins.hasPlugin(GroovyPlugin) && project.file("src/main/groovy").exists()
-        }
-        String defaultRuleName = "main-groovy"
-    }
-
-    class JavaLibrary {
-        String defaultRuleName = "main"
-    }
-
-    class JavaTestLibrary {
-        String defaultRuleName = "test"
-    }
-
-    class DependencyResolution {
-        Closure pathResolution
-        Closure nameResolution
-
-        DependencyResolution(Closure pathResolution, Closure nameResolution) {
-            this.pathResolution = pathResolution
-            this.nameResolution = nameResolution
-        }
     }
 }

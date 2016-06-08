@@ -22,16 +22,16 @@ class Dependencies {
         def configSpecificArtifacts = findConfigSpecificArtifacts(configuration)
 
         configSpecificDependencies = configSpecificArtifacts.collect({
-            new ArtifactDependency(it, buckifyExtension.externalDependencies)
+            new ArtifactDependency(it, buckifyExtension.externalDependencyRuleName)
         })
         projectDependencies = projectArtifacts.collect({
-            new ProjectDependency(it, buckifyExtension.projectDependencies)
+            new ProjectDependency(it, buckifyExtension.projectDependencyRuleName)
         })
         declaredExternalDependencies = externalArtifacts.collect({
-            new ArtifactDependency(it, buckifyExtension.externalDependencies)
+            new ArtifactDependency(it, buckifyExtension.externalDependencyRuleName)
         })
         transitiveDependencies = transitiveArtifacts.collect({
-            new ArtifactDependency(it, buckifyExtension.externalDependencies)
+            new ArtifactDependency(it, buckifyExtension.externalDependencyRuleName)
         })
     }
 

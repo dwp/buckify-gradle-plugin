@@ -20,8 +20,8 @@ class JavaTestRule extends Rule {
 
     JavaTestRule(Project project, DependencyCache dependencies) {
         this.dependencies = dependencies.testCompileDependencies()
-        this.name = BuckifyExtension.from(project).javaTestLibrary.defaultRuleName
-        this.sourceUnderTest = [":${BuckifyExtension.from(project).javaLibrary.defaultRuleName}"]
+        this.name = BuckifyExtension.from(project).javaTestRuleName
+        this.sourceUnderTest = [":${BuckifyExtension.from(project).javaLibraryRuleName}"]
         this.autoDeps = BuckifyExtension.from(project).autoDeps
         // todo - check sourceSets property of Java plugin to find actual resources dir
         this.resources = project.file(resourcesDir).exists() ? "glob(['$resourcesDir/**/*'])" : '[]'

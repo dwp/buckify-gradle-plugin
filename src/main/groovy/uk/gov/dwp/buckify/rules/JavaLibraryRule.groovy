@@ -22,7 +22,7 @@ class JavaLibraryRule extends Rule {
     JavaLibraryRule(Project project, DependencyCache dependencies) {
         def buckifyExtension = project.extensions.findByType(BuckifyExtension)
         this.dependencies = dependencies.compileDependencies()
-        this.name = BuckifyExtension.from(project).javaLibrary.defaultRuleName
+        this.name = BuckifyExtension.from(project).javaLibraryRuleName
         this.autoDeps = buckifyExtension.autoDeps
         // todo - check sourceSets property of Java plugin to find actual resources dir
         this.hasResources = project.file(resourcesDir).exists()

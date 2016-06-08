@@ -2,19 +2,19 @@ package uk.gov.dwp.buckify.dependencies
 
 import groovy.transform.Canonical
 import org.gradle.api.artifacts.ResolvedArtifact
-import uk.gov.dwp.buckify.BuckifyExtension.DependencyResolution
 
 @Canonical
 class ArtifactDependency implements BuckDependency {
+
     String filename
     String sha1
 
-    ArtifactDependency(ResolvedArtifact artifact, DependencyResolution dependencyResolution) {
-        this.ruleName = dependencyResolution.nameResolution artifact
+    ArtifactDependency(ResolvedArtifact artifact, Closure dependencyResolution) {
+        this.ruleName = artifact.name + (artifact.classifier ? "-$artifact.classifier" : "")
         this.filename = artifact.file.name
         this.identifier = createMavenIdentifier(artifact)
         this.sha1 = artifact.file.exists() ? Checksum.generateSHA1(artifact.file) : null
-        this.path = dependencyResolution.pathResolution this
+        this.path = dependencyResolution this
     }
 
     // mvn:optionalServer:group:id:type:classifier:version

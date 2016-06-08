@@ -13,7 +13,7 @@ class GroovyLibraryRuleGeneratorTest {
 
     @Test
     public void createGroovyLibraryRuleWhenPredicateIsTrue() {
-        project.extensions.create("buckify", BuckifyExtension).groovyLibrary.predicate = { true }
+        project.extensions.create("buckify", BuckifyExtension).groovyLibraryPredicate = { true }
         project.plugins.apply(GroovyPlugin)
 
         def rules = GroovyLibraryRule.generator(project, new DependencyCache(project))
@@ -23,7 +23,7 @@ class GroovyLibraryRuleGeneratorTest {
 
     @Test
     public void doNotCreateGroovyLibraryRuleWhenPredicateIsFalse() {
-        project.extensions.create("buckify", BuckifyExtension).groovyLibrary.predicate = { false }
+        project.extensions.create("buckify", BuckifyExtension).groovyLibraryPredicate = { false }
         project.plugins.apply(GroovyPlugin)
         project.dependencies {}
 

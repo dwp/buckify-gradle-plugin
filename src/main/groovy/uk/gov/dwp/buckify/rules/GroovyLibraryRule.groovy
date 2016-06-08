@@ -14,7 +14,7 @@ class GroovyLibraryRule extends Rule {
     static final resourcesDir = "src/main/resources"
 
     static generator = { Project project, DependencyCache dependencies ->
-        BuckifyExtension.from(project).groovyLibrary.predicate(project) ? [new GroovyLibraryRule(project, dependencies)] : []
+        BuckifyExtension.from(project).groovyLibraryPredicate(project) ? [new GroovyLibraryRule(project, dependencies)] : []
     }
 
     Dependencies dependencies
@@ -22,7 +22,7 @@ class GroovyLibraryRule extends Rule {
 
     GroovyLibraryRule(Project project, DependencyCache dependencies) {
         this.dependencies = dependencies.compileDependencies()
-        this.name = BuckifyExtension.from(project).groovyLibrary.defaultRuleName
+        this.name = BuckifyExtension.from(project).groovyLibraryRuleName
         this.resources = project.file(resourcesDir).exists() ? "glob(['$resourcesDir/**/*'])" : '[]'
     }
 
