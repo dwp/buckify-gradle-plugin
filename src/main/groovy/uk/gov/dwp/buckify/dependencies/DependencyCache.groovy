@@ -27,6 +27,6 @@ class DependencyCache {
     }
 
     Set<ArtifactDependency> externalDependenciesForAllConfigurations() {
-        testCompileDependencies().externalDependencies() + compileDependencies().externalDependencies()
+        (testCompileDependencies().externalDependencies() + compileDependencies().externalDependencies()).sort()
     }
 }

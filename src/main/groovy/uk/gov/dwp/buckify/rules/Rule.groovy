@@ -16,12 +16,12 @@ abstract class Rule {
 
     abstract Writable createOutput()
 
-    static List<String> quoted(Collection<String> strings) {
-        strings.collect { '"' + it + '"' }
+    static Collection<String> quoteAndSort(Collection<String> strings) {
+        strings.toSet().collect({ '"' + it + '"' }).sort()
     }
 
-    static Set<String> transitiveDependencyPaths(Dependencies dependencies) {
-        dependencies.transitiveDependencies.collect({ it.path }).toSet()
+    static Collection<String> transitiveDependencyPaths(Dependencies dependencies) {
+        dependencies.transitiveDependencies.collect({ it.path })
     }
 
     static String toPythonBoolean(boolean val){

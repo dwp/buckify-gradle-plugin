@@ -31,9 +31,9 @@ groovy_library(
                 name="$name",
                 srcs=glob(["$sourceDir/**/*.groovy", "$sourceDir/**/*.java"]),
                 resources=${hasResources ? "glob(['$resourcesDir/**/*'])" : ''},
-                deps=${quoted(transitiveDependencyPaths(dependencies))},
-                exported_deps=${quoted(dependencies.nonTransitiveDependencies().collect({ it.path }).toSet())},
-                visibility=${quoted(visibility)}
+                deps=${quoteAndSort(transitiveDependencyPaths(dependencies))},
+                exported_deps=${quoteAndSort(dependencies.nonTransitiveDependencies().collect({ it.path }).toSet())},
+                visibility=${quoteAndSort(visibility)}
 )
 
 """).make(this.properties)

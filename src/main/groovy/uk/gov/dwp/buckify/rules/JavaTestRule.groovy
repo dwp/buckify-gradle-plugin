@@ -33,10 +33,10 @@ class JavaTestRule extends Rule {
 java_test(
                 name="$name",
                 autodeps=${toPythonBoolean(autoDeps)},
-                source_under_test=${quoted(sourceUnderTest)},
+                source_under_test=${quoteAndSort(sourceUnderTest)},
                 resources=${hasResources ? "glob(['$resourcesDir/**/*'])" : ''},
-                deps=${quoted(dependencies.configSpecificDependencies.collect({ it.path }).toSet())},
-                visibility=${quoted(visibility)}
+                deps=${quoteAndSort(dependencies.configSpecificDependencies.collect({ it.path }).toSet())},
+                visibility=${quoteAndSort(visibility)}
 )
 
 """).make(this.properties)

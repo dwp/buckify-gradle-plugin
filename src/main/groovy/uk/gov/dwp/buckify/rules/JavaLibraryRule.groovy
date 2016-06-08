@@ -35,9 +35,9 @@ java_library(
                 srcs=glob(["$sourceDir/**/*.java"]),
                 resources=${hasResources ? "glob(['$resourcesDir/**/*'])" : ''},
                 resources_root=${hasResources ? "'$resourcesDir'" : ''},
-                deps=${quoted(transitiveDependencyPaths(dependencies))},
-                exported_deps=${quoted(dependencies.nonTransitiveDependencies().collect({ it.path }).toSet())},
-                visibility=${quoted(visibility)}
+                deps=${quoteAndSort(transitiveDependencyPaths(dependencies))},
+                exported_deps=${quoteAndSort(dependencies.nonTransitiveDependencies().collect({ it.path }))},
+                visibility=${quoteAndSort(visibility)}
 )
 
 """).make(this.properties)

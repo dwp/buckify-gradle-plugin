@@ -7,7 +7,7 @@ import uk.gov.dwp.buckify.dependencies.DependencyCache
 
 class PreBuiltJarRule extends Rule {
     static generator = { Project project, DependencyCache dependencies ->
-        dependencies.externalDependenciesForAllConfigurations().collect({ dep ->
+        dependencies.externalDependenciesForAllConfigurations().unique().collect({ dep ->
             new PreBuiltJarRule(dep.ruleName, BuckifyExtension.from(project).binaryJarResolution(dep.ruleName))
         })
     }
@@ -21,6 +21,6 @@ class PreBuiltJarRule extends Rule {
 
     @Override
     Writable createOutput() {
-        new SimpleTemplateEngine().createTemplate("prebuilt_jar(name='$name', binary_jar='$binaryJar', visibility=${quoted(visibility)})\n").make(this.properties)
+        new SimpleTemplateEngine().createTemplate("prebuilt_jar(name='$name', binary_jar='$binaryJar', visibility=${quoteAndSort(visibility)})\n").make(this.properties)
     }
 }
