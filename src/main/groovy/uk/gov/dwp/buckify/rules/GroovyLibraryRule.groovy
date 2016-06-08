@@ -6,6 +6,8 @@ import uk.gov.dwp.buckify.BuckifyExtension
 import uk.gov.dwp.buckify.dependencies.Dependencies
 import uk.gov.dwp.buckify.dependencies.DependencyCache
 
+import static java.util.stream.Collectors.joining
+
 class GroovyLibraryRule extends Rule {
 
     static final sourceDir = "src/main/groovy"
@@ -16,12 +18,12 @@ class GroovyLibraryRule extends Rule {
     }
 
     Dependencies dependencies
-    boolean hasResources
+    String resources
 
     GroovyLibraryRule(Project project, DependencyCache dependencies) {
         this.dependencies = dependencies.compileDependencies()
         this.name = BuckifyExtension.from(project).groovyLibrary.defaultRuleName
-        this.hasResources = project.file(resourcesDir).exists()
+        this.resources = project.file(resourcesDir).exists() ? "glob(['$resourcesDir/**/*'])" : '[]'
     }
 
     @Override
@@ -30,12 +32,16 @@ class GroovyLibraryRule extends Rule {
 groovy_library(
                 name="$name",
                 srcs=glob(["$sourceDir/**/*.groovy", "$sourceDir/**/*.java"]),
-                resources=${hasResources ? "glob(['$resourcesDir/**/*'])" : ''},
-                deps=${quoteAndSort(transitiveDependencyPaths(dependencies))},
+                resources=$resources,
+                ${deps()}
                 exported_deps=${quoteAndSort(dependencies.nonTransitiveDependencies().collect({ it.path }).toSet())},
                 visibility=${quoteAndSort(visibility)}
 )
 
 """).make(this.properties)
+    }
+
+    private String deps() {
+        "deps=${ quoteAndSort(transitiveDependencyPaths(dependencies)).stream().map({str -> "#${str}"}).collect(joining(',\n', '[\n', '\n]')) },"
     }
 }

@@ -12,13 +12,14 @@ class ArtifactDependency implements BuckDependency {
     ArtifactDependency(ResolvedArtifact artifact, DependencyResolution dependencyResolution) {
         this.ruleName = dependencyResolution.nameResolution artifact
         this.filename = artifact.file.name
-        this.identifier = createIdentifier(artifact)
+        this.identifier = createMavenIdentifier(artifact)
         this.sha1 = artifact.file.exists() ? Checksum.generateSHA1(artifact.file) : null
         this.path = dependencyResolution.pathResolution this
     }
 
-    private static String createIdentifier(ResolvedArtifact artifact) {
-        def classifier = artifact.artifact.attributes["classifier"]
-        artifact.owner.identifier.toString() + (classifier ? ":$classifier" : '')
+    // mvn:optionalServer:group:id:type:classifier:version
+    static String createMavenIdentifier(ResolvedArtifact artifact) {
+        def id = artifact.getModuleVersion().getId()
+        "mvn:${id.group}:${id.name}:${artifact.type}:${artifact.classifier ? "${artifact.classifier}:" : ""}${id.version}"
     }
 }

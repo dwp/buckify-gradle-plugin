@@ -26,6 +26,7 @@ class BuckifyTaskTest {
             compile group: 'org.apache.solr', name: 'solr-core', version: '6.0.1'
 
             testCompile group: 'junit', name: 'junit', version: '4.11'
+            testCompile "uk.gov.dwp.common:mongo-ext:1.951.0:tests"
         }
 
         def buckifyTask = testProject.task('buckify', type: BuckifyTask)

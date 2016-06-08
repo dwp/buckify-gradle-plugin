@@ -8,7 +8,7 @@ import uk.gov.dwp.buckify.BuckifyExtension
 class ProjectDependency implements BuckDependency {
     ProjectDependency(ResolvedArtifact artifact, BuckifyExtension.DependencyResolution dependencyResolution) {
         this.ruleName = dependencyResolution.nameResolution artifact
-        this.identifier = artifact.owner.identifier
+        this.identifier = artifact.moduleVersion.id
         this.path = dependencyResolution.pathResolution this
     }
 }

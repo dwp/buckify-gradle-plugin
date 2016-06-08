@@ -11,12 +11,12 @@ class BuckifyExtension {
     static final String NAME = "buckify"
 
     DependencyResolution projectDependencies = new DependencyResolution(
-            { ProjectDependency dep -> dep.ruleName + ":" + javaLibrary.defaultRuleName },
+            { ProjectDependency dep -> "//$dep.ruleName:" + javaLibrary.defaultRuleName },
             { ResolvedArtifact artifact -> artifact.name }
     )
     DependencyResolution externalDependencies = new DependencyResolution(
             { ArtifactDependency dep -> "//lib:" + dep.ruleName },
-            { ResolvedArtifact artifact -> artifact.artifact.toString() }
+            { ResolvedArtifact artifact -> artifact.name + (artifact.classifier ? "-$artifact.classifier" : "") }
     )
     Closure binaryJarResolution = { String dep -> ":" + dep + "-mvn" }
     GroovyLibrary groovyLibrary = new GroovyLibrary()

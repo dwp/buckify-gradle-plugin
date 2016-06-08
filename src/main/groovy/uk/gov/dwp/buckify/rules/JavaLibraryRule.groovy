@@ -7,6 +7,8 @@ import uk.gov.dwp.buckify.BuckifyExtension
 import uk.gov.dwp.buckify.dependencies.Dependencies
 import uk.gov.dwp.buckify.dependencies.DependencyCache
 
+import static java.util.stream.Collectors.joining
+
 class JavaLibraryRule extends Rule {
     static final sourceDir = "src/main/java"
     static final resourcesDir = "src/main/resources"
@@ -33,13 +35,20 @@ java_library(
                 name="$name",
                 autodeps=${toPythonBoolean(autoDeps)},
                 srcs=glob(["$sourceDir/**/*.java"]),
-                resources=${hasResources ? "glob(['$resourcesDir/**/*'])" : ''},
-                resources_root=${hasResources ? "'$resourcesDir'" : ''},
-                deps=${quoteAndSort(transitiveDependencyPaths(dependencies))},
+                ${resources()}
+                ${deps()}
                 exported_deps=${quoteAndSort(dependencies.nonTransitiveDependencies().collect({ it.path }))},
                 visibility=${quoteAndSort(visibility)}
 )
 
 """).make(this.properties)
+    }
+
+    private String resources() {
+        hasResources ? "resources=glob(['$resourcesDir/**/*']),\nresources_root='$resourcesDir'," : '# no resources found'
+    }
+
+    private String deps() {
+        "deps=${ quoteAndSort(transitiveDependencyPaths(dependencies)).stream().map({str -> "#${str}"}).collect(joining(',\n', '[\n', '\n]')) },"
     }
 }

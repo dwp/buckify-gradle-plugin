@@ -3,84 +3,83 @@ java_library(
                 name="main",
                 autodeps=True,
                 srcs=glob(["src/main/java/**/*.java"]),
-                resources=glob(['src/main/resources/**/*']),
-                resources_root='src/main/resources',
+                # no resources found
                 deps=[
-                  "//lib:antlr4-runtime.jar",
-                  "//lib:asm-commons.jar",
-                  "//lib:asm.jar",
-                  "//lib:caffeine.jar",
-                  "//lib:commons-cli.jar",
-                  "//lib:commons-codec.jar",
-                  "//lib:commons-collections.jar",
-                  "//lib:commons-configuration.jar",
-                  "//lib:commons-exec.jar",
-                  "//lib:commons-fileupload.jar",
-                  "//lib:commons-io.jar",
-                  "//lib:dom4j.jar",
-                  "//lib:guava.jar",
-                  "//lib:hadoop-annotations.jar",
-                  "//lib:hadoop-auth.jar",
-                  "//lib:hadoop-common.jar",
-                  "//lib:hadoop-hdfs.jar",
-                  "//lib:hppc.jar",
-                  "//lib:htrace-core.jar",
-                  "//lib:httpclient.jar",
-                  "//lib:httpcore.jar",
-                  "//lib:httpmime.jar",
-                  "//lib:jackson-core.jar",
-                  "//lib:jackson-dataformat-smile.jar",
-                  "//lib:javax.servlet-api.jar",
-                  "//lib:jcl-over-slf4j.jar",
-                  "//lib:jetty-continuation.jar",
-                  "//lib:jetty-deploy.jar",
-                  "//lib:jetty-http.jar",
-                  "//lib:jetty-io.jar",
-                  "//lib:jetty-jmx.jar",
-                  "//lib:jetty-rewrite.jar",
-                  "//lib:jetty-security.jar",
-                  "//lib:jetty-server.jar",
-                  "//lib:jetty-servlet.jar",
-                  "//lib:jetty-servlets.jar",
-                  "//lib:jetty-util.jar",
-                  "//lib:jetty-webapp.jar",
-                  "//lib:jetty-xml.jar",
-                  "//lib:jline.jar",
-                  "//lib:junit.jar",
-                  "//lib:log4j.jar",
-                  "//lib:lucene-analyzers-common.jar",
-                  "//lib:lucene-analyzers-kuromoji.jar",
-                  "//lib:lucene-analyzers-phonetic.jar",
-                  "//lib:lucene-backward-codecs.jar",
-                  "//lib:lucene-codecs.jar",
-                  "//lib:lucene-core.jar",
-                  "//lib:lucene-expressions.jar",
-                  "//lib:lucene-grouping.jar",
-                  "//lib:lucene-highlighter.jar",
-                  "//lib:lucene-join.jar",
-                  "//lib:lucene-memory.jar",
-                  "//lib:lucene-misc.jar",
-                  "//lib:lucene-queries.jar",
-                  "//lib:lucene-queryparser.jar",
-                  "//lib:lucene-sandbox.jar",
-                  "//lib:lucene-spatial-extras.jar",
-                  "//lib:lucene-suggest.jar",
-                  "//lib:netty.jar",
-                  "//lib:noggit.jar",
-                  "//lib:org.restlet.ext.servlet.jar",
-                  "//lib:org.restlet.jar",
-                  "//lib:presto-parser.jar",
-                  "//lib:protobuf-java.jar",
-                  "//lib:slf4j-api.jar",
-                  "//lib:slice.jar",
-                  "//lib:solr-solrj.jar",
-                  "//lib:spatial4j.jar",
-                  "//lib:stax2-api.jar",
-                  "//lib:t-digest.jar",
-                  "//lib:woodstox-core-asl.jar",
-                  "//lib:zookeeper.jar"
-                ],
-                exported_deps=["//lib:commons-lang.jar", "//lib:joda-time.jar", "//lib:solr-core.jar", "child:main"],
+#"//lib:antlr4-runtime",
+#"//lib:asm",
+#"//lib:asm-commons",
+#"//lib:caffeine",
+#"//lib:commons-cli",
+#"//lib:commons-codec",
+#"//lib:commons-collections",
+#"//lib:commons-configuration",
+#"//lib:commons-exec",
+#"//lib:commons-fileupload",
+#"//lib:commons-io",
+#"//lib:dom4j",
+#"//lib:guava",
+#"//lib:hadoop-annotations",
+#"//lib:hadoop-auth",
+#"//lib:hadoop-common",
+#"//lib:hadoop-hdfs",
+#"//lib:hppc",
+#"//lib:htrace-core",
+#"//lib:httpclient",
+#"//lib:httpcore",
+#"//lib:httpmime",
+#"//lib:jackson-core",
+#"//lib:jackson-dataformat-smile",
+#"//lib:javax.servlet-api",
+#"//lib:jcl-over-slf4j",
+#"//lib:jetty-continuation",
+#"//lib:jetty-deploy",
+#"//lib:jetty-http",
+#"//lib:jetty-io",
+#"//lib:jetty-jmx",
+#"//lib:jetty-rewrite",
+#"//lib:jetty-security",
+#"//lib:jetty-server",
+#"//lib:jetty-servlet",
+#"//lib:jetty-servlets",
+#"//lib:jetty-util",
+#"//lib:jetty-webapp",
+#"//lib:jetty-xml",
+#"//lib:jline",
+#"//lib:junit",
+#"//lib:log4j",
+#"//lib:lucene-analyzers-common",
+#"//lib:lucene-analyzers-kuromoji",
+#"//lib:lucene-analyzers-phonetic",
+#"//lib:lucene-backward-codecs",
+#"//lib:lucene-codecs",
+#"//lib:lucene-core",
+#"//lib:lucene-expressions",
+#"//lib:lucene-grouping",
+#"//lib:lucene-highlighter",
+#"//lib:lucene-join",
+#"//lib:lucene-memory",
+#"//lib:lucene-misc",
+#"//lib:lucene-queries",
+#"//lib:lucene-queryparser",
+#"//lib:lucene-sandbox",
+#"//lib:lucene-spatial-extras",
+#"//lib:lucene-suggest",
+#"//lib:netty",
+#"//lib:noggit",
+#"//lib:org.restlet",
+#"//lib:org.restlet.ext.servlet",
+#"//lib:presto-parser",
+#"//lib:protobuf-java",
+#"//lib:slf4j-api",
+#"//lib:slice",
+#"//lib:solr-solrj",
+#"//lib:spatial4j",
+#"//lib:stax2-api",
+#"//lib:t-digest",
+#"//lib:woodstox-core-asl",
+#"//lib:zookeeper"
+],
+                exported_deps=["//child:main", "//lib:commons-lang", "//lib:joda-time", "//lib:solr-core"],
                 visibility=["PUBLIC"]
 )
 
@@ -88,166 +87,405 @@ java_library(
 java_test(
                 name="test",
                 autodeps=True,
-                source_under_test=["main"],
+                source_under_test=[":main"],
                 resources=glob(['src/test/resources/**/*']),
                 deps=[
-                  "//lib:junit.jar"
+                  "//lib:junit",
+                  "//lib:mongo-ext-tests"
                 ],
                 visibility=["PUBLIC"]
 )
 
-prebuilt_jar(name='antlr4-runtime.jar', binary_jar=':antlr4-runtime.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='asm-commons.jar', binary_jar=':asm-commons.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='asm.jar', binary_jar=':asm.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='caffeine.jar', binary_jar=':caffeine.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='commons-cli.jar', binary_jar=':commons-cli.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='commons-codec.jar', binary_jar=':commons-codec.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='commons-collections.jar', binary_jar=':commons-collections.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='commons-configuration.jar', binary_jar=':commons-configuration.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='commons-exec.jar', binary_jar=':commons-exec.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='commons-fileupload.jar', binary_jar=':commons-fileupload.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='commons-io.jar', binary_jar=':commons-io.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='commons-lang.jar', binary_jar=':commons-lang.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='dom4j.jar', binary_jar=':dom4j.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='guava.jar', binary_jar=':guava.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='hadoop-annotations.jar', binary_jar=':hadoop-annotations.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='hadoop-auth.jar', binary_jar=':hadoop-auth.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='hadoop-common.jar', binary_jar=':hadoop-common.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='hadoop-hdfs.jar', binary_jar=':hadoop-hdfs.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='hamcrest-core.jar', binary_jar=':hamcrest-core.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='hppc.jar', binary_jar=':hppc.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='htrace-core.jar', binary_jar=':htrace-core.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='httpclient.jar', binary_jar=':httpclient.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='httpcore.jar', binary_jar=':httpcore.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='httpmime.jar', binary_jar=':httpmime.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='jackson-core.jar', binary_jar=':jackson-core.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='jackson-dataformat-smile.jar', binary_jar=':jackson-dataformat-smile.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='javax.servlet-api.jar', binary_jar=':javax.servlet-api.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='jcl-over-slf4j.jar', binary_jar=':jcl-over-slf4j.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='jetty-continuation.jar', binary_jar=':jetty-continuation.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='jetty-deploy.jar', binary_jar=':jetty-deploy.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='jetty-http.jar', binary_jar=':jetty-http.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='jetty-io.jar', binary_jar=':jetty-io.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='jetty-jmx.jar', binary_jar=':jetty-jmx.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='jetty-rewrite.jar', binary_jar=':jetty-rewrite.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='jetty-security.jar', binary_jar=':jetty-security.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='jetty-server.jar', binary_jar=':jetty-server.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='jetty-servlet.jar', binary_jar=':jetty-servlet.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='jetty-servlets.jar', binary_jar=':jetty-servlets.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='jetty-util.jar', binary_jar=':jetty-util.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='jetty-webapp.jar', binary_jar=':jetty-webapp.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='jetty-xml.jar', binary_jar=':jetty-xml.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='jline.jar', binary_jar=':jline.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='joda-time.jar', binary_jar=':joda-time.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='junit.jar', binary_jar=':junit.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='log4j.jar', binary_jar=':log4j.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='lucene-analyzers-common.jar', binary_jar=':lucene-analyzers-common.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='lucene-analyzers-kuromoji.jar', binary_jar=':lucene-analyzers-kuromoji.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='lucene-analyzers-phonetic.jar', binary_jar=':lucene-analyzers-phonetic.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='lucene-backward-codecs.jar', binary_jar=':lucene-backward-codecs.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='lucene-codecs.jar', binary_jar=':lucene-codecs.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='lucene-core.jar', binary_jar=':lucene-core.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='lucene-expressions.jar', binary_jar=':lucene-expressions.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='lucene-grouping.jar', binary_jar=':lucene-grouping.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='lucene-highlighter.jar', binary_jar=':lucene-highlighter.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='lucene-join.jar', binary_jar=':lucene-join.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='lucene-memory.jar', binary_jar=':lucene-memory.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='lucene-misc.jar', binary_jar=':lucene-misc.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='lucene-queries.jar', binary_jar=':lucene-queries.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='lucene-queryparser.jar', binary_jar=':lucene-queryparser.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='lucene-sandbox.jar', binary_jar=':lucene-sandbox.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='lucene-spatial-extras.jar', binary_jar=':lucene-spatial-extras.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='lucene-suggest.jar', binary_jar=':lucene-suggest.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='netty.jar', binary_jar=':netty.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='noggit.jar', binary_jar=':noggit.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='org.restlet.ext.servlet.jar', binary_jar=':org.restlet.ext.servlet.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='org.restlet.jar', binary_jar=':org.restlet.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='presto-parser.jar', binary_jar=':presto-parser.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='protobuf-java.jar', binary_jar=':protobuf-java.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='slf4j-api.jar', binary_jar=':slf4j-api.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='slice.jar', binary_jar=':slice.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='solr-core.jar', binary_jar=':solr-core.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='solr-solrj.jar', binary_jar=':solr-solrj.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='spatial4j.jar', binary_jar=':spatial4j.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='stax2-api.jar', binary_jar=':stax2-api.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='t-digest.jar', binary_jar=':t-digest.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='woodstox-core-asl.jar', binary_jar=':woodstox-core-asl.jar-mvn', visibility=["PUBLIC"])
-prebuilt_jar(name='zookeeper.jar', binary_jar=':zookeeper.jar-mvn', visibility=["PUBLIC"])
-remote_file(name='antlr4-runtime.jar-mvn', out='antlr4-runtime-4.5.1-1.jar', url='mvn:org.antlr:antlr4-runtime:4.5.1-1', sha1='66144204f9d6d7d3f3f775622c2dd7e9bd511d97' )
-remote_file(name='asm-commons.jar-mvn', out='asm-commons-5.0.4.jar', url='mvn:org.ow2.asm:asm-commons:5.0.4', sha1='5a556786086c23cd689a0328f8519db93821c04c' )
-remote_file(name='asm.jar-mvn', out='asm-5.0.4.jar', url='mvn:org.ow2.asm:asm:5.0.4', sha1='0da08b8cce7bbf903602a25a3a163ae252435795' )
-remote_file(name='caffeine.jar-mvn', out='caffeine-1.0.1.jar', url='mvn:com.github.ben-manes.caffeine:caffeine:1.0.1', sha1='eb95a1eb55cb02018b8e0bc1609ce569b455ea98' )
-remote_file(name='commons-cli.jar-mvn', out='commons-cli-1.2.jar', url='mvn:commons-cli:commons-cli:1.2', sha1='2bf96b7aa8b611c177d329452af1dc933e14501c' )
-remote_file(name='commons-codec.jar-mvn', out='commons-codec-1.10.jar', url='mvn:commons-codec:commons-codec:1.10', sha1='4b95f4897fa13f2cd904aee711aeafc0c5295cd8' )
-remote_file(name='commons-collections.jar-mvn', out='commons-collections-3.2.2.jar', url='mvn:commons-collections:commons-collections:3.2.2', sha1='8ad72fe39fa8c91eaaf12aadb21e0c3661fe26d5' )
-remote_file(name='commons-configuration.jar-mvn', out='commons-configuration-1.6.jar', url='mvn:commons-configuration:commons-configuration:1.6', sha1='32cadde23955d7681b0d94a2715846d20b425235' )
-remote_file(name='commons-exec.jar-mvn', out='commons-exec-1.3.jar', url='mvn:org.apache.commons:commons-exec:1.3', sha1='8dfb9facd0830a27b1b5f29f84593f0aeee7773b' )
-remote_file(name='commons-fileupload.jar-mvn', out='commons-fileupload-1.3.1.jar', url='mvn:commons-fileupload:commons-fileupload:1.3.1', sha1='c621b54583719ac0310404463d6d99db27e1052c' )
-remote_file(name='commons-io.jar-mvn', out='commons-io-2.4.jar', url='mvn:commons-io:commons-io:2.4', sha1='b1b6ea3b7e4aa4f492509a4952029cd8e48019ad' )
-remote_file(name='commons-lang.jar-mvn', out='commons-lang-2.6.jar', url='mvn:commons-lang:commons-lang:2.6', sha1='0ce1edb914c94ebc388f086c6827e8bdeec71ac2' )
-remote_file(name='dom4j.jar-mvn', out='dom4j-1.6.1.jar', url='mvn:dom4j:dom4j:1.6.1', sha1='5d3ccc056b6f056dbf0dddfdf43894b9065a8f94' )
-remote_file(name='guava.jar-mvn', out='guava-14.0.1.jar', url='mvn:com.google.guava:guava:14.0.1', sha1='69e12f4c6aeac392555f1ea86fab82b5e5e31ad4' )
-remote_file(name='hadoop-annotations.jar-mvn', out='hadoop-annotations-2.6.0.jar', url='mvn:org.apache.hadoop:hadoop-annotations:2.6.0', sha1='8cd40a4cde2b77e6edc1ab3bb55706d626ae8b2d' )
-remote_file(name='hadoop-auth.jar-mvn', out='hadoop-auth-2.6.0.jar', url='mvn:org.apache.hadoop:hadoop-auth:2.6.0', sha1='b0b8dec23a84ac8a0d00fbd69a87d320724ae34a' )
-remote_file(name='hadoop-common.jar-mvn', out='hadoop-common-2.6.0.jar', url='mvn:org.apache.hadoop:hadoop-common:2.6.0', sha1='a3f6d9827e9813a0fb286ebc0d3ae8cffed17105' )
-remote_file(name='hadoop-hdfs.jar-mvn', out='hadoop-hdfs-2.6.0.jar', url='mvn:org.apache.hadoop:hadoop-hdfs:2.6.0', sha1='9e25d4ea9daab5d0b7fbbe1749790aef3280ff35' )
-remote_file(name='hamcrest-core.jar-mvn', out='hamcrest-core-1.3.jar', url='mvn:org.hamcrest:hamcrest-core:1.3', sha1='42a25dc3219429f0e5d060061f71acb49bf010a0' )
-remote_file(name='hppc.jar-mvn', out='hppc-0.7.1.jar', url='mvn:com.carrotsearch:hppc:0.7.1', sha1='8b5057f74ea378c0150a1860874a3ebdcb713767' )
-remote_file(name='htrace-core.jar-mvn', out='htrace-core-3.0.4.jar', url='mvn:org.htrace:htrace-core:3.0.4', sha1='d7461828faf28411f37f8570d896292db277d838' )
-remote_file(name='httpclient.jar-mvn', out='httpclient-4.4.1.jar', url='mvn:org.apache.httpcomponents:httpclient:4.4.1', sha1='016d0bc512222f1253ee6b64d389c84e22f697f0' )
-remote_file(name='httpcore.jar-mvn', out='httpcore-4.4.1.jar', url='mvn:org.apache.httpcomponents:httpcore:4.4.1', sha1='f5aa318bda4c6c8d688c9d00b90681dcd82ce636' )
-remote_file(name='httpmime.jar-mvn', out='httpmime-4.4.1.jar', url='mvn:org.apache.httpcomponents:httpmime:4.4.1', sha1='2f8757f5ac5e38f46c794e5229d1f3c522e9b1df' )
-remote_file(name='jackson-core.jar-mvn', out='jackson-core-2.5.4.jar', url='mvn:com.fasterxml.jackson.core:jackson-core:2.5.4', sha1='0a57a2df1a23ca1ee32f129173ba7f5feaa9ac24' )
-remote_file(name='jackson-dataformat-smile.jar-mvn', out='jackson-dataformat-smile-2.5.4.jar', url='mvn:com.fasterxml.jackson.dataformat:jackson-dataformat-smile:2.5.4', sha1='db0c5f1b6e16cb5f5e0505abfcd4b36f3e8bfdc6' )
-remote_file(name='javax.servlet-api.jar-mvn', out='javax.servlet-api-3.1.0.jar', url='mvn:javax.servlet:javax.servlet-api:3.1.0', sha1='3cd63d075497751784b2fa84be59432f4905bf7c' )
-remote_file(name='jcl-over-slf4j.jar-mvn', out='jcl-over-slf4j-1.7.7.jar', url='mvn:org.slf4j:jcl-over-slf4j:1.7.7', sha1='56003dcd0a31deea6391b9e2ef2f2dc90b205a92' )
-remote_file(name='jetty-continuation.jar-mvn', out='jetty-continuation-9.3.8.v20160314.jar', url='mvn:org.eclipse.jetty:jetty-continuation:9.3.8.v20160314', sha1='dec4dfc43617637694762822ef99c8373c944c98' )
-remote_file(name='jetty-deploy.jar-mvn', out='jetty-deploy-9.3.8.v20160314.jar', url='mvn:org.eclipse.jetty:jetty-deploy:9.3.8.v20160314', sha1='fe4025121641f5c4b06986e9b14983964bfcd7d5' )
-remote_file(name='jetty-http.jar-mvn', out='jetty-http-9.3.8.v20160314.jar', url='mvn:org.eclipse.jetty:jetty-http:9.3.8.v20160314', sha1='0127feb7407f4137ff4295b5fa2895845db56710' )
-remote_file(name='jetty-io.jar-mvn', out='jetty-io-9.3.8.v20160314.jar', url='mvn:org.eclipse.jetty:jetty-io:9.3.8.v20160314', sha1='371e3c2b72d9a9737579ec0fdfd6a2a3ab8b8141' )
-remote_file(name='jetty-jmx.jar-mvn', out='jetty-jmx-9.3.8.v20160314.jar', url='mvn:org.eclipse.jetty:jetty-jmx:9.3.8.v20160314', sha1='4aca2eb607d49969bac6a5f36be24ebe1d6d39ad' )
-remote_file(name='jetty-rewrite.jar-mvn', out='jetty-rewrite-9.3.8.v20160314.jar', url='mvn:org.eclipse.jetty:jetty-rewrite:9.3.8.v20160314', sha1='264a34089a62d22cea8e38f6ab6c55d8cef992dc' )
-remote_file(name='jetty-security.jar-mvn', out='jetty-security-9.3.8.v20160314.jar', url='mvn:org.eclipse.jetty:jetty-security:9.3.8.v20160314', sha1='5291fa5e3098f08017bfcc7f950a7ce36c9544d7' )
-remote_file(name='jetty-server.jar-mvn', out='jetty-server-9.3.8.v20160314.jar', url='mvn:org.eclipse.jetty:jetty-server:9.3.8.v20160314', sha1='da8366f602f35d4c3177cb081472e2fc4abe04ea' )
-remote_file(name='jetty-servlet.jar-mvn', out='jetty-servlet-9.3.8.v20160314.jar', url='mvn:org.eclipse.jetty:jetty-servlet:9.3.8.v20160314', sha1='ea5f25d3326d7745d9c21d405dcf6f878efbd5fb' )
-remote_file(name='jetty-servlets.jar-mvn', out='jetty-servlets-9.3.8.v20160314.jar', url='mvn:org.eclipse.jetty:jetty-servlets:9.3.8.v20160314', sha1='7c6cca49412e873cc2cee9903e3209525175f60d' )
-remote_file(name='jetty-util.jar-mvn', out='jetty-util-9.3.8.v20160314.jar', url='mvn:org.eclipse.jetty:jetty-util:9.3.8.v20160314', sha1='01d53c7a7e7715e67d6f4edec6c5b328ee162e65' )
-remote_file(name='jetty-webapp.jar-mvn', out='jetty-webapp-9.3.8.v20160314.jar', url='mvn:org.eclipse.jetty:jetty-webapp:9.3.8.v20160314', sha1='2f0dfef84af7c97f2a1f14db65aa3f37349420e4' )
-remote_file(name='jetty-xml.jar-mvn', out='jetty-xml-9.3.8.v20160314.jar', url='mvn:org.eclipse.jetty:jetty-xml:9.3.8.v20160314', sha1='f02bbbf71d7ea706a95fedf7e76c3ff243049bfc' )
-remote_file(name='jline.jar-mvn', out='jline-0.9.94.jar', url='mvn:jline:jline:0.9.94', sha1='99a18e9a44834afdebc467294e1138364c207402' )
-remote_file(name='joda-time.jar-mvn', out='joda-time-2.2.jar', url='mvn:joda-time:joda-time:2.2', sha1='a5f29a7acaddea3f4af307e8cf2d0cc82645fd7d' )
-remote_file(name='junit.jar-mvn', out='junit-4.11.jar', url='mvn:junit:junit:4.11', sha1='4e031bb61df09069aeb2bffb4019e7a5034a4ee0' )
-remote_file(name='junit.jar-mvn', out='junit-3.8.1.jar', url='mvn:junit:junit:3.8.1', sha1='99129f16442844f6a4a11ae22fbbee40b14d774f' )
-remote_file(name='log4j.jar-mvn', out='log4j-1.2.17.jar', url='mvn:log4j:log4j:1.2.17', sha1='5af35056b4d257e4b64b9e8069c0746e8b08629f' )
-remote_file(name='lucene-analyzers-common.jar-mvn', out='lucene-analyzers-common-6.0.1.jar', url='mvn:org.apache.lucene:lucene-analyzers-common:6.0.1', sha1='53953c1a9b097f83209c84a422cf8f9d271f47c1' )
-remote_file(name='lucene-analyzers-kuromoji.jar-mvn', out='lucene-analyzers-kuromoji-6.0.1.jar', url='mvn:org.apache.lucene:lucene-analyzers-kuromoji:6.0.1', sha1='77905f563c47994a764a6ab3d5ec198c174567a7' )
-remote_file(name='lucene-analyzers-phonetic.jar-mvn', out='lucene-analyzers-phonetic-6.0.1.jar', url='mvn:org.apache.lucene:lucene-analyzers-phonetic:6.0.1', sha1='3ee5d909c269e5da7a92715f41ead88943b38123' )
-remote_file(name='lucene-backward-codecs.jar-mvn', out='lucene-backward-codecs-6.0.1.jar', url='mvn:org.apache.lucene:lucene-backward-codecs:6.0.1', sha1='3647088603be84b8f4916ef86954e3336b98d254' )
-remote_file(name='lucene-codecs.jar-mvn', out='lucene-codecs-6.0.1.jar', url='mvn:org.apache.lucene:lucene-codecs:6.0.1', sha1='b90eac74f04c5523fc4546d77ffbbb57b5861bfb' )
-remote_file(name='lucene-core.jar-mvn', out='lucene-core-6.0.1.jar', url='mvn:org.apache.lucene:lucene-core:6.0.1', sha1='40ccd40bec54266a10aa1f81c565914ede8c0ca0' )
-remote_file(name='lucene-expressions.jar-mvn', out='lucene-expressions-6.0.1.jar', url='mvn:org.apache.lucene:lucene-expressions:6.0.1', sha1='2b76056dbd40fb51dc5e8ef71e1919ad23e635a1' )
-remote_file(name='lucene-grouping.jar-mvn', out='lucene-grouping-6.0.1.jar', url='mvn:org.apache.lucene:lucene-grouping:6.0.1', sha1='010daaae60227fbe719ca95e9b6fcdb5c38d4eba' )
-remote_file(name='lucene-highlighter.jar-mvn', out='lucene-highlighter-6.0.1.jar', url='mvn:org.apache.lucene:lucene-highlighter:6.0.1', sha1='65d74c3642e6a86ba905045473b17cc84826527e' )
-remote_file(name='lucene-join.jar-mvn', out='lucene-join-6.0.1.jar', url='mvn:org.apache.lucene:lucene-join:6.0.1', sha1='2105e2826ce93d1f764e5a0a3afa9ee461d556c1' )
-remote_file(name='lucene-memory.jar-mvn', out='lucene-memory-6.0.1.jar', url='mvn:org.apache.lucene:lucene-memory:6.0.1', sha1='e2cde0688e487a27d08df0c2d81d492b1f4cdc2a' )
-remote_file(name='lucene-misc.jar-mvn', out='lucene-misc-6.0.1.jar', url='mvn:org.apache.lucene:lucene-misc:6.0.1', sha1='e6e59996fc324319d695e41cf25e30e5f1e4c182' )
-remote_file(name='lucene-queries.jar-mvn', out='lucene-queries-6.0.1.jar', url='mvn:org.apache.lucene:lucene-queries:6.0.1', sha1='09b0e5862a676ff9e55a1bc6ca37ad578a25cb38' )
-remote_file(name='lucene-queryparser.jar-mvn', out='lucene-queryparser-6.0.1.jar', url='mvn:org.apache.lucene:lucene-queryparser:6.0.1', sha1='24f7ba0707aa01be2dd7749adff1659262be8f33' )
-remote_file(name='lucene-sandbox.jar-mvn', out='lucene-sandbox-6.0.1.jar', url='mvn:org.apache.lucene:lucene-sandbox:6.0.1', sha1='0faf4c0d7e0adb6fccd830a2d5797d4176b579fe' )
-remote_file(name='lucene-spatial-extras.jar-mvn', out='lucene-spatial-extras-6.0.1.jar', url='mvn:org.apache.lucene:lucene-spatial-extras:6.0.1', sha1='3de19dbdb889fe87791dae291ac3b340586854c4' )
-remote_file(name='lucene-suggest.jar-mvn', out='lucene-suggest-6.0.1.jar', url='mvn:org.apache.lucene:lucene-suggest:6.0.1', sha1='55886bdaf16ecc6948e94b527837eaa1f16fe988' )
-remote_file(name='netty.jar-mvn', out='netty-3.7.0.Final.jar', url='mvn:io.netty:netty:3.7.0.Final', sha1='07a8c35599c68c0bf383df74469aa3e03d9aca87' )
-remote_file(name='noggit.jar-mvn', out='noggit-0.6.jar', url='mvn:org.noggit:noggit:0.6', sha1='fa94a59c44b39ee710f3c9451750119e432326c0' )
-remote_file(name='org.restlet.ext.servlet.jar-mvn', out='org.restlet.ext.servlet-2.3.0.jar', url='mvn:org.restlet.jee:org.restlet.ext.servlet:2.3.0', sha1='9303e20d0397c0304342943560c3a1693fd7ce7d' )
-remote_file(name='org.restlet.jar-mvn', out='org.restlet-2.3.0.jar', url='mvn:org.restlet.jee:org.restlet:2.3.0', sha1='4c5d184e23fa729726668a90dc7338d80c4e7e6f' )
-remote_file(name='presto-parser.jar-mvn', out='presto-parser-0.122.jar', url='mvn:com.facebook.presto:presto-parser:0.122', sha1='b4261cbabfd2f28b8d4d20d7e3a3d1be48bb890c' )
-remote_file(name='protobuf-java.jar-mvn', out='protobuf-java-2.5.0.jar', url='mvn:com.google.protobuf:protobuf-java:2.5.0', sha1='a10732c76bfacdbd633a7eb0f7968b1059a65dfa' )
-remote_file(name='slf4j-api.jar-mvn', out='slf4j-api-1.7.7.jar', url='mvn:org.slf4j:slf4j-api:1.7.7', sha1='2b8019b6249bb05d81d3a3094e468753e2b21311' )
-remote_file(name='slice.jar-mvn', out='slice-0.10.jar', url='mvn:io.airlift:slice:0.10', sha1='159a81631ed2cc1bc865f3d8e51239c9e8a20bea' )
-remote_file(name='solr-core.jar-mvn', out='solr-core-6.0.1.jar', url='mvn:org.apache.solr:solr-core:6.0.1', sha1='2cfb3c2e614279276f3bc7d6786c2c07ef2cfb08' )
-remote_file(name='solr-solrj.jar-mvn', out='solr-solrj-6.0.1.jar', url='mvn:org.apache.solr:solr-solrj:6.0.1', sha1='3d822b04feb8fcb9ee833d7c10e41fd5cf768c5b' )
-remote_file(name='spatial4j.jar-mvn', out='spatial4j-0.6.jar', url='mvn:org.locationtech.spatial4j:spatial4j:0.6', sha1='21b15310bddcfd8c72611c180f20cf23279809a3' )
-remote_file(name='stax2-api.jar-mvn', out='stax2-api-3.1.4.jar', url='mvn:org.codehaus.woodstox:stax2-api:3.1.4', sha1='ac19014b1e6a7c08aad07fe114af792676b685b7' )
-remote_file(name='t-digest.jar-mvn', out='t-digest-3.1.jar', url='mvn:com.tdunning:t-digest:3.1', sha1='451ed219688aed5821a789428fd5e10426d11312' )
-remote_file(name='woodstox-core-asl.jar-mvn', out='woodstox-core-asl-4.4.1.jar', url='mvn:org.codehaus.woodstox:woodstox-core-asl:4.4.1', sha1='84fee5eb1a4a1cefe65b6883c73b3fa83be3c1a1' )
-remote_file(name='zookeeper.jar-mvn', out='zookeeper-3.4.6.jar', url='mvn:org.apache.zookeeper:zookeeper:3.4.6', sha1='01b2502e29da1ebaade2357cd1de35a855fa3755' )
+prebuilt_jar(name='activation', binary_jar=':activation-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='activemq-client', binary_jar=':activemq-client-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='activemq-jms-pool', binary_jar=':activemq-jms-pool-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='activemq-pool', binary_jar=':activemq-pool-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='antlr4-runtime', binary_jar=':antlr4-runtime-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='aopalliance', binary_jar=':aopalliance-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='archaius-core', binary_jar=':archaius-core-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='asm', binary_jar=':asm-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='asm-commons', binary_jar=':asm-commons-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='awaitility', binary_jar=':awaitility-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='caffeine', binary_jar=':caffeine-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='commons-beanutils', binary_jar=':commons-beanutils-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='commons-cli', binary_jar=':commons-cli-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='commons-codec', binary_jar=':commons-codec-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='commons-collections', binary_jar=':commons-collections-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='commons-collections4', binary_jar=':commons-collections4-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='commons-configuration', binary_jar=':commons-configuration-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='commons-digester', binary_jar=':commons-digester-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='commons-exec', binary_jar=':commons-exec-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='commons-fileupload', binary_jar=':commons-fileupload-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='commons-io', binary_jar=':commons-io-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='commons-lang', binary_jar=':commons-lang-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='commons-lang3', binary_jar=':commons-lang3-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='commons-logging', binary_jar=':commons-logging-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='commons-math3', binary_jar=':commons-math3-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='commons-pool', binary_jar=':commons-pool-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='commons-validator', binary_jar=':commons-validator-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='compiler', binary_jar=':compiler-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='crypto-api', binary_jar=':crypto-api-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='crypto-api-test-support', binary_jar=':crypto-api-test-support-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='crypto-common', binary_jar=':crypto-common-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='cxf-core', binary_jar=':cxf-core-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='cxf-rt-bindings-soap', binary_jar=':cxf-rt-bindings-soap-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='cxf-rt-bindings-xml', binary_jar=':cxf-rt-bindings-xml-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='cxf-rt-databinding-jaxb', binary_jar=':cxf-rt-databinding-jaxb-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='cxf-rt-frontend-jaxrs', binary_jar=':cxf-rt-frontend-jaxrs-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='cxf-rt-frontend-jaxws', binary_jar=':cxf-rt-frontend-jaxws-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='cxf-rt-frontend-simple', binary_jar=':cxf-rt-frontend-simple-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='cxf-rt-rs-client', binary_jar=':cxf-rt-rs-client-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='cxf-rt-transports-http', binary_jar=':cxf-rt-transports-http-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='cxf-rt-ws-addr', binary_jar=':cxf-rt-ws-addr-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='cxf-rt-ws-policy', binary_jar=':cxf-rt-ws-policy-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='cxf-rt-wsdl', binary_jar=':cxf-rt-wsdl-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='data-consistency', binary_jar=':data-consistency-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='data-consistency-api', binary_jar=':data-consistency-api-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='dom4j', binary_jar=':dom4j-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='error', binary_jar=':error-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='error-api', binary_jar=':error-api-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='geronimo-j2ee-management_1.1_spec', binary_jar=':geronimo-j2ee-management_1.1_spec-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='geronimo-jms_1.1_spec', binary_jar=':geronimo-jms_1.1_spec-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='geronimo-jta_1.0.1B_spec', binary_jar=':geronimo-jta_1.0.1B_spec-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='gson', binary_jar=':gson-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='guava', binary_jar=':guava-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='hadoop-annotations', binary_jar=':hadoop-annotations-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='hadoop-auth', binary_jar=':hadoop-auth-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='hadoop-common', binary_jar=':hadoop-common-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='hadoop-hdfs', binary_jar=':hadoop-hdfs-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='hamcrest-core', binary_jar=':hamcrest-core-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='hamcrest-library', binary_jar=':hamcrest-library-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='hawtbuf', binary_jar=':hawtbuf-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='hibernate-validator', binary_jar=':hibernate-validator-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='hppc', binary_jar=':hppc-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='htrace-core', binary_jar=':htrace-core-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='httpclient', binary_jar=':httpclient-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='httpcore', binary_jar=':httpcore-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='httpmime', binary_jar=':httpmime-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='hystrix', binary_jar=':hystrix-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='hystrix-core', binary_jar=':hystrix-core-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='hystrix-metrics-event-stream', binary_jar=':hystrix-metrics-event-stream-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='id-api', binary_jar=':id-api-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='identification', binary_jar=':identification-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jackson', binary_jar=':jackson-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jackson-annotations', binary_jar=':jackson-annotations-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jackson-core', binary_jar=':jackson-core-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jackson-core-asl', binary_jar=':jackson-core-asl-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jackson-databind', binary_jar=':jackson-databind-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jackson-dataformat-smile', binary_jar=':jackson-dataformat-smile-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jackson-dataformat-yaml', binary_jar=':jackson-dataformat-yaml-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jackson-datatype-guava', binary_jar=':jackson-datatype-guava-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jackson-datatype-joda', binary_jar=':jackson-datatype-joda-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jackson-datatype-jsr310', binary_jar=':jackson-datatype-jsr310-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jackson-jaxrs-base', binary_jar=':jackson-jaxrs-base-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jackson-jaxrs-json-provider', binary_jar=':jackson-jaxrs-json-provider-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jackson-module-jaxb-annotations', binary_jar=':jackson-module-jaxb-annotations-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='javax.annotation-api', binary_jar=':javax.annotation-api-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='javax.servlet-api', binary_jar=':javax.servlet-api-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='javax.ws.rs-api', binary_jar=':javax.ws.rs-api-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jaxb-core', binary_jar=':jaxb-core-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jaxb-impl', binary_jar=':jaxb-impl-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jboss-logging', binary_jar=':jboss-logging-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jcl-over-slf4j', binary_jar=':jcl-over-slf4j-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jetty-continuation', binary_jar=':jetty-continuation-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jetty-deploy', binary_jar=':jetty-deploy-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jetty-http', binary_jar=':jetty-http-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jetty-io', binary_jar=':jetty-io-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jetty-jmx', binary_jar=':jetty-jmx-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jetty-rewrite', binary_jar=':jetty-rewrite-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jetty-security', binary_jar=':jetty-security-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jetty-server', binary_jar=':jetty-server-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jetty-servlet', binary_jar=':jetty-servlet-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jetty-servlets', binary_jar=':jetty-servlets-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jetty-util', binary_jar=':jetty-util-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jetty-webapp', binary_jar=':jetty-webapp-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jetty-xml', binary_jar=':jetty-xml-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jline', binary_jar=':jline-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='joda-time', binary_jar=':joda-time-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='json', binary_jar=':json-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='json-path', binary_jar=':json-path-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='json-smart', binary_jar=':json-smart-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jsonassert', binary_jar=':jsonassert-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='jsr305', binary_jar=':jsr305-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='junit', binary_jar=':junit-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='kafka', binary_jar=':kafka-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='kafka-clients', binary_jar=':kafka-clients-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='key-value-store', binary_jar=':key-value-store-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='log4j', binary_jar=':log4j-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='log4j-over-slf4j', binary_jar=':log4j-over-slf4j-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-analyzers-common', binary_jar=':lucene-analyzers-common-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-analyzers-kuromoji', binary_jar=':lucene-analyzers-kuromoji-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-analyzers-phonetic', binary_jar=':lucene-analyzers-phonetic-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-backward-codecs', binary_jar=':lucene-backward-codecs-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-codecs', binary_jar=':lucene-codecs-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-core', binary_jar=':lucene-core-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-expressions', binary_jar=':lucene-expressions-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-grouping', binary_jar=':lucene-grouping-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-highlighter', binary_jar=':lucene-highlighter-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-join', binary_jar=':lucene-join-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-memory', binary_jar=':lucene-memory-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-misc', binary_jar=':lucene-misc-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-queries', binary_jar=':lucene-queries-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-queryparser', binary_jar=':lucene-queryparser-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-sandbox', binary_jar=':lucene-sandbox-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-spatial-extras', binary_jar=':lucene-spatial-extras-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lucene-suggest', binary_jar=':lucene-suggest-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='lz4', binary_jar=':lz4-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='mail', binary_jar=':mail-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='managed', binary_jar=':managed-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='messaging', binary_jar=':messaging-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='messaging-api', binary_jar=':messaging-api-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='metadata', binary_jar=':metadata-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='metrics-healthchecks', binary_jar=':metrics-healthchecks-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='mockito-core', binary_jar=':mockito-core-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='mongo-api', binary_jar=':mongo-api-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='mongo-ext-tests', binary_jar=':mongo-ext-tests-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='mongo-java-driver', binary_jar=':mongo-java-driver-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='neethi', binary_jar=':neethi-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='netty', binary_jar=':netty-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='netty-buffer', binary_jar=':netty-buffer-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='netty-codec', binary_jar=':netty-codec-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='netty-common', binary_jar=':netty-common-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='netty-handler', binary_jar=':netty-handler-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='netty-transport', binary_jar=':netty-transport-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='noggit', binary_jar=':noggit-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='objenesis', binary_jar=':objenesis-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='org.restlet', binary_jar=':org.restlet-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='org.restlet.ext.servlet', binary_jar=':org.restlet.ext.servlet-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='presto-parser', binary_jar=':presto-parser-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='protobuf-java', binary_jar=':protobuf-java-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='reactive-streams', binary_jar=':reactive-streams-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='reactor-core', binary_jar=':reactor-core-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='reactor-stream', binary_jar=':reactor-stream-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='redisson', binary_jar=':redisson-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='rest-client', binary_jar=':rest-client-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='rxjava-core', binary_jar=':rxjava-core-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='shazamcrest', binary_jar=':shazamcrest-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='slf4j-api', binary_jar=':slf4j-api-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='slice', binary_jar=':slice-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='snakeyaml', binary_jar=':snakeyaml-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='snappy-java', binary_jar=':snappy-java-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='solr-core', binary_jar=':solr-core-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='solr-solrj', binary_jar=':solr-solrj-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='spatial4j', binary_jar=':spatial4j-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='spring-aop', binary_jar=':spring-aop-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='spring-beans', binary_jar=':spring-beans-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='spring-context', binary_jar=':spring-context-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='spring-core', binary_jar=':spring-core-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='spring-expression', binary_jar=':spring-expression-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='stax2-api', binary_jar=':stax2-api-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='t-digest', binary_jar=':t-digest-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='templating', binary_jar=':templating-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='test-matchers', binary_jar=':test-matchers-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='trace-core', binary_jar=':trace-core-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='trace-http', binary_jar=':trace-http-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='util', binary_jar=':util-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='validation', binary_jar=':validation-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='validation-api', binary_jar=':validation-api-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='woodstox-core-asl', binary_jar=':woodstox-core-asl-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='wsdl4j', binary_jar=':wsdl4j-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='xml-resolver', binary_jar=':xml-resolver-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='xmlschema-core', binary_jar=':xmlschema-core-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='zabbixj', binary_jar=':zabbixj-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='zero-allocation-hashing', binary_jar=':zero-allocation-hashing-mvn', visibility=["PUBLIC"])
+prebuilt_jar(name='zookeeper', binary_jar=':zookeeper-mvn', visibility=["PUBLIC"])
+remote_file(name='activation-mvn', out='activation-1.1.jar', url='mvn:mvn:javax.activation:activation:jar:1.1', sha1='e6cb541461c2834bdea3eb920f1884d1eb508b50' )
+remote_file(name='activemq-client-mvn', out='activemq-client-5.10.1.jar', url='mvn:mvn:org.apache.activemq:activemq-client:jar:5.10.1', sha1='06ae7b83002c6e91c9611ac1e60c16d794c2b285' )
+remote_file(name='activemq-jms-pool-mvn', out='activemq-jms-pool-5.10.1.jar', url='mvn:mvn:org.apache.activemq:activemq-jms-pool:jar:5.10.1', sha1='0754f62cf829bc6772241b2a8610f3b2af0a54e2' )
+remote_file(name='activemq-pool-mvn', out='activemq-pool-5.10.1.jar', url='mvn:mvn:org.apache.activemq:activemq-pool:jar:5.10.1', sha1='36fca607e40d5a4c8f5453be61f7dcd6e3b3d02d' )
+remote_file(name='antlr4-runtime-mvn', out='antlr4-runtime-4.5.1-1.jar', url='mvn:mvn:org.antlr:antlr4-runtime:jar:4.5.1-1', sha1='66144204f9d6d7d3f3f775622c2dd7e9bd511d97' )
+remote_file(name='aopalliance-mvn', out='aopalliance-1.0.jar', url='mvn:mvn:aopalliance:aopalliance:jar:1.0', sha1='0235ba8b489512805ac13a8f9ea77a1ca5ebe3e8' )
+remote_file(name='archaius-core-mvn', out='archaius-core-0.4.1.jar', url='mvn:mvn:com.netflix.archaius:archaius-core:jar:0.4.1', sha1='69e956ddf4543c989461352a214f32a014abd64a' )
+remote_file(name='asm-mvn', out='asm-5.0.4.jar', url='mvn:mvn:org.ow2.asm:asm:jar:5.0.4', sha1='0da08b8cce7bbf903602a25a3a163ae252435795' )
+remote_file(name='asm-mvn', out='asm-1.0.2.jar', url='mvn:mvn:net.minidev:asm:jar:1.0.2', sha1='49f3068a4591b4aa6af553905ff2145685a21c2c' )
+remote_file(name='asm-mvn', out='asm-3.3.1.jar', url='mvn:mvn:asm:asm:jar:3.3.1', sha1='1d5f20b4ea675e6fab6ab79f1cd60ec268ddc015' )
+remote_file(name='asm-commons-mvn', out='asm-commons-5.0.4.jar', url='mvn:mvn:org.ow2.asm:asm-commons:jar:5.0.4', sha1='5a556786086c23cd689a0328f8519db93821c04c' )
+remote_file(name='awaitility-mvn', out='awaitility-1.7.0.jar', url='mvn:mvn:com.jayway.awaitility:awaitility:jar:1.7.0', sha1='e4fa7955cab67d880e4868a0795cce3498ea7bf2' )
+remote_file(name='caffeine-mvn', out='caffeine-1.0.1.jar', url='mvn:mvn:com.github.ben-manes.caffeine:caffeine:jar:1.0.1', sha1='eb95a1eb55cb02018b8e0bc1609ce569b455ea98' )
+remote_file(name='commons-beanutils-mvn', out='commons-beanutils-1.9.2.jar', url='mvn:mvn:commons-beanutils:commons-beanutils:jar:1.9.2', sha1='7a87d845ad3a155297e8f67d9008f4c1e5656b71' )
+remote_file(name='commons-cli-mvn', out='commons-cli-1.2.jar', url='mvn:mvn:commons-cli:commons-cli:jar:1.2', sha1='2bf96b7aa8b611c177d329452af1dc933e14501c' )
+remote_file(name='commons-codec-mvn', out='commons-codec-1.10.jar', url='mvn:mvn:commons-codec:commons-codec:jar:1.10', sha1='4b95f4897fa13f2cd904aee711aeafc0c5295cd8' )
+remote_file(name='commons-collections-mvn', out='commons-collections-3.2.2.jar', url='mvn:mvn:commons-collections:commons-collections:jar:3.2.2', sha1='8ad72fe39fa8c91eaaf12aadb21e0c3661fe26d5' )
+remote_file(name='commons-collections4-mvn', out='commons-collections4-4.0.jar', url='mvn:mvn:org.apache.commons:commons-collections4:jar:4.0', sha1='da217367fd25e88df52ba79e47658d4cf928b0d1' )
+remote_file(name='commons-configuration-mvn', out='commons-configuration-1.8.jar', url='mvn:mvn:commons-configuration:commons-configuration:jar:1.8', sha1='6cce40435bcd8018018f16898de01976b319941a' )
+remote_file(name='commons-configuration-mvn', out='commons-configuration-1.6.jar', url='mvn:mvn:commons-configuration:commons-configuration:jar:1.6', sha1='32cadde23955d7681b0d94a2715846d20b425235' )
+remote_file(name='commons-digester-mvn', out='commons-digester-1.8.1.jar', url='mvn:mvn:commons-digester:commons-digester:jar:1.8.1', sha1='3dec9b9c7ea9342d4dbe8c38560080d85b44a015' )
+remote_file(name='commons-exec-mvn', out='commons-exec-1.3.jar', url='mvn:mvn:org.apache.commons:commons-exec:jar:1.3', sha1='8dfb9facd0830a27b1b5f29f84593f0aeee7773b' )
+remote_file(name='commons-fileupload-mvn', out='commons-fileupload-1.3.1.jar', url='mvn:mvn:commons-fileupload:commons-fileupload:jar:1.3.1', sha1='c621b54583719ac0310404463d6d99db27e1052c' )
+remote_file(name='commons-io-mvn', out='commons-io-2.4.jar', url='mvn:mvn:commons-io:commons-io:jar:2.4', sha1='b1b6ea3b7e4aa4f492509a4952029cd8e48019ad' )
+remote_file(name='commons-lang-mvn', out='commons-lang-2.6.jar', url='mvn:mvn:commons-lang:commons-lang:jar:2.6', sha1='0ce1edb914c94ebc388f086c6827e8bdeec71ac2' )
+remote_file(name='commons-lang3-mvn', out='commons-lang3-3.3.jar', url='mvn:mvn:org.apache.commons:commons-lang3:jar:3.3', sha1='05ccde9cb5e3071eaadf5d87a84b4d0aba43b119' )
+remote_file(name='commons-logging-mvn', out='commons-logging-1.2.jar', url='mvn:mvn:commons-logging:commons-logging:jar:1.2', sha1='4bfc12adfe4842bf07b657f0369c4cb522955686' )
+remote_file(name='commons-math3-mvn', out='commons-math3-3.3.jar', url='mvn:mvn:org.apache.commons:commons-math3:jar:3.3', sha1='a85dc3aa929de625606270ae69a343cda69b7670' )
+remote_file(name='commons-pool-mvn', out='commons-pool-1.6.jar', url='mvn:mvn:commons-pool:commons-pool:jar:1.6', sha1='4572d589699f09d866a226a14b7f4323c6d8f040' )
+remote_file(name='commons-validator-mvn', out='commons-validator-1.5.0.jar', url='mvn:mvn:commons-validator:commons-validator:jar:1.5.0', sha1='26b98c21975c5caf6bf34bacdeb7183be7a65970' )
+remote_file(name='compiler-mvn', out='compiler-0.8.10.jar', url='mvn:mvn:com.github.spullara.mustache.java:compiler:jar:0.8.10', sha1='68f62d58078e49eebdd4e014cbe60603f10f893d' )
+remote_file(name='crypto-api-mvn', out='crypto-api-1.119.0.jar', url='mvn:mvn:uk.gov.dwp.api:crypto-api:jar:1.119.0', sha1='32e5b16d5610822112bd6f180d52f52801516afe' )
+remote_file(name='crypto-api-test-support-mvn', out='crypto-api-test-support-1.119.0.jar', url='mvn:mvn:uk.gov.dwp.api:crypto-api-test-support:jar:1.119.0', sha1='5bf848aaf03811459a6ba43b8dc996d00e953d7f' )
+remote_file(name='crypto-common-mvn', out='crypto-common-2.6.0.jar', url='mvn:mvn:uk.gov.dwp.crypto:crypto-common:jar:2.6.0', sha1='fea53c015212f726d8806bec9bb36e192283df10' )
+remote_file(name='cxf-core-mvn', out='cxf-core-3.1.4.jar', url='mvn:mvn:org.apache.cxf:cxf-core:jar:3.1.4', sha1='5387c3daecea4e2b4c7bf74c77e81435f381481e' )
+remote_file(name='cxf-rt-bindings-soap-mvn', out='cxf-rt-bindings-soap-3.1.4.jar', url='mvn:mvn:org.apache.cxf:cxf-rt-bindings-soap:jar:3.1.4', sha1='146dbb22163cd6aa1dabb6287519265ee870f48a' )
+remote_file(name='cxf-rt-bindings-xml-mvn', out='cxf-rt-bindings-xml-3.1.4.jar', url='mvn:mvn:org.apache.cxf:cxf-rt-bindings-xml:jar:3.1.4', sha1='bbc67553eb287494c71161829817b34ba0506fcd' )
+remote_file(name='cxf-rt-databinding-jaxb-mvn', out='cxf-rt-databinding-jaxb-3.1.4.jar', url='mvn:mvn:org.apache.cxf:cxf-rt-databinding-jaxb:jar:3.1.4', sha1='6a1abaf5d807356f9e7bc8c524bd1ac9b62a648d' )
+remote_file(name='cxf-rt-frontend-jaxrs-mvn', out='cxf-rt-frontend-jaxrs-3.1.4.jar', url='mvn:mvn:org.apache.cxf:cxf-rt-frontend-jaxrs:jar:3.1.4', sha1='01d30b8bc5e6b2630baa24ae56e302bf52133dcd' )
+remote_file(name='cxf-rt-frontend-jaxws-mvn', out='cxf-rt-frontend-jaxws-3.1.4.jar', url='mvn:mvn:org.apache.cxf:cxf-rt-frontend-jaxws:jar:3.1.4', sha1='57f7351088b1a157d1a4c5a3aaa0bc12fe178d92' )
+remote_file(name='cxf-rt-frontend-simple-mvn', out='cxf-rt-frontend-simple-3.1.4.jar', url='mvn:mvn:org.apache.cxf:cxf-rt-frontend-simple:jar:3.1.4', sha1='c605e26202c657054060b30d06dadd3e984bd860' )
+remote_file(name='cxf-rt-rs-client-mvn', out='cxf-rt-rs-client-3.1.4.jar', url='mvn:mvn:org.apache.cxf:cxf-rt-rs-client:jar:3.1.4', sha1='e3c7e7d84203916c57120c8a45fd66900da4461f' )
+remote_file(name='cxf-rt-transports-http-mvn', out='cxf-rt-transports-http-3.1.4.jar', url='mvn:mvn:org.apache.cxf:cxf-rt-transports-http:jar:3.1.4', sha1='72adf12f5df281f6fbfe9482f66799e7593a968f' )
+remote_file(name='cxf-rt-ws-addr-mvn', out='cxf-rt-ws-addr-3.1.4.jar', url='mvn:mvn:org.apache.cxf:cxf-rt-ws-addr:jar:3.1.4', sha1='3a4c9d96932fedcb49350c57d767506fc35236c1' )
+remote_file(name='cxf-rt-ws-policy-mvn', out='cxf-rt-ws-policy-3.1.4.jar', url='mvn:mvn:org.apache.cxf:cxf-rt-ws-policy:jar:3.1.4', sha1='aaaf9d0f5ee97ff99d42699e5f28aa4ab6fab6f9' )
+remote_file(name='cxf-rt-wsdl-mvn', out='cxf-rt-wsdl-3.1.4.jar', url='mvn:mvn:org.apache.cxf:cxf-rt-wsdl:jar:3.1.4', sha1='864e5001262447c4188a2d072f96d281029de621' )
+remote_file(name='data-consistency-mvn', out='data-consistency-1.951.0.jar', url='mvn:mvn:uk.gov.dwp.common:data-consistency:jar:1.951.0', sha1='a0a808b276612a3e15f2cab8276a50a02009a52d' )
+remote_file(name='data-consistency-api-mvn', out='data-consistency-api-1.119.0.jar', url='mvn:mvn:uk.gov.dwp.api:data-consistency-api:jar:1.119.0', sha1='8a7d8c20a879b9a27b9205f1f987e1c6a1c4b122' )
+remote_file(name='dom4j-mvn', out='dom4j-1.6.1.jar', url='mvn:mvn:dom4j:dom4j:jar:1.6.1', sha1='5d3ccc056b6f056dbf0dddfdf43894b9065a8f94' )
+remote_file(name='error-mvn', out='error-1.951.0.jar', url='mvn:mvn:uk.gov.dwp.common:error:jar:1.951.0', sha1='ac24cb9e6288c286e29289db085270e0e87a93d6' )
+remote_file(name='error-api-mvn', out='error-api-1.119.0.jar', url='mvn:mvn:uk.gov.dwp.api:error-api:jar:1.119.0', sha1='a602b9e86bee23e3c7d60a58f01cbe9fc94cf0c3' )
+remote_file(name='geronimo-j2ee-management_1.1_spec-mvn', out='geronimo-j2ee-management_1.1_spec-1.0.1.jar', url='mvn:mvn:org.apache.geronimo.specs:geronimo-j2ee-management_1.1_spec:jar:1.0.1', sha1='5372615b0c04c1913c95c34a0414cef720ca2855' )
+remote_file(name='geronimo-jms_1.1_spec-mvn', out='geronimo-jms_1.1_spec-1.1.1.jar', url='mvn:mvn:org.apache.geronimo.specs:geronimo-jms_1.1_spec:jar:1.1.1', sha1='c872b46c601d8dc03633288b81269f9e42762cea' )
+remote_file(name='geronimo-jta_1.0.1B_spec-mvn', out='geronimo-jta_1.0.1B_spec-1.0.1.jar', url='mvn:mvn:org.apache.geronimo.specs:geronimo-jta_1.0.1B_spec:jar:1.0.1', sha1='c9e67d21082a497f20e4ce87be1379faceb9c087' )
+remote_file(name='gson-mvn', out='gson-2.3.1.jar', url='mvn:mvn:com.google.code.gson:gson:jar:2.3.1', sha1='ecb6e1f8e4b0e84c4b886c2f14a1500caf309757' )
+remote_file(name='guava-mvn', out='guava-17.0.jar', url='mvn:mvn:com.google.guava:guava:jar:17.0', sha1='9c6ef172e8de35fd8d4d8783e4821e57cdef7445' )
+remote_file(name='guava-mvn', out='guava-14.0.1.jar', url='mvn:mvn:com.google.guava:guava:jar:14.0.1', sha1='69e12f4c6aeac392555f1ea86fab82b5e5e31ad4' )
+remote_file(name='hadoop-annotations-mvn', out='hadoop-annotations-2.6.0.jar', url='mvn:mvn:org.apache.hadoop:hadoop-annotations:jar:2.6.0', sha1='8cd40a4cde2b77e6edc1ab3bb55706d626ae8b2d' )
+remote_file(name='hadoop-auth-mvn', out='hadoop-auth-2.6.0.jar', url='mvn:mvn:org.apache.hadoop:hadoop-auth:jar:2.6.0', sha1='b0b8dec23a84ac8a0d00fbd69a87d320724ae34a' )
+remote_file(name='hadoop-common-mvn', out='hadoop-common-2.6.0.jar', url='mvn:mvn:org.apache.hadoop:hadoop-common:jar:2.6.0', sha1='a3f6d9827e9813a0fb286ebc0d3ae8cffed17105' )
+remote_file(name='hadoop-hdfs-mvn', out='hadoop-hdfs-2.6.0.jar', url='mvn:mvn:org.apache.hadoop:hadoop-hdfs:jar:2.6.0', sha1='9e25d4ea9daab5d0b7fbbe1749790aef3280ff35' )
+remote_file(name='hamcrest-core-mvn', out='hamcrest-core-1.3.jar', url='mvn:mvn:org.hamcrest:hamcrest-core:jar:1.3', sha1='42a25dc3219429f0e5d060061f71acb49bf010a0' )
+remote_file(name='hamcrest-library-mvn', out='hamcrest-library-1.3.jar', url='mvn:mvn:org.hamcrest:hamcrest-library:jar:1.3', sha1='4785a3c21320980282f9f33d0d1264a69040538f' )
+remote_file(name='hawtbuf-mvn', out='hawtbuf-1.10.jar', url='mvn:mvn:org.fusesource.hawtbuf:hawtbuf:jar:1.10', sha1='a20907168eb4f05c8f777e1671d8070cd06715e4' )
+remote_file(name='hibernate-validator-mvn', out='hibernate-validator-4.3.1.Final.jar', url='mvn:mvn:org.hibernate:hibernate-validator:jar:4.3.1.Final', sha1='49b31d8ea51fa21cc78a89e9d4ddb11d6bfb4669' )
+remote_file(name='hppc-mvn', out='hppc-0.7.1.jar', url='mvn:mvn:com.carrotsearch:hppc:jar:0.7.1', sha1='8b5057f74ea378c0150a1860874a3ebdcb713767' )
+remote_file(name='htrace-core-mvn', out='htrace-core-3.0.4.jar', url='mvn:mvn:org.htrace:htrace-core:jar:3.0.4', sha1='d7461828faf28411f37f8570d896292db277d838' )
+remote_file(name='httpclient-mvn', out='httpclient-4.4.1.jar', url='mvn:mvn:org.apache.httpcomponents:httpclient:jar:4.4.1', sha1='016d0bc512222f1253ee6b64d389c84e22f697f0' )
+remote_file(name='httpcore-mvn', out='httpcore-4.4.1.jar', url='mvn:mvn:org.apache.httpcomponents:httpcore:jar:4.4.1', sha1='f5aa318bda4c6c8d688c9d00b90681dcd82ce636' )
+remote_file(name='httpmime-mvn', out='httpmime-4.4.1.jar', url='mvn:mvn:org.apache.httpcomponents:httpmime:jar:4.4.1', sha1='2f8757f5ac5e38f46c794e5229d1f3c522e9b1df' )
+remote_file(name='hystrix-mvn', out='hystrix-1.951.0.jar', url='mvn:mvn:uk.gov.dwp.common:hystrix:jar:1.951.0', sha1='658be251f836c8af176f339ea07e9914accb5aec' )
+remote_file(name='hystrix-core-mvn', out='hystrix-core-1.3.18.jar', url='mvn:mvn:com.netflix.hystrix:hystrix-core:jar:1.3.18', sha1='b49206b2be4300ffdfcba51009a80596f9fce50f' )
+remote_file(name='hystrix-metrics-event-stream-mvn', out='hystrix-metrics-event-stream-1.1.2.jar', url='mvn:mvn:com.netflix.hystrix:hystrix-metrics-event-stream:jar:1.1.2', sha1='238330b1e1972ba46faba0a441fcc22f0896ba15' )
+remote_file(name='id-api-mvn', out='id-api-1.119.0.jar', url='mvn:mvn:uk.gov.dwp.api:id-api:jar:1.119.0', sha1='cb49b02248bf3cd04bc42ac83177a936eb085661' )
+remote_file(name='identification-mvn', out='identification-1.951.0.jar', url='mvn:mvn:uk.gov.dwp.common:identification:jar:1.951.0', sha1='8ffd8e0a10330348fc2de6988e0a38c4bad17d6c' )
+remote_file(name='jackson-mvn', out='jackson-1.119.0.jar', url='mvn:mvn:uk.gov.dwp.api:jackson:jar:1.119.0', sha1='e80650c6a6315f620ac1a0e8086096fa3c60a92b' )
+remote_file(name='jackson-annotations-mvn', out='jackson-annotations-2.6.0.jar', url='mvn:mvn:com.fasterxml.jackson.core:jackson-annotations:jar:2.6.0', sha1='a0990e2e812ac6639b6ce955c91b13228500476e' )
+remote_file(name='jackson-core-mvn', out='jackson-core-2.6.5.jar', url='mvn:mvn:com.fasterxml.jackson.core:jackson-core:jar:2.6.5', sha1='334369d7eff497f358b248c171dac0dd62c68f67' )
+remote_file(name='jackson-core-mvn', out='jackson-core-2.5.4.jar', url='mvn:mvn:com.fasterxml.jackson.core:jackson-core:jar:2.5.4', sha1='0a57a2df1a23ca1ee32f129173ba7f5feaa9ac24' )
+remote_file(name='jackson-core-asl-mvn', out='jackson-core-asl-1.9.2.jar', url='mvn:mvn:org.codehaus.jackson:jackson-core-asl:jar:1.9.2', sha1='8493982bba1727106d767034bd0d8e77bc1931a9' )
+remote_file(name='jackson-databind-mvn', out='jackson-databind-2.6.5.jar', url='mvn:mvn:com.fasterxml.jackson.core:jackson-databind:jar:2.6.5', sha1='d50be1723a09befd903887099ff2014ea9020333' )
+remote_file(name='jackson-dataformat-smile-mvn', out='jackson-dataformat-smile-2.5.4.jar', url='mvn:mvn:com.fasterxml.jackson.dataformat:jackson-dataformat-smile:jar:2.5.4', sha1='db0c5f1b6e16cb5f5e0505abfcd4b36f3e8bfdc6' )
+remote_file(name='jackson-dataformat-yaml-mvn', out='jackson-dataformat-yaml-2.6.5.jar', url='mvn:mvn:com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:jar:2.6.5', sha1='4a6293d1bf7af850fa58ef3e5185f2ff7a8c66e7' )
+remote_file(name='jackson-datatype-guava-mvn', out='jackson-datatype-guava-2.4.6.jar', url='mvn:mvn:com.fasterxml.jackson.datatype:jackson-datatype-guava:jar:2.4.6', sha1='6d760de94a9a592d352d260e922a3f6cca58c3da' )
+remote_file(name='jackson-datatype-joda-mvn', out='jackson-datatype-joda-2.4.6.jar', url='mvn:mvn:com.fasterxml.jackson.datatype:jackson-datatype-joda:jar:2.4.6', sha1='b2d656f7ef2b4e3983685f721da1f8d8e86b15fa' )
+remote_file(name='jackson-datatype-jsr310-mvn', out='jackson-datatype-jsr310-2.4.6.jar', url='mvn:mvn:com.fasterxml.jackson.datatype:jackson-datatype-jsr310:jar:2.4.6', sha1='e7bcea2c51d02fa2f171dd000db33ace9e460871' )
+remote_file(name='jackson-jaxrs-base-mvn', out='jackson-jaxrs-base-2.4.6.jar', url='mvn:mvn:com.fasterxml.jackson.jaxrs:jackson-jaxrs-base:jar:2.4.6', sha1='74f1c30d54a8228ea404a147c2f3f3c130097662' )
+remote_file(name='jackson-jaxrs-json-provider-mvn', out='jackson-jaxrs-json-provider-2.4.6.jar', url='mvn:mvn:com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:jar:2.4.6', sha1='3d884f8051d93940af814f7653f5bedb9d599726' )
+remote_file(name='jackson-module-jaxb-annotations-mvn', out='jackson-module-jaxb-annotations-2.4.6.jar', url='mvn:mvn:com.fasterxml.jackson.module:jackson-module-jaxb-annotations:jar:2.4.6', sha1='3f9e547c605eddcd61ab25c5ed1016b24374972a' )
+remote_file(name='javax.annotation-api-mvn', out='javax.annotation-api-1.2.jar', url='mvn:mvn:javax.annotation:javax.annotation-api:jar:1.2', sha1='479c1e06db31c432330183f5cae684163f186146' )
+remote_file(name='javax.servlet-api-mvn', out='javax.servlet-api-3.1.0.jar', url='mvn:mvn:javax.servlet:javax.servlet-api:jar:3.1.0', sha1='3cd63d075497751784b2fa84be59432f4905bf7c' )
+remote_file(name='javax.ws.rs-api-mvn', out='javax.ws.rs-api-2.0.1.jar', url='mvn:mvn:javax.ws.rs:javax.ws.rs-api:jar:2.0.1', sha1='104e9c2b5583cfcfeac0402316221648d6d8ea6b' )
+remote_file(name='jaxb-core-mvn', out='jaxb-core-2.2.11.jar', url='mvn:mvn:com.sun.xml.bind:jaxb-core:jar:2.2.11', sha1='c3f87d654f8d5943cd08592f3f758856544d279a' )
+remote_file(name='jaxb-impl-mvn', out='jaxb-impl-2.2.11.jar', url='mvn:mvn:com.sun.xml.bind:jaxb-impl:jar:2.2.11', sha1='a49ce57aee680f9435f49ba6ef427d38c93247a6' )
+remote_file(name='jboss-logging-mvn', out='jboss-logging-3.1.0.CR2.jar', url='mvn:mvn:org.jboss.logging:jboss-logging:jar:3.1.0.CR2', sha1='28725380c07f917ace4e511db21cc45e9ae5a72b' )
+remote_file(name='jcl-over-slf4j-mvn', out='jcl-over-slf4j-1.7.7.jar', url='mvn:mvn:org.slf4j:jcl-over-slf4j:jar:1.7.7', sha1='56003dcd0a31deea6391b9e2ef2f2dc90b205a92' )
+remote_file(name='jetty-continuation-mvn', out='jetty-continuation-9.3.8.v20160314.jar', url='mvn:mvn:org.eclipse.jetty:jetty-continuation:jar:9.3.8.v20160314', sha1='dec4dfc43617637694762822ef99c8373c944c98' )
+remote_file(name='jetty-deploy-mvn', out='jetty-deploy-9.3.8.v20160314.jar', url='mvn:mvn:org.eclipse.jetty:jetty-deploy:jar:9.3.8.v20160314', sha1='fe4025121641f5c4b06986e9b14983964bfcd7d5' )
+remote_file(name='jetty-http-mvn', out='jetty-http-9.3.8.v20160314.jar', url='mvn:mvn:org.eclipse.jetty:jetty-http:jar:9.3.8.v20160314', sha1='0127feb7407f4137ff4295b5fa2895845db56710' )
+remote_file(name='jetty-io-mvn', out='jetty-io-9.3.8.v20160314.jar', url='mvn:mvn:org.eclipse.jetty:jetty-io:jar:9.3.8.v20160314', sha1='371e3c2b72d9a9737579ec0fdfd6a2a3ab8b8141' )
+remote_file(name='jetty-jmx-mvn', out='jetty-jmx-9.3.8.v20160314.jar', url='mvn:mvn:org.eclipse.jetty:jetty-jmx:jar:9.3.8.v20160314', sha1='4aca2eb607d49969bac6a5f36be24ebe1d6d39ad' )
+remote_file(name='jetty-rewrite-mvn', out='jetty-rewrite-9.3.8.v20160314.jar', url='mvn:mvn:org.eclipse.jetty:jetty-rewrite:jar:9.3.8.v20160314', sha1='264a34089a62d22cea8e38f6ab6c55d8cef992dc' )
+remote_file(name='jetty-security-mvn', out='jetty-security-9.3.8.v20160314.jar', url='mvn:mvn:org.eclipse.jetty:jetty-security:jar:9.3.8.v20160314', sha1='5291fa5e3098f08017bfcc7f950a7ce36c9544d7' )
+remote_file(name='jetty-server-mvn', out='jetty-server-9.3.8.v20160314.jar', url='mvn:mvn:org.eclipse.jetty:jetty-server:jar:9.3.8.v20160314', sha1='da8366f602f35d4c3177cb081472e2fc4abe04ea' )
+remote_file(name='jetty-servlet-mvn', out='jetty-servlet-9.3.8.v20160314.jar', url='mvn:mvn:org.eclipse.jetty:jetty-servlet:jar:9.3.8.v20160314', sha1='ea5f25d3326d7745d9c21d405dcf6f878efbd5fb' )
+remote_file(name='jetty-servlets-mvn', out='jetty-servlets-9.3.8.v20160314.jar', url='mvn:mvn:org.eclipse.jetty:jetty-servlets:jar:9.3.8.v20160314', sha1='7c6cca49412e873cc2cee9903e3209525175f60d' )
+remote_file(name='jetty-util-mvn', out='jetty-util-9.3.8.v20160314.jar', url='mvn:mvn:org.eclipse.jetty:jetty-util:jar:9.3.8.v20160314', sha1='01d53c7a7e7715e67d6f4edec6c5b328ee162e65' )
+remote_file(name='jetty-webapp-mvn', out='jetty-webapp-9.3.8.v20160314.jar', url='mvn:mvn:org.eclipse.jetty:jetty-webapp:jar:9.3.8.v20160314', sha1='2f0dfef84af7c97f2a1f14db65aa3f37349420e4' )
+remote_file(name='jetty-xml-mvn', out='jetty-xml-9.3.8.v20160314.jar', url='mvn:mvn:org.eclipse.jetty:jetty-xml:jar:9.3.8.v20160314', sha1='f02bbbf71d7ea706a95fedf7e76c3ff243049bfc' )
+remote_file(name='jline-mvn', out='jline-0.9.94.jar', url='mvn:mvn:jline:jline:jar:0.9.94', sha1='99a18e9a44834afdebc467294e1138364c207402' )
+remote_file(name='joda-time-mvn', out='joda-time-2.2.jar', url='mvn:mvn:joda-time:joda-time:jar:2.2', sha1='a5f29a7acaddea3f4af307e8cf2d0cc82645fd7d' )
+remote_file(name='json-mvn', out='json-20090211.jar', url='mvn:mvn:org.json:json:jar:20090211', sha1='c183aa3a2a6250293808bba12262c8920ce5a51c' )
+remote_file(name='json-path-mvn', out='json-path-2.0.0.jar', url='mvn:mvn:com.jayway.jsonpath:json-path:jar:2.0.0', sha1='26b8555596b3fb9652c1ffe193fa9123945b32cc' )
+remote_file(name='json-smart-mvn', out='json-smart-2.1.1.jar', url='mvn:mvn:net.minidev:json-smart:jar:2.1.1', sha1='922d12fb1f394e2b6999ae0f7936ab13f4dffb81' )
+remote_file(name='jsonassert-mvn', out='jsonassert-1.2.3.jar', url='mvn:mvn:org.skyscreamer:jsonassert:jar:1.2.3', sha1='2cb01fdff70caf688561d877cea55451ab164527' )
+remote_file(name='jsr305-mvn', out='jsr305-2.0.0.jar', url='mvn:mvn:com.google.code.findbugs:jsr305:jar:2.0.0', sha1='516c03b21d50a644d538de0f0369c620989cd8f0' )
+remote_file(name='junit-mvn', out='junit-4.11.jar', url='mvn:mvn:junit:junit:jar:4.11', sha1='4e031bb61df09069aeb2bffb4019e7a5034a4ee0' )
+remote_file(name='junit-mvn', out='junit-3.8.1.jar', url='mvn:mvn:junit:junit:jar:3.8.1', sha1='99129f16442844f6a4a11ae22fbbee40b14d774f' )
+remote_file(name='kafka-mvn', out='kafka-1.951.0.jar', url='mvn:mvn:uk.gov.dwp.common:kafka:jar:1.951.0', sha1='bb6f9b21f587e6fadd85bf2478709d957984b2e9' )
+remote_file(name='kafka-clients-mvn', out='kafka-clients-0.9.0.0.jar', url='mvn:mvn:org.apache.kafka:kafka-clients:jar:0.9.0.0', sha1='8c85b7de6c61ceae39b2a3d4fa055b0850325c14' )
+remote_file(name='key-value-store-mvn', out='key-value-store-1.951.0.jar', url='mvn:mvn:uk.gov.dwp.common:key-value-store:jar:1.951.0', sha1='f2efba4096d728beb2cc423ec024b97769a16883' )
+remote_file(name='log4j-mvn', out='log4j-1.2.17.jar', url='mvn:mvn:log4j:log4j:jar:1.2.17', sha1='5af35056b4d257e4b64b9e8069c0746e8b08629f' )
+remote_file(name='log4j-over-slf4j-mvn', out='log4j-over-slf4j-1.7.13.jar', url='mvn:mvn:org.slf4j:log4j-over-slf4j:jar:1.7.13', sha1='b5f4685073a6ffba6bf7e1d51e2b5fb83bdfa953' )
+remote_file(name='lucene-analyzers-common-mvn', out='lucene-analyzers-common-6.0.1.jar', url='mvn:mvn:org.apache.lucene:lucene-analyzers-common:jar:6.0.1', sha1='53953c1a9b097f83209c84a422cf8f9d271f47c1' )
+remote_file(name='lucene-analyzers-kuromoji-mvn', out='lucene-analyzers-kuromoji-6.0.1.jar', url='mvn:mvn:org.apache.lucene:lucene-analyzers-kuromoji:jar:6.0.1', sha1='77905f563c47994a764a6ab3d5ec198c174567a7' )
+remote_file(name='lucene-analyzers-phonetic-mvn', out='lucene-analyzers-phonetic-6.0.1.jar', url='mvn:mvn:org.apache.lucene:lucene-analyzers-phonetic:jar:6.0.1', sha1='3ee5d909c269e5da7a92715f41ead88943b38123' )
+remote_file(name='lucene-backward-codecs-mvn', out='lucene-backward-codecs-6.0.1.jar', url='mvn:mvn:org.apache.lucene:lucene-backward-codecs:jar:6.0.1', sha1='3647088603be84b8f4916ef86954e3336b98d254' )
+remote_file(name='lucene-codecs-mvn', out='lucene-codecs-6.0.1.jar', url='mvn:mvn:org.apache.lucene:lucene-codecs:jar:6.0.1', sha1='b90eac74f04c5523fc4546d77ffbbb57b5861bfb' )
+remote_file(name='lucene-core-mvn', out='lucene-core-6.0.1.jar', url='mvn:mvn:org.apache.lucene:lucene-core:jar:6.0.1', sha1='40ccd40bec54266a10aa1f81c565914ede8c0ca0' )
+remote_file(name='lucene-expressions-mvn', out='lucene-expressions-6.0.1.jar', url='mvn:mvn:org.apache.lucene:lucene-expressions:jar:6.0.1', sha1='2b76056dbd40fb51dc5e8ef71e1919ad23e635a1' )
+remote_file(name='lucene-grouping-mvn', out='lucene-grouping-6.0.1.jar', url='mvn:mvn:org.apache.lucene:lucene-grouping:jar:6.0.1', sha1='010daaae60227fbe719ca95e9b6fcdb5c38d4eba' )
+remote_file(name='lucene-highlighter-mvn', out='lucene-highlighter-6.0.1.jar', url='mvn:mvn:org.apache.lucene:lucene-highlighter:jar:6.0.1', sha1='65d74c3642e6a86ba905045473b17cc84826527e' )
+remote_file(name='lucene-join-mvn', out='lucene-join-6.0.1.jar', url='mvn:mvn:org.apache.lucene:lucene-join:jar:6.0.1', sha1='2105e2826ce93d1f764e5a0a3afa9ee461d556c1' )
+remote_file(name='lucene-memory-mvn', out='lucene-memory-6.0.1.jar', url='mvn:mvn:org.apache.lucene:lucene-memory:jar:6.0.1', sha1='e2cde0688e487a27d08df0c2d81d492b1f4cdc2a' )
+remote_file(name='lucene-misc-mvn', out='lucene-misc-6.0.1.jar', url='mvn:mvn:org.apache.lucene:lucene-misc:jar:6.0.1', sha1='e6e59996fc324319d695e41cf25e30e5f1e4c182' )
+remote_file(name='lucene-queries-mvn', out='lucene-queries-6.0.1.jar', url='mvn:mvn:org.apache.lucene:lucene-queries:jar:6.0.1', sha1='09b0e5862a676ff9e55a1bc6ca37ad578a25cb38' )
+remote_file(name='lucene-queryparser-mvn', out='lucene-queryparser-6.0.1.jar', url='mvn:mvn:org.apache.lucene:lucene-queryparser:jar:6.0.1', sha1='24f7ba0707aa01be2dd7749adff1659262be8f33' )
+remote_file(name='lucene-sandbox-mvn', out='lucene-sandbox-6.0.1.jar', url='mvn:mvn:org.apache.lucene:lucene-sandbox:jar:6.0.1', sha1='0faf4c0d7e0adb6fccd830a2d5797d4176b579fe' )
+remote_file(name='lucene-spatial-extras-mvn', out='lucene-spatial-extras-6.0.1.jar', url='mvn:mvn:org.apache.lucene:lucene-spatial-extras:jar:6.0.1', sha1='3de19dbdb889fe87791dae291ac3b340586854c4' )
+remote_file(name='lucene-suggest-mvn', out='lucene-suggest-6.0.1.jar', url='mvn:mvn:org.apache.lucene:lucene-suggest:jar:6.0.1', sha1='55886bdaf16ecc6948e94b527837eaa1f16fe988' )
+remote_file(name='lz4-mvn', out='lz4-1.2.0.jar', url='mvn:mvn:net.jpountz.lz4:lz4:jar:1.2.0', sha1='cd301e9a481eae5b68c53267100aeca43b782b9f' )
+remote_file(name='mail-mvn', out='mail-1.4.7.jar', url='mvn:mvn:javax.mail:mail:jar:1.4.7', sha1='9add058589d5d85adeb625859bf2c5eeaaedf12d' )
+remote_file(name='managed-mvn', out='managed-1.951.0.jar', url='mvn:mvn:uk.gov.dwp.common:managed:jar:1.951.0', sha1='b59f41f717a93f020918aea1f04ef5d33c949b44' )
+remote_file(name='messaging-mvn', out='messaging-1.951.0.jar', url='mvn:mvn:uk.gov.dwp.common:messaging:jar:1.951.0', sha1='be03ea60571577c37606cf59fdcedd23efe48f59' )
+remote_file(name='messaging-api-mvn', out='messaging-api-1.119.0.jar', url='mvn:mvn:uk.gov.dwp.api:messaging-api:jar:1.119.0', sha1='2e16ccf1233429d68fd633cc419eda564f7385f7' )
+remote_file(name='metadata-mvn', out='metadata-1.951.0.jar', url='mvn:mvn:uk.gov.dwp.common:metadata:jar:1.951.0', sha1='d2318269332826f603ee7f6054660d9d0c66aa84' )
+remote_file(name='metrics-healthchecks-mvn', out='metrics-healthchecks-3.1.0.jar', url='mvn:mvn:io.dropwizard.metrics:metrics-healthchecks:jar:3.1.0', sha1='475b277322856252b3e3d6b469140058c74dde0c' )
+remote_file(name='mockito-core-mvn', out='mockito-core-1.9.5.jar', url='mvn:mvn:org.mockito:mockito-core:jar:1.9.5', sha1='c3264abeea62c4d2f367e21484fbb40c7e256393' )
+remote_file(name='mongo-api-mvn', out='mongo-api-1.119.0.jar', url='mvn:mvn:uk.gov.dwp.api:mongo-api:jar:1.119.0', sha1='4378cfdba66b56d6e44a3a6d84f7f3b279d0fab8' )
+remote_file(name='mongo-ext-tests-mvn', out='mongo-ext-1.951.0-tests.jar', url='mvn:mvn:uk.gov.dwp.common:mongo-ext:jar:tests:1.951.0', sha1='7f23896ece7bac159471b2f48986b600ab870d39' )
+remote_file(name='mongo-java-driver-mvn', out='mongo-java-driver-3.2.2.jar', url='mvn:mvn:org.mongodb:mongo-java-driver:jar:3.2.2', sha1='654b381c444d22e095363036767a52de1fda3ab0' )
+remote_file(name='neethi-mvn', out='neethi-3.0.3.jar', url='mvn:mvn:org.apache.neethi:neethi:jar:3.0.3', sha1='ee37a38bbf9f355ee88ba554a85c9220b75ba500' )
+remote_file(name='netty-mvn', out='netty-3.7.0.Final.jar', url='mvn:mvn:io.netty:netty:jar:3.7.0.Final', sha1='07a8c35599c68c0bf383df74469aa3e03d9aca87' )
+remote_file(name='netty-buffer-mvn', out='netty-buffer-4.0.34.Final.jar', url='mvn:mvn:io.netty:netty-buffer:jar:4.0.34.Final', sha1='5e1af9c24081df715a2332f42c9a06deed7a56fb' )
+remote_file(name='netty-codec-mvn', out='netty-codec-4.0.34.Final.jar', url='mvn:mvn:io.netty:netty-codec:jar:4.0.34.Final', sha1='db5d364d433e66093c2d76bf0c4ae823ca7c2f3d' )
+remote_file(name='netty-common-mvn', out='netty-common-4.0.34.Final.jar', url='mvn:mvn:io.netty:netty-common:jar:4.0.34.Final', sha1='8d2c50a27a5a2d01e9f5c034a2865df75baa4776' )
+remote_file(name='netty-handler-mvn', out='netty-handler-4.0.34.Final.jar', url='mvn:mvn:io.netty:netty-handler:jar:4.0.34.Final', sha1='4e4856c95972f591ee929c9fb81ec6afd005085c' )
+remote_file(name='netty-transport-mvn', out='netty-transport-4.0.34.Final.jar', url='mvn:mvn:io.netty:netty-transport:jar:4.0.34.Final', sha1='abe4f35c89043202c0e3d50e9a359e81ef863473' )
+remote_file(name='noggit-mvn', out='noggit-0.6.jar', url='mvn:mvn:org.noggit:noggit:jar:0.6', sha1='fa94a59c44b39ee710f3c9451750119e432326c0' )
+remote_file(name='objenesis-mvn', out='objenesis-2.1.jar', url='mvn:mvn:org.objenesis:objenesis:jar:2.1', sha1='87c0ea803b69252868d09308b4618f766f135a96' )
+remote_file(name='org.restlet-mvn', out='org.restlet-2.3.0.jar', url='mvn:mvn:org.restlet.jee:org.restlet:jar:2.3.0', sha1='4c5d184e23fa729726668a90dc7338d80c4e7e6f' )
+remote_file(name='org.restlet.ext.servlet-mvn', out='org.restlet.ext.servlet-2.3.0.jar', url='mvn:mvn:org.restlet.jee:org.restlet.ext.servlet:jar:2.3.0', sha1='9303e20d0397c0304342943560c3a1693fd7ce7d' )
+remote_file(name='presto-parser-mvn', out='presto-parser-0.122.jar', url='mvn:mvn:com.facebook.presto:presto-parser:jar:0.122', sha1='b4261cbabfd2f28b8d4d20d7e3a3d1be48bb890c' )
+remote_file(name='protobuf-java-mvn', out='protobuf-java-2.5.0.jar', url='mvn:mvn:com.google.protobuf:protobuf-java:jar:2.5.0', sha1='a10732c76bfacdbd633a7eb0f7968b1059a65dfa' )
+remote_file(name='reactive-streams-mvn', out='reactive-streams-1.0.0.jar', url='mvn:mvn:org.reactivestreams:reactive-streams:jar:1.0.0', sha1='14b8c877d98005ba3941c9257cfe09f6ed0e0d74' )
+remote_file(name='reactor-core-mvn', out='reactor-core-2.0.7.RELEASE.jar', url='mvn:mvn:io.projectreactor:reactor-core:jar:2.0.7.RELEASE', sha1='3f7190ff62e6d8cefa8a832f64140387e473fb41' )
+remote_file(name='reactor-stream-mvn', out='reactor-stream-2.0.7.RELEASE.jar', url='mvn:mvn:io.projectreactor:reactor-stream:jar:2.0.7.RELEASE', sha1='5c8d4486a6f17177a5411ae195ba68ab02f75759' )
+remote_file(name='redisson-mvn', out='redisson-2.2.9.jar', url='mvn:mvn:org.redisson:redisson:jar:2.2.9', sha1='14bbc298b74de8064186b9bafa6d35311d0fbe22' )
+remote_file(name='rest-client-mvn', out='rest-client-1.951.0.jar', url='mvn:mvn:uk.gov.dwp.common:rest-client:jar:1.951.0', sha1='f97b8362a88f62899bc0067071eac91733558172' )
+remote_file(name='rxjava-core-mvn', out='rxjava-core-0.20.3.jar', url='mvn:mvn:com.netflix.rxjava:rxjava-core:jar:0.20.3', sha1='30389481b5322f50068c731ceb63ed36ffa4baa8' )
+remote_file(name='shazamcrest-mvn', out='shazamcrest-0.11.jar', url='mvn:mvn:com.shazam:shazamcrest:jar:0.11', sha1='380f4792623562fe0cb8b680ec9b823e7c76f33b' )
+remote_file(name='slf4j-api-mvn', out='slf4j-api-1.7.14.jar', url='mvn:mvn:org.slf4j:slf4j-api:jar:1.7.14', sha1='862a5bc736005d68727d1387844d09d62efdb6cb' )
+remote_file(name='slf4j-api-mvn', out='slf4j-api-1.7.7.jar', url='mvn:mvn:org.slf4j:slf4j-api:jar:1.7.7', sha1='2b8019b6249bb05d81d3a3094e468753e2b21311' )
+remote_file(name='slice-mvn', out='slice-0.10.jar', url='mvn:mvn:io.airlift:slice:jar:0.10', sha1='159a81631ed2cc1bc865f3d8e51239c9e8a20bea' )
+remote_file(name='snakeyaml-mvn', out='snakeyaml-1.15.jar', url='mvn:mvn:org.yaml:snakeyaml:jar:1.15', sha1='3b132bea69e8ee099f416044970997bde80f4ea6' )
+remote_file(name='snappy-java-mvn', out='snappy-java-1.1.1.7.jar', url='mvn:mvn:org.xerial.snappy:snappy-java:jar:1.1.1.7', sha1='33b6965e9364145972035c30a45a996aad2bf789' )
+remote_file(name='solr-core-mvn', out='solr-core-6.0.1.jar', url='mvn:mvn:org.apache.solr:solr-core:jar:6.0.1', sha1='2cfb3c2e614279276f3bc7d6786c2c07ef2cfb08' )
+remote_file(name='solr-solrj-mvn', out='solr-solrj-6.0.1.jar', url='mvn:mvn:org.apache.solr:solr-solrj:jar:6.0.1', sha1='3d822b04feb8fcb9ee833d7c10e41fd5cf768c5b' )
+remote_file(name='spatial4j-mvn', out='spatial4j-0.6.jar', url='mvn:mvn:org.locationtech.spatial4j:spatial4j:jar:0.6', sha1='21b15310bddcfd8c72611c180f20cf23279809a3' )
+remote_file(name='spring-aop-mvn', out='spring-aop-4.2.3.RELEASE.jar', url='mvn:mvn:org.springframework:spring-aop:jar:4.2.3.RELEASE', sha1='6384a57a024df03bfcb1eeccd3d820da98125b92' )
+remote_file(name='spring-beans-mvn', out='spring-beans-4.2.3.RELEASE.jar', url='mvn:mvn:org.springframework:spring-beans:jar:4.2.3.RELEASE', sha1='249921ead97248410ac04f854075f0a1c1a567e4' )
+remote_file(name='spring-context-mvn', out='spring-context-4.2.3.RELEASE.jar', url='mvn:mvn:org.springframework:spring-context:jar:4.2.3.RELEASE', sha1='fb26a160d984eb9cbf01fbf38f4b17e15fdd50e1' )
+remote_file(name='spring-core-mvn', out='spring-core-4.2.3.RELEASE.jar', url='mvn:mvn:org.springframework:spring-core:jar:4.2.3.RELEASE', sha1='3ed00dad7a16b2a28df9348294f6a67151f43cf6' )
+remote_file(name='spring-expression-mvn', out='spring-expression-4.2.3.RELEASE.jar', url='mvn:mvn:org.springframework:spring-expression:jar:4.2.3.RELEASE', sha1='67b064c726c276436387c7a183a49deda153a6cc' )
+remote_file(name='stax2-api-mvn', out='stax2-api-3.1.4.jar', url='mvn:mvn:org.codehaus.woodstox:stax2-api:jar:3.1.4', sha1='ac19014b1e6a7c08aad07fe114af792676b685b7' )
+remote_file(name='t-digest-mvn', out='t-digest-3.1.jar', url='mvn:mvn:com.tdunning:t-digest:jar:3.1', sha1='451ed219688aed5821a789428fd5e10426d11312' )
+remote_file(name='templating-mvn', out='templating-1.951.0.jar', url='mvn:mvn:uk.gov.dwp.common:templating:jar:1.951.0', sha1='7aebf3b6a7593bac92c6db5f21c81c63889c6fa2' )
+remote_file(name='test-matchers-mvn', out='test-matchers-1.951.0.jar', url='mvn:mvn:uk.gov.dwp.common:test-matchers:jar:1.951.0', sha1='1d6f40d1bcdc1cf705867b282ccf06b64fe6692a' )
+remote_file(name='trace-core-mvn', out='trace-core-1.951.0.jar', url='mvn:mvn:uk.gov.dwp.common:trace-core:jar:1.951.0', sha1='5847f19b089781fe89d76c4a4ae3cfda820be67c' )
+remote_file(name='trace-http-mvn', out='trace-http-1.951.0.jar', url='mvn:mvn:uk.gov.dwp.common:trace-http:jar:1.951.0', sha1='de505f87ee54b99ac827ac870e231649485dc861' )
+remote_file(name='util-mvn', out='util-1.119.0.jar', url='mvn:mvn:uk.gov.dwp.api:util:jar:1.119.0', sha1='735bc72533bc18bbbfab6039c71ca8242d8dae24' )
+remote_file(name='validation-mvn', out='validation-1.119.0.jar', url='mvn:mvn:uk.gov.dwp.api:validation:jar:1.119.0', sha1='856341330b1fedcc90f38147895883957ea8b931' )
+remote_file(name='validation-api-mvn', out='validation-api-1.0.0.GA.jar', url='mvn:mvn:javax.validation:validation-api:jar:1.0.0.GA', sha1='b6bd7f9d78f6fdaa3c37dae18a4bd298915f328e' )
+remote_file(name='woodstox-core-asl-mvn', out='woodstox-core-asl-4.4.1.jar', url='mvn:mvn:org.codehaus.woodstox:woodstox-core-asl:jar:4.4.1', sha1='84fee5eb1a4a1cefe65b6883c73b3fa83be3c1a1' )
+remote_file(name='wsdl4j-mvn', out='wsdl4j-1.6.3.jar', url='mvn:mvn:wsdl4j:wsdl4j:jar:1.6.3', sha1='6d106a6845a3d3477a1560008479312888e94f2f' )
+remote_file(name='xml-resolver-mvn', out='xml-resolver-1.2.jar', url='mvn:mvn:xml-resolver:xml-resolver:jar:1.2', sha1='3d0f97750b3a03e0971831566067754ba4bfd68c' )
+remote_file(name='xmlschema-core-mvn', out='xmlschema-core-2.2.1.jar', url='mvn:mvn:org.apache.ws.xmlschema:xmlschema-core:jar:2.2.1', sha1='02eff1f3776590d4c51cc735eab2143c497329f2' )
+remote_file(name='zabbixj-mvn', out='zabbixj-1.0.1.jar', url='mvn:mvn:com.quigley:zabbixj:jar:1.0.1', sha1='6aca813f6d7608b4e195e8fc890d0cfcb1885afc' )
+remote_file(name='zero-allocation-hashing-mvn', out='zero-allocation-hashing-0.5.jar', url='mvn:mvn:net.openhft:zero-allocation-hashing:jar:0.5', sha1='b813b4ed7ad4f3ab10edd5fecd665083472c003d' )
+remote_file(name='zookeeper-mvn', out='zookeeper-3.4.6.jar', url='mvn:mvn:org.apache.zookeeper:zookeeper:jar:3.4.6', sha1='01b2502e29da1ebaade2357cd1de35a855fa3755' )
