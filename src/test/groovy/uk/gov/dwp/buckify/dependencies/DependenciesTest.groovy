@@ -26,7 +26,7 @@ class DependenciesTest {
 
     @Test
     void findProjectDependencies() {
-        def dependencies = new Dependencies(testProject.configurations.findByName("compile"), testProject.extensions.findByType(BuckifyExtension))
+        def dependencies = Dependencies.factory(testProject.configurations.findByName("compile"), testProject.extensions.findByType(BuckifyExtension))
 
         assert dependencies.projectDependencies.size() == 1
         assert dependencies.projectDependencies.collect({ it.ruleName }) == ["child"]
@@ -34,24 +34,24 @@ class DependenciesTest {
 
     @Test
     void findDeclaredExternalDependencies() {
-        def dependencies = new Dependencies(testProject.configurations.findByName("compile"), testProject.extensions.findByType(BuckifyExtension))
+        def dependencies = Dependencies.factory(testProject.configurations.findByName("compile"), testProject.extensions.findByType(BuckifyExtension))
 
         assert dependencies.declaredExternalDependencies.size() == 3
-        assert dependencies.declaredExternalDependencies.collect({ it.ruleName }) == (["commons-lang", "joda-time", "cucumber-core"])
+        assert dependencies.declaredExternalDependencies.collect({ it.ruleName }).containsAll(["commons-lang", "joda-time", "cucumber-core"])
     }
 
     @Test
     void findDeclaredTransitiveDependencies() {
-        def dependencies = new Dependencies(testProject.configurations.findByName("compile"), testProject.extensions.findByType(BuckifyExtension))
+        def dependencies = Dependencies.factory(testProject.configurations.findByName("compile"), testProject.extensions.findByType(BuckifyExtension))
 
         assert dependencies.transitiveDependencies.size() == 3
-        assert dependencies.transitiveDependencies.collect({ it.ruleName }) == ["cucumber-html", "cucumber-jvm-deps", "gherkin"]
+        assert dependencies.transitiveDependencies.collect({ it.ruleName }).containsAll(["cucumber-html", "cucumber-jvm-deps", "gherkin"])
         assert dependencies.transitiveDependencies.disjoint(dependencies.nonTransitiveDependencies())
     }
 
     @Test
     void findConfigSpecificDependencies() {
-        def dependencies = new Dependencies(testProject.configurations.findByName("testCompile"), testProject.extensions.findByType(BuckifyExtension))
+        def dependencies = Dependencies.factory(testProject.configurations.findByName("testCompile"), testProject.extensions.findByType(BuckifyExtension))
 
         assert dependencies.configSpecificDependencies.size() == 1
         assert dependencies.configSpecificDependencies.collect({ it.ruleName }) == ["junit"]

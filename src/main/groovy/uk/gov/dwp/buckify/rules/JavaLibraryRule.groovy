@@ -8,19 +8,22 @@ import uk.gov.dwp.buckify.dependencies.Dependencies
 import uk.gov.dwp.buckify.dependencies.DependencyCache
 
 class JavaLibraryRule extends Rule {
+
     static final sourceDir = "src/main/java"
     static final resourcesDir = "src/main/resources"
 
-    static generator = { Project project, DependencyCache dependencies -> project.plugins.hasPlugin(JavaPlugin) && project.file(sourceDir).exists() ? [new JavaLibraryRule(project, dependencies)] : [] }
+    static generator = { Project project, DependencyCache dependencies ->
+        project.plugins.hasPlugin(JavaPlugin) && project.file(sourceDir).exists() ? [new JavaLibraryRule(project, dependencies)] : []
+    }
 
     Dependencies dependencies
     boolean autoDeps
     boolean hasResources
 
     JavaLibraryRule(Project project, DependencyCache dependencies) {
-        def buckifyExtension = project.extensions.findByType(BuckifyExtension)
+        def buckifyExtension = BuckifyExtension.from(project)
         this.dependencies = dependencies.compileDependencies()
-        this.name = BuckifyExtension.from(project).javaLibraryRuleName
+        this.name = buckifyExtension.javaLibraryRuleName
         this.autoDeps = buckifyExtension.autoDeps
         // todo - check sourceSets property of Java plugin to find actual resources dir
         this.hasResources = project.file(resourcesDir).exists()
@@ -46,7 +49,7 @@ java_library(
     }
 
     private String deps() {
-        def deps = quoteAndSort(dependencies.nonTransitiveDependencies().collect({ it.path })) + quoteAndSort(transitiveDependencyPaths(dependencies))
-        "deps=[\n${ deps.join(',\n') }\n],"
+        def deps = nonTransitiveDependencyPaths(dependencies) + transitiveDependencyPaths(dependencies)
+        "deps=[\n${deps.join(',\n')}\n],"
     }
 }

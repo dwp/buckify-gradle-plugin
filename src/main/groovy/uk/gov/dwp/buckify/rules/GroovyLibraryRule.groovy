@@ -39,7 +39,7 @@ groovy_library(
     }
 
     private String deps() {
-        def deps = quoteAndSort(dependencies.nonTransitiveDependencies().collect({ it.path })) + quoteAndSort(transitiveDependencyPaths(dependencies))
+        def deps = nonTransitiveDependencyPaths(dependencies) + transitiveDependencyPaths(dependencies)
         "deps=[\n${ deps.join(',\n') }\n],"
     }
 }

@@ -27,7 +27,7 @@ class RemoteFileRule extends Rule {
 
     @Override
     Writable createOutput() {
-        new SimpleTemplateEngine().createTemplate(commentIfDisabled() + "remote_file(name='$name', out='$out', url='$url', sha1='$sha1' )\n").make(this.properties)
+        new SimpleTemplateEngine().createTemplate(commentIfDisabled() + "remote_file(name='$name', out='$out', url='$url', sha1='$sha1')\n").make(this.properties)
     }
 
     private String commentIfDisabled() {

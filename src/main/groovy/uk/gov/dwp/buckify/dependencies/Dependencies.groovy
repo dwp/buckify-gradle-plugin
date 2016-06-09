@@ -7,32 +7,45 @@ import org.gradle.internal.component.local.model.PublishArtifactLocalArtifactMet
 import uk.gov.dwp.buckify.BuckifyExtension
 
 class Dependencies {
+
     Set<ProjectDependency> projectDependencies = []
     Set<ArtifactDependency> declaredExternalDependencies = []
     Set<ArtifactDependency> transitiveDependencies = []
     Set<ArtifactDependency> configSpecificDependencies = []
 
-    Dependencies() {}
-
-    Dependencies(Configuration configuration, BuckifyExtension buckifyExtension) {
+    static def factory = { Configuration configuration, BuckifyExtension buckifyExtension ->
         def resolvedArtifacts = configuration.resolvedConfiguration.resolvedArtifacts
         def projectArtifacts = findProjectArtifacts(resolvedArtifacts)
         def externalArtifacts = findDeclaredExternalArtifacts(configuration)
         def transitiveArtifacts = (resolvedArtifacts - externalArtifacts) - projectArtifacts
         def configSpecificArtifacts = findConfigSpecificArtifacts(configuration)
 
-        configSpecificDependencies = configSpecificArtifacts.collect({
-            new ArtifactDependency(it, buckifyExtension.externalDependencyRuleName)
-        })
-        projectDependencies = projectArtifacts.collect({
-            new ProjectDependency(it, buckifyExtension.projectDependencyRuleName)
-        })
-        declaredExternalDependencies = externalArtifacts.collect({
-            new ArtifactDependency(it, buckifyExtension.externalDependencyRuleName)
-        })
-        transitiveDependencies = transitiveArtifacts.collect({
-            new ArtifactDependency(it, buckifyExtension.externalDependencyRuleName)
-        })
+        new Dependencies(
+                projectArtifacts.collect({
+                    new ProjectDependency(it, buckifyExtension.projectDependencyRuleName)
+                }).toSet(),
+                externalArtifacts.collect({
+                    new ArtifactDependency(it, buckifyExtension.externalDependencyRuleName)
+                }).toSet(),
+                transitiveArtifacts.collect({
+                    new ArtifactDependency(it, buckifyExtension.externalDependencyRuleName)
+                }).toSet(),
+                configSpecificArtifacts.collect({
+                    new ArtifactDependency(it, buckifyExtension.externalDependencyRuleName)
+                }).toSet()
+        )
+    }
+
+    Dependencies() {}
+
+    Dependencies(Set<ProjectDependency> projectDependencies,
+                 Set<ArtifactDependency> declaredExternalDependencies,
+                 Set<ArtifactDependency> transitiveDependencies,
+                 Set<ArtifactDependency> configSpecificDependencies) {
+        this.projectDependencies = projectDependencies
+        this.declaredExternalDependencies = declaredExternalDependencies
+        this.transitiveDependencies = transitiveDependencies
+        this.configSpecificDependencies = configSpecificDependencies
     }
 
     private static HashSet<ResolvedArtifact> findConfigSpecificArtifacts(Configuration configuration) {
@@ -46,7 +59,7 @@ class Dependencies {
 
     private static boolean compareDeps(Dependency configDep, ResolvedArtifact artifact) {
         "$configDep.group:$configDep.name:$configDep.version" == artifact.owner.identifier.toString() &&
-                artifactsHaveSameClassifier(configDep, artifact)
+        artifactsHaveSameClassifier(configDep, artifact)
     }
 
     // differentiates "tests" from "normal" artifacts, for example

@@ -6,15 +6,21 @@ import uk.gov.dwp.buckify.BuckifyExtension
 class DependencyCache {
     Map<String, Dependencies> dependenciesForConfiguration = [:]
     Project project
+    Closure<Dependencies> dependenciesFactory
 
     DependencyCache(Project project) {
+        this(project, Dependencies.factory)
+    }
+
+    DependencyCache(Project project, Closure<Dependencies> dependenciesFactory) {
         this.project = project
+        this.dependenciesFactory = dependenciesFactory
     }
 
     Dependencies get(String configurationName) {
         dependenciesForConfiguration.computeIfAbsent(configurationName, {
             def configuration = project.configurations.findByName(configurationName)
-            configuration != null ? new Dependencies(configuration, BuckifyExtension.from(project)) : new Dependencies()
+            configuration != null ? dependenciesFactory(configuration, BuckifyExtension.from(project)) : new Dependencies()
         })
     }
 
