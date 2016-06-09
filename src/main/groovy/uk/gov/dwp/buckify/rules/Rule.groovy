@@ -21,7 +21,7 @@ abstract class Rule {
     }
 
     static Collection<String> transitiveDependencyPaths(Dependencies dependencies) {
-        dependencies.transitiveDependencies.collect({ it.path })
+        dependencies.transitiveDependencies.collect({ "#" + it.path })
     }
 
     static String toPythonBoolean(boolean val){

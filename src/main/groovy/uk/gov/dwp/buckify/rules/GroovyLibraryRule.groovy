@@ -6,8 +6,6 @@ import uk.gov.dwp.buckify.BuckifyExtension
 import uk.gov.dwp.buckify.dependencies.Dependencies
 import uk.gov.dwp.buckify.dependencies.DependencyCache
 
-import static java.util.stream.Collectors.joining
-
 class GroovyLibraryRule extends Rule {
 
     static final sourceDir = "src/main/groovy"
@@ -34,7 +32,6 @@ groovy_library(
                 srcs=glob(["$sourceDir/**/*.groovy", "$sourceDir/**/*.java"]),
                 resources=$resources,
                 ${deps()}
-                exported_deps=${quoteAndSort(dependencies.nonTransitiveDependencies().collect({ it.path }).toSet())},
                 visibility=${quoteAndSort(visibility)}
 )
 
@@ -42,6 +39,7 @@ groovy_library(
     }
 
     private String deps() {
-        "deps=${ quoteAndSort(transitiveDependencyPaths(dependencies)).stream().map({str -> "#${str}"}).collect(joining(',\n', '[\n', '\n]')) },"
+        def deps = quoteAndSort(dependencies.nonTransitiveDependencies().collect({ it.path })) + quoteAndSort(transitiveDependencyPaths(dependencies))
+        "deps=[\n${ deps.join(',\n') }\n],"
     }
 }
