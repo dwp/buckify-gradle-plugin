@@ -16,8 +16,8 @@ class GroovyLibraryRuleTest extends RuleTestCase {
 
     @Test
     public void listDeclaredDependenciesThenCommentedOutTransitiveDependencies() {
-        configureNonTransitiveDeps("dep2", "dep1")
-        configureTransitiveDeps("transitiveDep2", "transitiveDep1")
+        configureNonTransitiveDeps("dep2", "dep2", "dep1")
+        configureTransitiveDeps("transitiveDep2", "transitiveDep2", "transitiveDep1")
 
         def underTest = new GroovyLibraryRule(project, dependencyCache)
 

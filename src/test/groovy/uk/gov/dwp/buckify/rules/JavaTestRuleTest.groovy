@@ -16,7 +16,7 @@ class JavaTestRuleTest extends RuleTestCase {
 
     @Test
     public void listConfigSpecificDependencies() {
-        configureSpecificDeps("dep2", "dep1")
+        configureSpecificDeps("dep2", "dep2", "dep1")
 
         def underTest = new JavaTestRule(this.project, dependencyCache)
 
