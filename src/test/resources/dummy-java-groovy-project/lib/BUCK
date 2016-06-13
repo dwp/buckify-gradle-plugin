@@ -1,0 +1,2 @@
+prebuilt_jar(name='hamcrest-core', binary_jar=':hamcrest-core-mvn', visibility=["PUBLIC"])
+remote_file(name='hamcrest-core-mvn', out='hamcrest-core-1.3.jar', url='mvn:org.hamcrest:hamcrest-core:jar:1.3', sha1='42a25dc3219429f0e5d060061f71acb49bf010a0')

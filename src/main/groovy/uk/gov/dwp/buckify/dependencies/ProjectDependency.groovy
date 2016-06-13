@@ -5,9 +5,9 @@ import org.gradle.api.artifacts.ResolvedArtifact
 
 @Canonical
 class ProjectDependency implements BuckDependency {
-    ProjectDependency(ResolvedArtifact artifact, Closure dependencyResolution) {
-        this.ruleName = artifact.name
+    ProjectDependency(ResolvedArtifact artifact, String projectRuleName) {
+        this.name = "//$artifact.name:" + projectRuleName
         this.identifier = artifact.moduleVersion.id
-        this.path = dependencyResolution this
+        this.path = name
     }
 }

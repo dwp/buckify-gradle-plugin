@@ -1,0 +1,22 @@
+#some test rules
+
+from_nexus(name="activemq-broker", version="5.10.1", ga="org.apache.activemq:activemq-broker", sha1="889c6c67c65569157f4868fa4f751bfab461ece5")
+prebuilt_jar(name='activemq-jms-pool', binary_jar=':activemq-jms-pool-mvn', visibility=["PUBLIC"])
+remote_file(name='activemq-jms-pool-mvn', out='activemq-jms-pool-5.10.1.jar', url='mvn:org.apache.activemq:activemq-jms-pool:jar:5.10.1', sha1='0754f62cf829bc6772241b2a8610f3b2af0a54e2')
+#remote_file(name='activemq-kahadb-store-mvn', out='activemq-kahadb-store-5.10.1.jar', url='mvn:org.apache.activemq:activemq-kahadb-store:jar:5.10.1', sha1='dfb5dd19d1f70bb7bea644491a4eea0c6e9114e7')
+
+java_test(
+  name = "test",
+  autodeps = True,
+  source_under_test = [
+    ":main"
+  ],
+  resources = [
+  ],
+  deps = [
+    "//lib:activemq-broker",
+  ],
+  visibility = [
+    "PUBLIC"
+  ]
+)

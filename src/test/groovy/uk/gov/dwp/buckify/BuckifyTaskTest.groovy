@@ -6,12 +6,14 @@ import org.junit.Test
 
 class BuckifyTaskTest {
     @Test
-    public void pluginShouldAddTaskToProject() {
+    public void loadDependenciesAndCreateBuckFiles() {
 
         def start = System.currentTimeMillis()
 
         Project testProject = ProjectBuilder.builder().withProjectDir(new File("src/test/resources/dummy-java-groovy-project")) build()
-        setupProject(testProject)
+        def extension = setupProject(testProject)
+        extension.preExistingRuleFiles = ["lib/BUCK"]
+
 //        Project childProject = ProjectBuilder.builder().withName("child").withParent(testProject).build()
 //        setupProject(childProject)
 //
@@ -35,8 +37,8 @@ class BuckifyTaskTest {
         println System.currentTimeMillis() - start + "ms"
     }
 
-    private void setupProject(Project myProject) {
-        myProject.extensions.create("buckify", BuckifyExtension)
+    private BuckifyExtension setupProject(Project myProject) {
+        def extension = myProject.extensions.create("buckify", BuckifyExtension)
         myProject.plugins.apply('java')
         myProject.plugins.apply('groovy')
         myProject.repositories {
@@ -46,5 +48,6 @@ class BuckifyTaskTest {
             maven { url 'http://bld1.infra.uk1.uc:8081/nexus/content/repositories/snapshots' }
             maven { url 'https://repo.gradle.org/gradle/libs' }
         }
+        extension
     }
 }

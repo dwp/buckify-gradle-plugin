@@ -1,13 +1,19 @@
 package uk.gov.dwp.buckify.dependencies
 
 import org.gradle.api.Project
+import org.gradle.api.artifacts.Configuration
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.Before
 import org.junit.Test
 import uk.gov.dwp.buckify.BuckifyExtension
+import uk.gov.dwp.buckify.rules.PreExistingRules
+
+import static org.mockito.Mockito.mock
 
 class DependenciesTest {
-    private Project testProject = createProject()
+    private final Project testProject = createProject()
+    private final BuckifyExtension extension = testProject.extensions.findByType(BuckifyExtension)
+    private final PreExistingRules preExistingRules = mock(PreExistingRules)
 
     @Before
     public void setUp() {
@@ -26,35 +32,35 @@ class DependenciesTest {
 
     @Test
     void findProjectDependencies() {
-        def dependencies = Dependencies.factory(testProject.configurations.findByName("compile"), testProject.extensions.findByType(BuckifyExtension))
+        def dependencies = Dependencies.factory(configuration("compile"), extension, preExistingRules)
 
         assert dependencies.projectDependencies.size() == 1
-        assert dependencies.projectDependencies.collect({ it.ruleName }) == ["child"]
+        assert dependencies.projectDependencies.collect({ it.name }) == ["//child:main"]
     }
 
     @Test
     void findDeclaredExternalDependencies() {
-        def dependencies = Dependencies.factory(testProject.configurations.findByName("compile"), testProject.extensions.findByType(BuckifyExtension))
+        def dependencies = Dependencies.factory(configuration("compile"), extension, preExistingRules)
 
         assert dependencies.declaredExternalDependencies.size() == 3
-        assert dependencies.declaredExternalDependencies.collect({ it.ruleName }).containsAll(["commons-lang", "joda-time", "cucumber-core"])
+        assert dependencies.declaredExternalDependencies.collect({ it.name }).containsAll(["commons-lang", "joda-time", "cucumber-core"])
     }
 
     @Test
     void findDeclaredTransitiveDependencies() {
-        def dependencies = Dependencies.factory(testProject.configurations.findByName("compile"), testProject.extensions.findByType(BuckifyExtension))
+        def dependencies = Dependencies.factory(configuration("compile"), extension, preExistingRules)
 
         assert dependencies.transitiveDependencies.size() == 3
-        assert dependencies.transitiveDependencies.collect({ it.ruleName }).containsAll(["cucumber-html", "cucumber-jvm-deps", "gherkin"])
+        assert dependencies.transitiveDependencies.collect({ it.name }).containsAll(["cucumber-html", "cucumber-jvm-deps", "gherkin"])
         assert dependencies.transitiveDependencies.disjoint(dependencies.nonTransitiveDependencies())
     }
 
     @Test
     void findConfigSpecificDependencies() {
-        def dependencies = Dependencies.factory(testProject.configurations.findByName("testCompile"), testProject.extensions.findByType(BuckifyExtension))
+        def dependencies = Dependencies.factory(configuration("testCompile"), extension, preExistingRules)
 
         assert dependencies.configSpecificDependencies.size() == 1
-        assert dependencies.configSpecificDependencies.collect({ it.ruleName }) == ["junit"]
+        assert dependencies.configSpecificDependencies.collect({ it.name }) == ["junit"]
     }
 
     private Project createProject() {
@@ -70,5 +76,9 @@ class DependenciesTest {
             maven { url 'https://repo.gradle.org/gradle/libs' }
         }
         myProject
+    }
+
+    private Configuration configuration(String name) {
+        testProject.configurations.findByName(name)
     }
 }

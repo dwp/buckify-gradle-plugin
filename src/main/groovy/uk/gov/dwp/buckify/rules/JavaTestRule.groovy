@@ -8,10 +8,13 @@ import uk.gov.dwp.buckify.dependencies.Dependencies
 import uk.gov.dwp.buckify.dependencies.DependencyCache
 
 class JavaTestRule extends Rule {
+
     static final sourceDir = "src/test/java"
     static final resourcesDir = "src/test/resources"
 
-    static generator = { Project project, DependencyCache dependencies -> project.plugins.hasPlugin(JavaPlugin) && project.file(sourceDir).exists() ? [new JavaTestRule(project, dependencies)] : [] }
+    static generator = { Project project, DependencyCache dependencies ->
+        project.plugins.hasPlugin(JavaPlugin) && project.file(sourceDir).exists() ? [new JavaTestRule(project, dependencies)] : []
+    }
 
     Dependencies dependencies
     String resources

@@ -4,7 +4,13 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.Project
 import org.gradle.api.tasks.TaskAction
 import uk.gov.dwp.buckify.dependencies.DependencyCache
-import uk.gov.dwp.buckify.rules.*
+import uk.gov.dwp.buckify.rules.GroovyLibraryRule
+import uk.gov.dwp.buckify.rules.JavaLibraryRule
+import uk.gov.dwp.buckify.rules.JavaTestRule
+import uk.gov.dwp.buckify.rules.PreBuiltJarRule
+import uk.gov.dwp.buckify.rules.PreExistingRules
+import uk.gov.dwp.buckify.rules.RemoteFileRule
+import uk.gov.dwp.buckify.rules.Rule
 
 class BuckifyTask extends DefaultTask {
 
@@ -14,18 +20,25 @@ class BuckifyTask extends DefaultTask {
 
     @TaskAction
     public void convert() {
-        createBuckFiles(project).each { it.writeToFile() }
+        PreExistingRules preExistingRules = loadPreExistingRules()
+        createBuckFiles(project, preExistingRules).each { it.writeToFile() }
     }
 
-    List<BuckFile> createBuckFiles(Project project) {
+    private PreExistingRules loadPreExistingRules() {
+        PreExistingRules preExistingRules = new PreExistingRules()
+        BuckifyExtension.from(project).preExistingRuleFiles.each { preExistingRules.load(project.file(it)) }
+        preExistingRules
+    }
+
+    List<BuckFile> createBuckFiles(Project project, PreExistingRules preExistingRules) {
         def files = project.childProjects.values().collect() {
-            this.createBuckFiles(it)
+            this.createBuckFiles(it, preExistingRules)
         }.flatten()
-        files << new BuckFile(project, createRules(project))
+        files << new BuckFile(project, createRules(project, preExistingRules))
     }
 
-    List<Rule> createRules(Project project) {
-        DependencyCache dependencies = new DependencyCache(project)
+    List<Rule> createRules(Project project, PreExistingRules preExistingRules) {
+        DependencyCache dependencies = new DependencyCache(project, preExistingRules)
         ruleGenerators.collect { it(project, dependencies) }.flatten()
     }
 

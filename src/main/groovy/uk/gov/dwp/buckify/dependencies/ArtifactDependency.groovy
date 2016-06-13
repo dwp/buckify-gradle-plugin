@@ -2,6 +2,7 @@ package uk.gov.dwp.buckify.dependencies
 
 import groovy.transform.Canonical
 import org.gradle.api.artifacts.ResolvedArtifact
+import uk.gov.dwp.buckify.rules.PreExistingRules
 
 @Canonical
 class ArtifactDependency implements BuckDependency {
@@ -9,12 +10,12 @@ class ArtifactDependency implements BuckDependency {
     String filename
     String sha1
 
-    ArtifactDependency(ResolvedArtifact artifact, Closure dependencyResolution) {
-        this.ruleName = artifact.name + (artifact.classifier ? "-$artifact.classifier" : "")
+    ArtifactDependency(ResolvedArtifact artifact, PreExistingRules preExistingRules) {
+        this.name = artifact.name + (artifact.classifier ? "-$artifact.classifier" : "")
         this.filename = artifact.file.name
         this.identifier = createMavenIdentifier(artifact)
         this.sha1 = artifact.file.exists() ? Checksum.generateSHA1(artifact.file) : null
-        this.path = dependencyResolution this
+        this.path = preExistingRules.contains(name) ? preExistingRules.findPath(name) : name
     }
 
     // mvn:optionalServer:group:id:type:classifier:version

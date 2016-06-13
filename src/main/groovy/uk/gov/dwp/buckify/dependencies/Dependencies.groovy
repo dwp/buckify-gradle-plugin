@@ -5,6 +5,7 @@ import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.ResolvedArtifact
 import org.gradle.internal.component.local.model.PublishArtifactLocalArtifactMetaData
 import uk.gov.dwp.buckify.BuckifyExtension
+import uk.gov.dwp.buckify.rules.PreExistingRules
 
 class Dependencies {
 
@@ -13,7 +14,7 @@ class Dependencies {
     Set<ArtifactDependency> transitiveDependencies = []
     Set<ArtifactDependency> configSpecificDependencies = []
 
-    static def factory = { Configuration configuration, BuckifyExtension buckifyExtension ->
+    static def factory = { Configuration configuration, BuckifyExtension buckifyExtension, PreExistingRules preExistingRules ->
         def resolvedArtifacts = configuration.resolvedConfiguration.resolvedArtifacts
         def projectArtifacts = findProjectArtifacts(resolvedArtifacts)
         def externalArtifacts = findDeclaredExternalArtifacts(configuration)
@@ -22,16 +23,16 @@ class Dependencies {
 
         new Dependencies(
                 projectArtifacts.collect({
-                    new ProjectDependency(it, buckifyExtension.projectDependencyRuleName)
+                    new ProjectDependency(it, buckifyExtension.javaLibraryRuleName)
                 }).toSet(),
                 externalArtifacts.collect({
-                    new ArtifactDependency(it, buckifyExtension.externalDependencyRuleName)
+                    new ArtifactDependency(it, preExistingRules)
                 }).toSet(),
                 transitiveArtifacts.collect({
-                    new ArtifactDependency(it, buckifyExtension.externalDependencyRuleName)
+                    new ArtifactDependency(it, preExistingRules)
                 }).toSet(),
                 configSpecificArtifacts.collect({
-                    new ArtifactDependency(it, buckifyExtension.externalDependencyRuleName)
+                    new ArtifactDependency(it, preExistingRules)
                 }).toSet()
         )
     }
