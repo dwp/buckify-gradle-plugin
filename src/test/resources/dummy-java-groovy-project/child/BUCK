@@ -1,2 +1,0 @@
-#prebuilt_jar(name='commons-lang', binary_jar=':commons-lang-mvn', visibility=["PUBLIC"])
-#remote_file(name='commons-lang-mvn', out='commons-lang-2.5.jar', url='mvn:commons-lang:commons-lang:jar:2.5', sha1='b0236b252e86419eef20c31a44579d2aee2f0a69')

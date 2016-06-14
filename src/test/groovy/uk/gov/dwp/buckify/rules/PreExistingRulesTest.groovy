@@ -7,7 +7,7 @@ class PreExistingRulesTest {
     @Test
     public void loadRulesFromFile() {
         def testRulesFile = getClass().getResource("/test_rules")
-        def rules = new PreExistingRules().load(testRulesFile)
+        def rules = new PreExistingRules().parse(testRulesFile.text, testRulesFile.file)
 
         assert rules.rules.size() == 4
         assert rules.rules["activemq-broker"] == new PreExistingRules.PreExistingRule("activemq-broker", "from_nexus", "test_rules")

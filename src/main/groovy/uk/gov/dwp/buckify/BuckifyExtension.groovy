@@ -22,6 +22,6 @@ class BuckifyExtension {
     List<String> preExistingRuleFiles = []
 
     static BuckifyExtension from(Project project) {
-        project.extensions.findByType(BuckifyExtension)
+        project.extensions.findByType(BuckifyExtension)?: project.extensions.create("buckify", BuckifyExtension)
     }
 }

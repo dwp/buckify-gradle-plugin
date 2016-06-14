@@ -14,21 +14,16 @@ class BuckifyTaskTest {
         def extension = setupProject(testProject)
         extension.preExistingRuleFiles = ["lib/BUCK"]
 
-//        Project childProject = ProjectBuilder.builder().withName("child").withParent(testProject).build()
-//        setupProject(childProject)
-//
-//        childProject.dependencies{
-//            compile 'commons-lang:commons-lang:2.5'
-//        }
+        Project childProject = ProjectBuilder.builder().withName("child").withParent(testProject).build()
+        setupProject(childProject)
+
+        childProject.dependencies{
+            compile 'commons-lang:commons-lang:2.5'
+        }
 
         testProject.dependencies {
-//            compile project(path: ':child')
-//            compile 'commons-lang:commons-lang:2.6'
-//            compile 'joda-time:joda-time:2.2'
-//            compile group: 'org.apache.solr', name: 'solr-core', version: '6.0.1'
-
+            compile project(path: ':child')
             testCompile group: 'junit', name: 'junit', version: '4.11'
-//            testCompile "uk.gov.dwp.common:mongo-ext:1.951.0:tests"
         }
 
         def buckifyTask = testProject.task('buckify', type: BuckifyTask)

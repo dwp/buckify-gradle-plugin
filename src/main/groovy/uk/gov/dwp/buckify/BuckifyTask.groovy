@@ -20,14 +20,7 @@ class BuckifyTask extends DefaultTask {
 
     @TaskAction
     public void convert() {
-        PreExistingRules preExistingRules = loadPreExistingRules()
-        createBuckFiles(project, preExistingRules).each { it.writeToFile() }
-    }
-
-    private PreExistingRules loadPreExistingRules() {
-        PreExistingRules preExistingRules = new PreExistingRules()
-        BuckifyExtension.from(project).preExistingRuleFiles.each { preExistingRules.load(project.file(it)) }
-        preExistingRules
+        createBuckFiles(project, PreExistingRules.find(project)).each { it.writeToFile() }
     }
 
     List<BuckFile> createBuckFiles(Project project, PreExistingRules preExistingRules) {

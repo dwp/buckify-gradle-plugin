@@ -1,38 +1,45 @@
 package uk.gov.dwp.buckify.rules
 
 import groovy.transform.Canonical
+import org.gradle.api.Project
+import uk.gov.dwp.buckify.BuckifyExtension
 
 class PreExistingRules {
 
     Map<String, PreExistingRule> rules = [:]
 
-    def load(URL url) {
-        parse(url.text, url.file)
-    }
-
-    def load(File file) {
-        parse(file.text, file.path)
+    static def find(Project project) {
+        PreExistingRules preExistingRules = new PreExistingRules()
+        BuckifyExtension.from(project).preExistingRuleFiles.each {
+            def file = project.file(it)
+            preExistingRules.parse(file.text, project.rootDir.toPath().relativize(file.parentFile.toPath()).toString())
+        }
+        preExistingRules
     }
 
     PreExistingRules parse(String content, String source) {
+        System.out.println "Loaded rules from $source"
+
         Map<String, PreExistingRule> rules = [:]
         def matcher = content =~ /(?m)^\s*(?<!#)(?<type>\w*)\s*\([^\)]*name\s*=\s*['"](?<name>[^'"]*)[^\)]+/
 
         while (matcher.find()) {
             matcher.group('type')
             def name = matcher.group('name')
-            rules.put(name, new PreExistingRule(name, matcher.group('type'), source))
+            def rule = new PreExistingRule(name, matcher.group('type'), source)
+            System.out.println("Found rule: name=$rule.name, type=$rule.type, source=$rule.source")
+            rules.put(name, rule)
         }
         this.rules << rules
         this
     }
 
-    boolean contains(String ruleName) {
-        rules.containsKey(ruleName)
+    boolean contains(String... ruleNames) {
+        ruleNames.any { rules.containsKey(it) }
     }
 
     def findPath(String name) {
-        rules.get(name)?.source
+        rules.containsKey(name) ? "//${rules.get(name).source}:$name" : null
     }
 
     @Canonical

@@ -40,7 +40,7 @@ class RemoteFileRuleTest extends RuleTestCase {
 
         when(dependency.name).thenReturn("ruleName")
         when(dependencyCache.externalDependenciesForAllConfigurations()).thenReturn([dependency].toSet())
-        when(preExistingRules.contains("ruleName-mvn")).thenReturn(true)
+        when(preExistingRules.contains("ruleName", "ruleName-mvn")).thenReturn(true)
 
         assert RemoteFileRule.generator(project, dependencyCache).isEmpty()
     }
