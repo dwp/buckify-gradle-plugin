@@ -8,7 +8,7 @@ class BuckifyExtension {
 
     static final String NAME = "buckify"
 
-    String groovyLibraryRuleName = "groovy"
+    String groovyLibraryRuleName = "groovy-main"
     String javaLibraryRuleName = "main"
     String javaTestRuleName = "test"
     List<String> preExistingRuleFiles = []
