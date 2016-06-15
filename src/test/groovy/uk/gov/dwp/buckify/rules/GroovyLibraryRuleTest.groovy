@@ -23,7 +23,7 @@ class GroovyLibraryRuleTest extends RuleTestCase {
 
         assertEquals underTest.createOutput().toString(), """
 groovy_library(
-                name="groovy",
+                name="groovy-main",
                 srcs=glob(["src/main/groovy/**/*.groovy", "src/main/groovy/**/*.java"]),
                 resources=[],
                 deps=[
