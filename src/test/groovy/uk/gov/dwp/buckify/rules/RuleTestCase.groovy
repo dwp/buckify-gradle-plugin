@@ -24,7 +24,6 @@ abstract class RuleTestCase {
     public void setUp() {
         when(project.extensions).thenReturn(extensionContainer)
         when(extensionContainer.findByType(BuckifyExtension)).thenReturn(new BuckifyExtension())
-        when(dependencyCache.preExistingRules).thenReturn(preExistingRules)
     }
 
     def configureResources(String directory) {

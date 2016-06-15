@@ -10,26 +10,41 @@ class BuckifyTaskTest {
 
         def start = System.currentTimeMillis()
 
-        Project testProject = ProjectBuilder.builder().withProjectDir(new File("src/test/resources/dummy-java-groovy-project")) build()
-        def extension = setupProject(testProject)
+        Project parentProject = ProjectBuilder.builder().withProjectDir(new File("src/test/resources/dummy-java-groovy-project")) build()
+        def extension = setupProject(parentProject)
         extension.preExistingRuleFiles = ["lib/BUCK"]
 
-        Project childProject = ProjectBuilder.builder().withName("child").withParent(testProject).build()
+        Project childProject = ProjectBuilder.builder().withName("child").withParent(parentProject).build()
         setupProject(childProject)
+        Project testSupportProject = ProjectBuilder.builder().withName("test-support").withParent(childProject).build()
+        setupProject(testSupportProject)
+        Project anotherChildProject = ProjectBuilder.builder().withName("another-child").withParent(parentProject).build()
+        setupProject(anotherChildProject)
 
         childProject.dependencies{
             compile 'commons-lang:commons-lang:2.5'
         }
 
-        testProject.dependencies {
+        anotherChildProject.dependencies {
+            testCompile project(path: ":child:test-support")
+        }
+
+        parentProject.dependencies {
             compile project(path: ':child')
             testCompile group: 'junit', name: 'junit', version: '4.11'
         }
 
-        def buckifyTask = testProject.task('buckify', type: BuckifyTask)
-        buckifyTask.actions.each { it.execute(buckifyTask) }
+        executeBuckifyTask(parentProject)
+        executeBuckifyTask(childProject)
+        executeBuckifyTask(testSupportProject)
+        executeBuckifyTask(anotherChildProject)
 
         println System.currentTimeMillis() - start + "ms"
+    }
+
+    private void executeBuckifyTask(Project parentProject) {
+        def buckifyTask = parentProject.task('buckify', type: BuckifyTask)
+        buckifyTask.actions.each { it.execute(buckifyTask) }
     }
 
     private BuckifyExtension setupProject(Project myProject) {

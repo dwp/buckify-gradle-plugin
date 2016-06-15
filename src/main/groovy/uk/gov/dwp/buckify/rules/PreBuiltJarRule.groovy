@@ -10,7 +10,7 @@ class PreBuiltJarRule extends Rule {
     static generator = { Project project, DependencyCache dependencies ->
         def buckifyExtension = BuckifyExtension.from(project)
         dependencies.externalDependenciesForAllConfigurations().unique()
-                .findAll({ !dependencies.preExistingRules.contains(it.name) })
+                .findAll({ !dependencies.rulesExist(it.name) })
                 .collect({ dep -> new PreBuiltJarRule(dep.name, buckifyExtension.binaryJarRuleName(dep.name)) })
     }
 

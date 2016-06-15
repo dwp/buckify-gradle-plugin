@@ -17,9 +17,7 @@ java_test(
                 autodeps=True,
                 source_under_test=[":main"],
                 resources=glob(['src/test/resources/**/*']),
-                deps=[
-                  "junit"
-                ],
+                deps=[":junit"],
                 visibility=["PUBLIC"]
 )
 

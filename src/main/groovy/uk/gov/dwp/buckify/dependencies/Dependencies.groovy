@@ -3,18 +3,18 @@ package uk.gov.dwp.buckify.dependencies
 import org.gradle.api.artifacts.Configuration
 import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.ResolvedArtifact
+import org.gradle.internal.component.local.model.DefaultProjectComponentIdentifier
 import org.gradle.internal.component.local.model.PublishArtifactLocalArtifactMetaData
 import uk.gov.dwp.buckify.BuckifyExtension
-import uk.gov.dwp.buckify.rules.PreExistingRules
 
 class Dependencies {
 
     Set<ProjectDependency> projectDependencies = []
     Set<ArtifactDependency> declaredExternalDependencies = []
     Set<ArtifactDependency> transitiveDependencies = []
-    Set<ArtifactDependency> configSpecificDependencies = []
+    Set<BuckDependency> configSpecificDependencies = []
 
-    static def factory = { Configuration configuration, BuckifyExtension buckifyExtension, PreExistingRules preExistingRules ->
+    static def factory = { Configuration configuration, BuckifyExtension buckifyExtension, DependencyFactory dependencyFactory->
         def resolvedArtifacts = configuration.resolvedConfiguration.resolvedArtifacts
         def projectArtifacts = findProjectArtifacts(resolvedArtifacts)
         def externalArtifacts = findDeclaredExternalArtifacts(configuration)
@@ -23,16 +23,16 @@ class Dependencies {
 
         new Dependencies(
                 projectArtifacts.collect({
-                    new ProjectDependency(it, buckifyExtension.javaLibraryRuleName)
+                    dependencyFactory.create(it)
                 }).toSet(),
                 externalArtifacts.collect({
-                    new ArtifactDependency(it, preExistingRules)
+                    dependencyFactory.create(it)
                 }).toSet(),
                 transitiveArtifacts.collect({
-                    new ArtifactDependency(it, preExistingRules)
+                    dependencyFactory.create(it)
                 }).toSet(),
                 configSpecificArtifacts.collect({
-                    new ArtifactDependency(it, preExistingRules)
+                    dependencyFactory.create(it)
                 }).toSet()
         )
     }
@@ -42,7 +42,7 @@ class Dependencies {
     Dependencies(Set<ProjectDependency> projectDependencies,
                  Set<ArtifactDependency> declaredExternalDependencies,
                  Set<ArtifactDependency> transitiveDependencies,
-                 Set<ArtifactDependency> configSpecificDependencies) {
+                 Set<BuckDependency> configSpecificDependencies) {
         this.projectDependencies = projectDependencies
         this.declaredExternalDependencies = declaredExternalDependencies
         this.transitiveDependencies = transitiveDependencies
@@ -69,9 +69,12 @@ class Dependencies {
     }
 
     private static HashSet<ResolvedArtifact> findProjectArtifacts(Set<ResolvedArtifact> resolvedArtifacts) {
-        resolvedArtifacts.findAll({
-            it.artifactSource.artifact instanceof PublishArtifactLocalArtifactMetaData
-        })
+        resolvedArtifacts.findAll({ isProjectDependency(it) })
+    }
+
+
+    static boolean isProjectDependency(ResolvedArtifact resolvedArtifact) {
+        resolvedArtifact.getId().getComponentIdentifier() instanceof DefaultProjectComponentIdentifier
     }
 
     private static Set<ResolvedArtifact> findDeclaredExternalArtifacts(Configuration configuration) {

@@ -13,10 +13,12 @@ import static org.mockito.Mockito.mock
 class DependenciesTest {
     private final Project testProject = createProject()
     private final BuckifyExtension extension = testProject.extensions.findByType(BuckifyExtension)
-    private final PreExistingRules preExistingRules = mock(PreExistingRules)
+    private final DependencyFactory factory = new  DependencyFactory(mock(PreExistingRules), extension)
 
     @Before
     public void setUp() {
+        extension.nomenclature = {artifact -> artifact.name}
+
         Project childProject = ProjectBuilder.builder().withName("child").withParent(testProject).build()
         childProject.plugins.apply('java')
         childProject.dependencies {}
@@ -32,15 +34,15 @@ class DependenciesTest {
 
     @Test
     void findProjectDependencies() {
-        def dependencies = Dependencies.factory(configuration("compile"), extension, preExistingRules)
+        def dependencies = Dependencies.factory(configuration("compile"), extension, factory)
 
         assert dependencies.projectDependencies.size() == 1
-        assert dependencies.projectDependencies.collect({ it.name }) == ["//child:main"]
+        assert dependencies.projectDependencies.collect({ it.name }) == ["child"]
     }
 
     @Test
     void findDeclaredExternalDependencies() {
-        def dependencies = Dependencies.factory(configuration("compile"), extension, preExistingRules)
+        def dependencies = Dependencies.factory(configuration("compile"), extension, factory)
 
         assert dependencies.declaredExternalDependencies.size() == 3
         assert dependencies.declaredExternalDependencies.collect({ it.name }).containsAll(["commons-lang", "joda-time", "cucumber-core"])
@@ -48,7 +50,7 @@ class DependenciesTest {
 
     @Test
     void findDeclaredTransitiveDependencies() {
-        def dependencies = Dependencies.factory(configuration("compile"), extension, preExistingRules)
+        def dependencies = Dependencies.factory(configuration("compile"), extension, factory)
 
         assert dependencies.transitiveDependencies.size() == 3
         assert dependencies.transitiveDependencies.collect({ it.name }).containsAll(["cucumber-html", "cucumber-jvm-deps", "gherkin"])
@@ -57,7 +59,7 @@ class DependenciesTest {
 
     @Test
     void findConfigSpecificDependencies() {
-        def dependencies = Dependencies.factory(configuration("testCompile"), extension, preExistingRules)
+        def dependencies = Dependencies.factory(configuration("testCompile"), extension, factory)
 
         assert dependencies.configSpecificDependencies.size() == 1
         assert dependencies.configSpecificDependencies.collect({ it.name }) == ["junit"]

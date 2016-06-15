@@ -20,14 +20,11 @@ class BuckifyTask extends DefaultTask {
 
     @TaskAction
     public void convert() {
-        createBuckFiles(project, PreExistingRules.find(project)).each { it.writeToFile() }
+        createBuckFile(project, PreExistingRules.find(project)).writeToFile()
     }
 
-    List<BuckFile> createBuckFiles(Project project, PreExistingRules preExistingRules) {
-        def files = project.childProjects.values().collect() {
-            this.createBuckFiles(it, preExistingRules)
-        }.flatten()
-        files << new BuckFile(project, createRules(project, preExistingRules))
+    BuckFile createBuckFile(Project project, PreExistingRules preExistingRules) {
+        new BuckFile(project, createRules(project, preExistingRules))
     }
 
     List<Rule> createRules(Project project, PreExistingRules preExistingRules) {

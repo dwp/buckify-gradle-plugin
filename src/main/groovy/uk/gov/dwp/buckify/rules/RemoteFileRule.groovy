@@ -8,7 +8,7 @@ import uk.gov.dwp.buckify.dependencies.DependencyCache
 class RemoteFileRule extends Rule {
     static generator = { Project project, DependencyCache dependencies ->
         dependencies.externalDependenciesForAllConfigurations()
-                .findAll({ !(dependencies.preExistingRules.contains(it.name, it.name + "-mvn")) })
+                .findAll({ !(dependencies.rulesExist(it.name, it.name + "-mvn")) })
                 .collect({ new RemoteFileRule(it) })
     }
 

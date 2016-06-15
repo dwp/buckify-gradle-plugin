@@ -34,7 +34,7 @@ class PreBuiltJarRuleTest extends RuleTestCase {
 
         when(dependency.name).thenReturn("ruleName")
         when(dependencyCache.externalDependenciesForAllConfigurations()).thenReturn([dependency].toSet())
-        when(preExistingRules.contains("ruleName")).thenReturn(true)
+        when(dependencyCache.rulesExist("ruleName")).thenReturn(true)
 
         assert PreBuiltJarRule.generator(project, dependencyCache).isEmpty()
     }
