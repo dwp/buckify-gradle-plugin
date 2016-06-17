@@ -1,10 +1,11 @@
 package uk.gov.dwp.buckify.rules
 
 import groovy.transform.Canonical
-import uk.gov.dwp.buckify.dependencies.Dependencies
+import uk.gov.dwp.buckify.dependencies.BuckDependency
 
 @Canonical
 abstract class Rule {
+
     String name
     Set<String> visibility = ["PUBLIC"]
 
@@ -20,15 +21,11 @@ abstract class Rule {
         strings.toSet().collect({ '"' + it + '"' }).sort()
     }
 
-    static Collection<String> transitiveDependencyPaths(Dependencies dependencies) {
-        dependencies.transitiveDependencies.collect({ "#'$it.path'" }).toSet().sort()
+    static Collection<String> pathsTo(Set<BuckDependency> dependencies) {
+        dependencies.collect({ "                    '$it.path'" }).toSet().sort()
     }
 
-    static Collection<String> nonTransitiveDependencyPaths(Dependencies dependencies) {
-        dependencies.nonTransitiveDependencies().collect({ "'$it.path'" }).toSet().sort()
-    }
-
-    static String toPythonBoolean(boolean val){
+    static String toPythonBoolean(boolean val) {
         String.valueOf(val).capitalize()
     }
 }

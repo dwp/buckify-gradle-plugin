@@ -5,9 +5,10 @@ java_library(
                 srcs=glob(["src/main/java/**/*.java"]),
                 # no resources found
                 deps=[
-'//child:main',
-#'//lib:commons-lang'
-],
+                    '//child:main',
+                    #transitive deps
+                  '//lib:commons-lang'
+                ],
                 visibility=["PUBLIC"]
 )
 
@@ -17,7 +18,9 @@ java_test(
                 autodeps=True,
                 source_under_test=[":main"],
                 resources=glob(['src/test/resources/**/*']),
-                deps=[":junit"],
+                deps=[
+                  ":junit"
+                ],
                 visibility=["PUBLIC"]
 )
 

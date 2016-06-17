@@ -27,11 +27,12 @@ groovy_library(
                 srcs=glob(["src/main/groovy/**/*.groovy", "src/main/groovy/**/*.java"]),
                 resources=[],
                 deps=[
-'dep1',
-'dep2',
-#'transitiveDep1',
-#'transitiveDep2'
-],
+                    'dep1',
+                    'dep2',
+                    #transitive deps
+                    'transitiveDep1',
+                    'transitiveDep2'
+                ],
                 visibility=["PUBLIC"]
 )
 

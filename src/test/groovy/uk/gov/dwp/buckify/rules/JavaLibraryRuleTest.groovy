@@ -28,11 +28,12 @@ java_library(
                 srcs=glob(["src/main/java/**/*.java"]),
                 # no resources found
                 deps=[
-'dep1',
-'dep2',
-#'transitiveDep1',
-#'transitiveDep2'
-],
+                    'dep1',
+                    'dep2',
+                    #transitive deps
+                    'transitiveDep1',
+                    'transitiveDep2'
+                ],
                 visibility=["PUBLIC"]
 )
 
