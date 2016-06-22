@@ -3,12 +3,18 @@ package uk.gov.dwp.buckify.rules
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.testfixtures.ProjectBuilder
+import org.junit.Before
 import org.junit.Test
 import uk.gov.dwp.buckify.BuckifyExtension
 import uk.gov.dwp.buckify.dependencies.DependencyCache
 
 class JavaLibraryRuleGeneratorTest {
-     final Project project = ProjectBuilder.builder().withProjectDir(new File("src/test/resources/dummy-java-groovy-project")).build()
+     final Project project = ProjectBuilder.builder().build()
+
+    @Before
+    public void setUp() {
+        project.file("src/main/java").mkdirs()
+    }
 
     @Test
     public void createJavaLibraryRuleWhenJavaPluginAndSourceDirectoriesExist() {
