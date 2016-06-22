@@ -49,6 +49,7 @@ class BuckifyTaskTest {
 
     private BuckifyExtension setupProject(Project myProject) {
         def extension = myProject.extensions.create("buckify", BuckifyExtension)
+        myProject.projectDir.mkdirs()
         myProject.plugins.apply('java')
         myProject.plugins.apply('groovy')
         myProject.repositories {
