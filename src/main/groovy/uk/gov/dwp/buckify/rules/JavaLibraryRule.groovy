@@ -49,12 +49,12 @@ java_library(
     }
 
     private String deps() {
-        def nonTransitiveDeps = pathsTo(dependencies.nonTransitiveDependencies())
-        def transitiveDeps = pathsTo(dependencies.transitiveDependencies)
+        def nonTransitiveDeps = pathsTo(dependencies.nonTransitiveDependencies()).collect({ "$it," }).join("\n")
+        def transitiveDeps = pathsTo(dependencies.transitiveDependencies).join(',\n')
         """deps=[
-${nonTransitiveDeps.collect({ "$it," }).join("\n")}
+$nonTransitiveDeps
                     #transitive deps
-${transitiveDeps.join(',\n')}
+$transitiveDeps
                 ],"""
     }
 }
