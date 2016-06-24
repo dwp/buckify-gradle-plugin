@@ -21,6 +21,9 @@ class BuckifyExtension {
     Closure<String> nomenclature = { ResolvedArtifact artifact ->
         artifact.name + (artifact.classifier ? "-$artifact.classifier" : "")
     }
+    Closure<Boolean> excluded = { ResolvedArtifact artifact ->
+        false
+    }
 
     static BuckifyExtension from(Project project) {
         project.extensions.findByType(BuckifyExtension) ?: project.extensions.create("buckify", BuckifyExtension)

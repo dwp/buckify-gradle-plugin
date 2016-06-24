@@ -2,7 +2,9 @@ package uk.gov.dwp.buckify.dependencies
 
 import org.gradle.api.artifacts.Configuration
 import org.gradle.api.artifacts.Dependency
+import org.gradle.api.artifacts.DependencySet
 import org.gradle.api.artifacts.ResolvedArtifact
+import org.gradle.api.artifacts.ResolvedDependency
 import org.gradle.internal.component.local.model.DefaultProjectComponentIdentifier
 import org.gradle.internal.component.local.model.PublishArtifactLocalArtifactMetaData
 import uk.gov.dwp.buckify.BuckifyExtension
@@ -14,27 +16,27 @@ class Dependencies {
     Set<ArtifactDependency> transitiveDependencies = []
     Set<BuckDependency> configSpecificDependencies = []
 
-    static def factory = { Configuration configuration, BuckifyExtension buckifyExtension, DependencyFactory dependencyFactory->
+    static def factory = { Configuration configuration, BuckifyExtension buckifyExtension, DependencyFactory dependencyFactory ->
         def resolvedArtifacts = configuration.resolvedConfiguration.resolvedArtifacts
+        def firstLevelModuleDependencies = configuration.resolvedConfiguration.firstLevelModuleDependencies
+
         def projectArtifacts = findProjectArtifacts(resolvedArtifacts)
-        def externalArtifacts = findDeclaredExternalArtifacts(configuration)
+        def externalArtifacts = findDeclaredExternalArtifacts(firstLevelModuleDependencies)
         def transitiveArtifacts = (resolvedArtifacts - externalArtifacts) - projectArtifacts
-        def configSpecificArtifacts = findConfigSpecificArtifacts(configuration)
+        def configSpecificArtifacts = findConfigSpecificArtifacts(firstLevelModuleDependencies, configuration.dependencies)
 
         new Dependencies(
-                projectArtifacts.collect({
-                    dependencyFactory.create(it)
-                }).toSet(),
-                externalArtifacts.collect({
-                    dependencyFactory.create(it)
-                }).toSet(),
-                transitiveArtifacts.collect({
-                    dependencyFactory.create(it)
-                }).toSet(),
-                configSpecificArtifacts.collect({
-                    dependencyFactory.create(it)
-                }).toSet()
+                toDependencies(projectArtifacts, dependencyFactory, buckifyExtension.excluded),
+                toDependencies(externalArtifacts, dependencyFactory, buckifyExtension.excluded),
+                toDependencies(transitiveArtifacts, dependencyFactory, buckifyExtension.excluded),
+                toDependencies(configSpecificArtifacts, dependencyFactory, buckifyExtension.excluded)
         )
+    }
+
+    private static Set<GroovyObjectSupport> toDependencies(HashSet<ResolvedArtifact> artifacts, dependencyFactory, Closure<Boolean> excluded) {
+        artifacts.findAll({!excluded(it)}).collect({
+            dependencyFactory.create(it)
+        }).toSet()
     }
 
     Dependencies() {}
@@ -49,12 +51,12 @@ class Dependencies {
         this.configSpecificDependencies = configSpecificDependencies
     }
 
-    private static HashSet<ResolvedArtifact> findConfigSpecificArtifacts(Configuration configuration) {
-        configuration.resolvedConfiguration.firstLevelModuleDependencies
+    private static HashSet<ResolvedArtifact> findConfigSpecificArtifacts(Set<ResolvedDependency> firstLevelModuleDependencies, DependencySet configurationDependencies) {
+        firstLevelModuleDependencies
                 .collect({ it.moduleArtifacts })
                 .flatten()
                 .findAll({
-            artifact -> configuration.dependencies.matching({ compareDeps(it, artifact) }).size() > 0
+            artifact -> configurationDependencies.matching({ compareDeps(it, artifact) }).size() > 0
         })
     }
 
@@ -77,8 +79,8 @@ class Dependencies {
         resolvedArtifact.getId().getComponentIdentifier() instanceof DefaultProjectComponentIdentifier
     }
 
-    private static Set<ResolvedArtifact> findDeclaredExternalArtifacts(Configuration configuration) {
-        configuration.resolvedConfiguration.firstLevelModuleDependencies
+    private static Set<ResolvedArtifact> findDeclaredExternalArtifacts(Set<ResolvedDependency> firstLevelModuleDependencies) {
+        firstLevelModuleDependencies
                 .collect({ it.moduleArtifacts })
                 .flatten()
                 .findAll({ !(it.artifactSource.artifact instanceof PublishArtifactLocalArtifactMetaData) })

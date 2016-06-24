@@ -58,6 +58,15 @@ class DependenciesTest {
     }
 
     @Test
+    void excludeDependencies() {
+        testProject.extensions.findByType(BuckifyExtension).excluded = { it.name == "gherkin"}
+        def dependencies = Dependencies.factory(configuration("compile"), extension, factory)
+
+        assert dependencies.transitiveDependencies.size() == 2
+        assert dependencies.transitiveDependencies.collect({ it.name }).containsAll(["cucumber-html", "cucumber-jvm-deps"])
+    }
+
+    @Test
     void findConfigSpecificDependencies() {
         def dependencies = Dependencies.factory(configuration("testCompile"), extension, factory)
 
