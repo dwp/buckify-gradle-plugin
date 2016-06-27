@@ -16,17 +16,24 @@ class JavaTestRuleTest extends RuleTestCase {
 
     @Test
     public void listConfigSpecificDependencies() {
-        configureSpecificDeps("dep2", "dep2", "dep1")
+        configureNonTransitiveDeps("dep2", "dep2", "dep1")
+        configureTransitiveDeps("transitiveDep2", "transitiveDep2", "transitiveDep1")
 
         def underTest = new JavaTestRule(this.project, dependencyCache)
 
         assertEquals underTest.createOutput().toString(), """
 java_test(
                 name="test",
+                srcs=glob(['src/test/java/**/*.java']),
+                resources=glob(['src/test/resources/**/*']),
                 autodeps=True,
-                source_under_test=[":main"],
-                resources=[],
-                deps=["dep1", "dep2"],
+                deps=[
+                    'dep1',
+                    'dep2',
+                    #transitive deps
+                    'transitiveDep1',
+                    'transitiveDep2'
+                ],
                 visibility=["PUBLIC"]
 )
 

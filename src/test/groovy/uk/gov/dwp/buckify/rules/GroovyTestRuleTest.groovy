@@ -6,26 +6,26 @@ import org.junit.Test
 import static org.junit.Assert.assertEquals
 import static org.mockito.Mockito.when
 
-class GroovyLibraryRuleTest extends RuleTestCase {
+class GroovyTestRuleTest extends RuleTestCase {
 
     @Before
     void setup() {
-        when(dependencyCache.compileDependencies()).thenReturn(dependencies)
-        configureResources("src/main/resources")
+        when(dependencyCache.testCompileDependencies()).thenReturn(dependencies)
+        configureResources("src/test/resources")
     }
 
     @Test
-    public void listDeclaredDependenciesThenCommentedOutTransitiveDependencies() {
+    public void listConfigSpecificDependencies() {
         configureNonTransitiveDeps("dep2", "dep2", "dep1")
         configureTransitiveDeps("transitiveDep2", "transitiveDep2", "transitiveDep1")
 
-        def underTest = new GroovyLibraryRule(project, dependencyCache)
+        def underTest = new GroovyTestRule(this.project, dependencyCache)
 
         assertEquals underTest.createOutput().toString(), """
-groovy_library(
-                name="groovy-main",
+groovy_test(
+                name="groovy-test",
                 srcs=glob(["src/main/groovy/**/*.groovy", "src/main/groovy/**/*.java"]),
-                resources=glob(['src/main/resources/**/*']),
+                resources=glob(['src/test/resources/**/*']),
                 deps=[
                     'dep1',
                     'dep2',

@@ -11,6 +11,7 @@ class GroovyLibraryRule extends Rule {
     static final sourceDir = "src/main/groovy"
     static final resourcesDir = "src/main/resources"
 
+    // todo - do not create rule when source dir does not contain any java / groovy files
     static generator = { Project project, DependencyCache dependencies ->
         BuckifyExtension.from(project).groovyLibraryPredicate(project) ? [new GroovyLibraryRule(project, dependencies)] : []
     }
@@ -31,20 +32,10 @@ groovy_library(
                 name="$name",
                 srcs=glob(["$sourceDir/**/*.groovy", "$sourceDir/**/*.java"]),
                 resources=$resources,
-                ${deps()}
+                ${formatted(dependencies)}
                 visibility=${quoteAndSort(visibility)}
 )
 
 """).make(this.properties)
-    }
-
-    private String deps() {
-        def nonTransitiveDeps = pathsTo(dependencies.nonTransitiveDependencies()).collect({ "$it," }).join("\n")
-        def transitiveDeps = pathsTo(dependencies.transitiveDependencies).join(',\n')
-        """deps=[
-$nonTransitiveDeps
-                    #transitive deps
-$transitiveDeps
-                ],"""
     }
 }

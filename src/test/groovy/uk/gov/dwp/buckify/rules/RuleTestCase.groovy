@@ -16,7 +16,6 @@ abstract class RuleTestCase {
     def project = mock(Project)
     def dependencies = mock(Dependencies)
     def dependencyCache = mock(DependencyCache)
-    def preExistingRules = mock(PreExistingRules)
     def extensionContainer = mock(ExtensionContainer)
     def resourcesDir = mock(File)
 
@@ -24,6 +23,7 @@ abstract class RuleTestCase {
     public void setUp() {
         when(project.extensions).thenReturn(extensionContainer)
         when(extensionContainer.findByType(BuckifyExtension)).thenReturn(new BuckifyExtension())
+        when(resourcesDir.exists()).thenReturn(true)
     }
 
     def configureResources(String directory) {

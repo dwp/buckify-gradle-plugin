@@ -2,6 +2,7 @@ package uk.gov.dwp.buckify.rules
 
 import groovy.transform.Canonical
 import uk.gov.dwp.buckify.dependencies.BuckDependency
+import uk.gov.dwp.buckify.dependencies.Dependencies
 
 @Canonical
 abstract class Rule {
@@ -27,5 +28,15 @@ abstract class Rule {
 
     static String toPythonBoolean(boolean val) {
         String.valueOf(val).capitalize()
+    }
+
+    protected String formatted(Dependencies dependencies) {
+        def nonTransitiveDeps = pathsTo(dependencies.nonTransitiveDependencies()).collect({ "$it," }).join("\n")
+        def transitiveDeps = pathsTo(dependencies.transitiveDependencies).join(',\n')
+        """deps=[
+$nonTransitiveDeps
+                    #transitive deps
+$transitiveDeps
+                ],"""
     }
 }

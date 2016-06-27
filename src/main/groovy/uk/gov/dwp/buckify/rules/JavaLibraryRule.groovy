@@ -37,7 +37,7 @@ java_library(
                 autodeps=${toPythonBoolean(autoDeps)},
                 srcs=glob(["$sourceDir/**/*.java"]),
                 ${resources()}
-                ${deps()}
+                ${formatted(dependencies)}
                 visibility=${quoteAndSort(visibility)}
 )
 
@@ -45,16 +45,6 @@ java_library(
     }
 
     private String resources() {
-        hasResources ? "resources=glob(['$resourcesDir/**/*']),\nresources_root='$resourcesDir'," : '# no resources found'
-    }
-
-    private String deps() {
-        def nonTransitiveDeps = pathsTo(dependencies.nonTransitiveDependencies()).collect({ "$it," }).join("\n")
-        def transitiveDeps = pathsTo(dependencies.transitiveDependencies).join(',\n')
-        """deps=[
-$nonTransitiveDeps
-                    #transitive deps
-$transitiveDeps
-                ],"""
+        hasResources ? "resources=glob(['$resourcesDir/**/*']),\n                resources_root='$resourcesDir'," : '# no resources found'
     }
 }

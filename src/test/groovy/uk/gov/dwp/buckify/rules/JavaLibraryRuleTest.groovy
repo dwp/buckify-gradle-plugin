@@ -26,7 +26,8 @@ java_library(
                 name="main",
                 autodeps=True,
                 srcs=glob(["src/main/java/**/*.java"]),
-                # no resources found
+                resources=glob(['src/main/resources/**/*']),
+                resources_root='src/main/resources',
                 deps=[
                     'dep1',
                     'dep2',

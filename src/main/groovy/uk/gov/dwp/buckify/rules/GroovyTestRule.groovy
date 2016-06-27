@@ -2,19 +2,19 @@ package uk.gov.dwp.buckify.rules
 
 import groovy.text.SimpleTemplateEngine
 import org.gradle.api.Project
-import org.gradle.api.plugins.JavaPlugin
+import org.gradle.api.plugins.GroovyPlugin
 import uk.gov.dwp.buckify.BuckifyExtension
 import uk.gov.dwp.buckify.dependencies.Dependencies
 import uk.gov.dwp.buckify.dependencies.DependencyCache
 
-class JavaTestRule extends Rule {
+class GroovyTestRule extends Rule {
 
-    static final sourceDir = "src/test/java"
+    static final sourceDir = "src/test/groovy"
     static final resourcesDir = "src/test/resources"
 
-    // todo - do not create rule when source dir does not contain any java files
+    // todo - do not create rule when source dir does not contain any java / groovy files
     static generator = { Project project, DependencyCache dependencies ->
-        project.plugins.hasPlugin(JavaPlugin) && project.file(sourceDir).exists() ? [new JavaTestRule(project, dependencies)] : []
+        project.plugins.hasPlugin(GroovyPlugin) && project.file(sourceDir).exists() ? [new GroovyTestRule(project, dependencies)] : []
     }
 
     Dependencies dependencies
@@ -22,9 +22,9 @@ class JavaTestRule extends Rule {
     boolean autoDeps
     Set<String> sourceUnderTest
 
-    JavaTestRule(Project project, DependencyCache dependencies) {
+    GroovyTestRule(Project project, DependencyCache dependencies) {
         this.dependencies = dependencies.testCompileDependencies()
-        this.name = BuckifyExtension.from(project).javaTestRuleName
+        this.name = BuckifyExtension.from(project).groovyTestRuleName
         this.sourceUnderTest = [":${BuckifyExtension.from(project).javaLibraryRuleName}"]
         this.autoDeps = BuckifyExtension.from(project).autoDeps
         // todo - check sourceSets property of Java plugin to find actual resources dir
@@ -34,11 +34,10 @@ class JavaTestRule extends Rule {
     @Override
     Writable createOutput() {
         new SimpleTemplateEngine().createTemplate("""
-java_test(
+groovy_test(
                 name="$name",
-                srcs=glob(['$sourceDir/**/*.java']),
+                srcs=glob(["src/main/groovy/**/*.groovy", "src/main/groovy/**/*.java"]),
                 resources=$resources,
-                autodeps=${toPythonBoolean(autoDeps)},
                 ${formatted(dependencies)}
                 visibility=${quoteAndSort(visibility)}
 )
