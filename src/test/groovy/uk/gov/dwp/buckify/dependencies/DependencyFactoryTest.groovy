@@ -50,7 +50,7 @@ class DependencyFactoryTest {
         assert dependency.filename == "filename"
         // file does not exist
         assert dependency.sha1 == null
-        assert dependency.identifier == "mvn:externalGroup:name:type:version"
+        assert dependency.mavenIdentifier == "mvn:externalGroup:name:type:version"
     }
 
     @Test

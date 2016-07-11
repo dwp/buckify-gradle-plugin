@@ -4,13 +4,12 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.Project
 import org.gradle.api.tasks.TaskAction
 import uk.gov.dwp.buckify.dependencies.DependencyCache
+import uk.gov.dwp.buckify.rules.FromNexusRule
 import uk.gov.dwp.buckify.rules.GroovyLibraryRule
 import uk.gov.dwp.buckify.rules.GroovyTestRule
 import uk.gov.dwp.buckify.rules.JavaLibraryRule
 import uk.gov.dwp.buckify.rules.JavaTestRule
-import uk.gov.dwp.buckify.rules.PreBuiltJarRule
 import uk.gov.dwp.buckify.rules.PreExistingRules
-import uk.gov.dwp.buckify.rules.RemoteFileRule
 import uk.gov.dwp.buckify.rules.Rule
 
 class BuckifyTask extends DefaultTask {
@@ -22,8 +21,9 @@ class BuckifyTask extends DefaultTask {
             GroovyLibraryRule.generator,
             JavaTestRule.generator,
             GroovyTestRule.generator,
-            PreBuiltJarRule.generator,
-            RemoteFileRule.generator
+            FromNexusRule.generator,
+//            PreBuiltJarRule.generator,
+//            RemoteFileRule.generator
     ]
 
     @TaskAction

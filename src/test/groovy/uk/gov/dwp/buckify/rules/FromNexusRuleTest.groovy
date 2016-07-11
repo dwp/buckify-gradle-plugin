@@ -7,19 +7,13 @@ import static org.junit.Assert.assertEquals
 import static org.mockito.Mockito.mock
 import static org.mockito.Mockito.when
 
-class RemoteFileRuleTest extends RuleTestCase {
+class FromNexusRuleTest extends RuleTestCase {
 
     @Test
     public void createOutput() {
-        def dependency = mock(ArtifactDependency)
-        when(dependency.name).thenReturn("ruleName")
-        when(dependency.filename).thenReturn("filename")
-        when(dependency.mavenIdentifier).thenReturn("url")
-        when(dependency.sha1).thenReturn("sha1")
+        def underTest = new FromNexusRule("name", "version", "group", "artifact", "sha1")
 
-        def underTest = new RemoteFileRule(dependency)
-
-        assertEquals "remote_file(name='ruleName-mvn', out='filename', url='url', sha1='sha1')\n", underTest.createOutput().toString()
+        assertEquals "from_nexus(name='name', version='version', ga='group:artifact', sha1='sha1')\n", underTest.createOutput().toString()
     }
 
     @Test
@@ -29,9 +23,9 @@ class RemoteFileRuleTest extends RuleTestCase {
         when(dependency.name).thenReturn("ruleName")
         when(dependencyCache.externalDependenciesForAllConfigurations()).thenReturn([dependency].toSet())
 
-        def rules = RemoteFileRule.generator(project, dependencyCache)
+        def rules = PreBuiltJarRule.generator(project, dependencyCache)
         assert rules.size() == 1
-        assert rules.first().name == "ruleName-mvn"
+        assert rules.first().name == "ruleName"
     }
 
     @Test
@@ -40,8 +34,8 @@ class RemoteFileRuleTest extends RuleTestCase {
 
         when(dependency.name).thenReturn("ruleName")
         when(dependencyCache.externalDependenciesForAllConfigurations()).thenReturn([dependency].toSet())
-        when(dependencyCache.rulesExist("ruleName", "ruleName-mvn")).thenReturn(true)
+        when(dependencyCache.rulesExist("ruleName")).thenReturn(true)
 
-        assert RemoteFileRule.generator(project, dependencyCache).isEmpty()
+        assert PreBuiltJarRule.generator(project, dependencyCache).isEmpty()
     }
 }

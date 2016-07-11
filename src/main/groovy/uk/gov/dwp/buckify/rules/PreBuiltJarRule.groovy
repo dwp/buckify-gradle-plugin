@@ -15,7 +15,6 @@ class PreBuiltJarRule extends Rule {
     }
 
     private String binaryJar
-    // todo - remove
 
     PreBuiltJarRule(String name, String binaryJar) {
         this.name = name

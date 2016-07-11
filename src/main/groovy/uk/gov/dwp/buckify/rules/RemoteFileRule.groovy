@@ -19,7 +19,7 @@ class RemoteFileRule extends Rule {
     RemoteFileRule(ArtifactDependency dependencyTarget) {
         name = dependencyTarget.name + "-mvn"
         out = dependencyTarget.filename
-        url = dependencyTarget.identifier
+        url = dependencyTarget.mavenIdentifier
         sha1 = dependencyTarget.sha1
     }
 

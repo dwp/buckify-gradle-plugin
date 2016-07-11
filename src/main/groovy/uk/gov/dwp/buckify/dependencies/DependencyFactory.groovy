@@ -29,6 +29,8 @@ class DependencyFactory {
         } else {
             def name = buckifyExtension.nomenclature(artifact)
             new ArtifactDependency(name,
+                                   artifact.moduleVersion.id.group,
+                                   artifact.moduleVersion.id.version,
                                    createExternalPath(name),
                                    createMavenIdentifier(artifact),
                                    artifact.file.name,
