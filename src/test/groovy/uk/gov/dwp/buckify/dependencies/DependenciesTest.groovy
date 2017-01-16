@@ -81,10 +81,7 @@ class DependenciesTest {
         myProject.plugins.apply('groovy')
         myProject.repositories {
             mavenLocal()
-            maven { url 'http://bld1.infra.uk1.uc:8081/nexus/content/repositories/releases' }
-            maven { url 'http://bld1.infra.uk1.uc:8081/nexus/content/groups/public/' }
-            maven { url 'http://bld1.infra.uk1.uc:8081/nexus/content/repositories/snapshots' }
-            maven { url 'https://repo.gradle.org/gradle/libs' }
+            maven { url 'http://repo.gradle.org/gradle/libs' }
         }
         myProject
     }
