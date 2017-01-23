@@ -5,10 +5,11 @@ apply plugin: 'maven-publish-auth'
 
 publishing {
     repositories {
-        maven {
-            // TODO - update this with the URL of your own repository
-            url "http://bld1.infra.uk1.uc:8081/nexus/content/repositories/releases"
-            name = "releases"
+        if (project.hasProperty("publish_repo_url")) {
+            maven {
+                url project.publish_repo_url
+                name = "releases"
+            }
         }
     }
 }

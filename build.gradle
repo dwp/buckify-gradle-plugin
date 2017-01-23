@@ -8,22 +8,23 @@ apply from: "$rootDir/gradle/publish.gradle"
 sourceCompatibility = 1.8
 
 repositories {
-    maven { url 'http://repo.gradle.org/gradle/libs' }
+    maven { url gradle_repo_url }
     if (!project.hasProperty('ci')) {
         mavenLocal()
     }
 }
 
 buildscript {
+    ext {
+        gradle_repo_url = project.getProperties()["gradle_repo_url"] ?: 'http://repo.gradle.org/gradle/libs'
+    }
+
     dependencies {
         classpath 'org.hibernate.build.gradle:gradle-maven-publish-auth:2.0.1'
         classpath 'com.netflix.nebula:nebula-publishing-plugin:3.0.2'
     }
     repositories {
-        maven { url 'http://repo.gradle.org/gradle/libs' }
-        if (!project.hasProperty('ci')) {
-            mavenLocal()
-        }
+        maven { url gradle_repo_url }
     }
 }
 
@@ -33,4 +34,8 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     testCompile "org.hamcrest:hamcrest-library:1.3"
     testCompile 'org.mockito:mockito-core:2.6.3'
+}
+
+test {
+    systemProperty "gradle.repo.url", gradle_repo_url
 }

@@ -81,7 +81,7 @@ class DependenciesTest {
         myProject.plugins.apply('groovy')
         myProject.repositories {
             mavenLocal()
-            maven { url 'http://repo.gradle.org/gradle/libs' }
+            maven { url System.getProperty("gradle.repo.url")  ?: 'http://repo.gradle.org/gradle/libs' }
         }
         myProject
     }
